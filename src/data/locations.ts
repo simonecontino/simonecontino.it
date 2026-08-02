@@ -12,7 +12,7 @@ export const locations: Location[] = [
     hours: "Mercoledì, 16:00–19:00",
     directions: "Ingresso in Via Pio II, 3",
     parking: "Sì",
-    publicTransport: "[INSERIRE MEZZI PUBBLICI]",
+    publicTransport: "Linee Bus 49 e 78 e la metropolitana MM1 o MM5.",
     mapsUrl: "https://maps.app.goo.gl/ukadFHShaTrWPivo8",
     bookingUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0In4XXATo306YRY0ufSKo8UvgIcuvSlfdmldpLi9l_k-m_4T6XVUBubfDAie9eDptqqcrdkDNJ?gv=true",
     confirmed: true,

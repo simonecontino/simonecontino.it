@@ -12,9 +12,9 @@ export const problems: Problem[] = [
 ];
 
 export const articles: ArticlePreview[] = [
-  { title: "Tosse persistente: quando parlarne con lo pneumologo", slug: "tosse-persistente-quando-visita", category: "Tosse e dispnea", description: "Una guida ai segnali da osservare e alle informazioni utili durante la valutazione.", date: "[DATA DA DEFINIRE]", readingTime: "5 min", draft: true },
-  { title: "Russamento e apnee notturne non sono la stessa cosa", slug: "russamento-apnee-differenze", category: "Disturbi respiratori del sonno", description: "Differenze, sintomi associati e ruolo della valutazione specialistica.", date: "[DATA DA DEFINIRE]", readingTime: "6 min", draft: true },
-  { title: "Spirometria: che cos’è e come si svolge", slug: "spirometria-come-si-svolge", category: "Esami respiratori", description: "Cosa misura l’esame e perché può essere indicato in un percorso pneumologico.", date: "[DATA DA DEFINIRE]", readingTime: "4 min", draft: true },
+  { title: "Tosse persistente: quando parlarne con lo pneumologo", slug: "tosse-persistente-quando-visita", category: "Tosse e dispnea", description: "Una guida ai segnali da osservare e alle informazioni utili durante la valutazione.", readingTime: "5 min", draft: false },
+  { title: "Russamento e apnee notturne non sono la stessa cosa", slug: "russamento-apnee-differenze", category: "Disturbi respiratori del sonno", description: "Differenze, sintomi associati e ruolo della valutazione specialistica.", readingTime: "6 min", draft: false },
+  { title: "Spirometria: che cos’è e come si svolge", slug: "spirometria-come-si-svolge", category: "Esami respiratori", description: "Cosa misura l’esame e perché può essere indicato in un percorso pneumologico.", readingTime: "4 min", draft: false },
 ];
 
 export const faqs: Faq[] = [

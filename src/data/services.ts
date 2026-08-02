@@ -1,7 +1,6 @@
 import type { Service } from "@/types/content";
 
 const spirometryReference = [{ label: "NHS — Spirometry", url: "https://www.nhs.uk/tests-and-treatments/spirometry/" }];
-const sleepReference = [{ label: "NHS — Sleep apnoea", url: "https://www.nhs.uk/conditions/sleep-apnoea/" }];
 
 export const services: Service[] = [
   {
@@ -44,14 +43,14 @@ export const services: Service[] = [
     description: "Confronto della funzione respiratoria prima e dopo un farmaco broncodilatatore.",
     purpose: "Valutare la variazione dei flussi respiratori dopo broncodilatatore in quesiti clinici selezionati.",
     whatToExpect: ["Spirometria iniziale", "Somministrazione del broncodilatatore", "Attesa prevista dal protocollo", "Ripetizione della spirometria"],
-    preparation: ["Non sospendere farmaci senza istruzioni", "Seguire le indicazioni ricevute alla prenotazione"], availabilityConfirmed: false, references: spirometryReference,
+    preparation: ["Non utilizzare la terapia inalatoria nelle 24–48 ore precedenti", "Non fumare"], availabilityConfirmed: false,
   },
   {
     title: "Poligrafia notturna", slug: "poligrafia-notturna",
     description: "Monitoraggio cardiorespiratorio notturno utilizzato in percorsi selezionati per sospette apnee.",
     purpose: "Registrare durante il sonno parametri utili alla valutazione dei disturbi respiratori notturni.",
     whatToExpect: ["Applicazione di sensori", "Registrazione notturna", "Analisi medica del tracciato nel contesto clinico"],
-    preparation: ["Seguire le istruzioni specifiche", "Mantenere, se possibile, le abituali condizioni di sonno", "Segnalare terapie e dispositivi già utilizzati"], availabilityConfirmed: false, references: sleepReference,
+    preparation: ["Seguire le istruzioni specifiche", "Mantenere, se possibile, le abituali condizioni di sonno", "Segnalare terapie e dispositivi già utilizzati"], availabilityConfirmed: false,
   },
   {
     title: "Follow-up CPAP", slug: "follow-up-cpap",
@@ -61,10 +60,45 @@ export const services: Service[] = [
     preparation: ["Portare dispositivo e maschera se richiesto", "Portare report o accesso ai dati", "Annotare problemi e orari di utilizzo"], availabilityConfirmed: true,
   },
   {
-    title: "Lettura e interpretazione dei report CPAP", slug: "lettura-report-cpap",
-    description: "Valutazione dei dati registrati dal dispositivo nel contesto clinico e dei sintomi.",
-    purpose: "Comprendere utilizzo, eventi residui, perdite e altri indicatori utili al follow-up.",
+    title: "Lettura e interpretazione dei report CPAP, BiPAP e NIV", slug: "lettura-report-cpap",
+    description: "Valutazione dei dati registrati da dispositivi CPAP, BiPAP e di ventilazione non invasiva (NIV) nel contesto clinico e dei sintomi.",
+    purpose: "Comprendere utilizzo, eventi residui, perdite, ventilazione e altri indicatori utili al follow-up della CPAP o della NIV.",
     whatToExpect: ["Revisione del report", "Confronto con sintomi e tollerabilità", "Indicazioni sugli eventuali passaggi successivi"],
     preparation: ["Portare il report più recente", "Portare il dispositivo se richiesto", "Non modificare autonomamente i parametri"], availabilityConfirmed: true,
+  },
+  {
+    title: "Test di broncoprovocazione con metacolina", slug: "test-broncoprovocazione-metacolina",
+    description: "Test funzionale che valuta la reattività delle vie aeree mediante dosi progressive di metacolina.",
+    purpose: "Approfondire il sospetto di iperreattività bronchiale quando anamnesi e spirometria di base non sono conclusive.",
+    whatToExpect: ["Spirometria iniziale", "Somministrazioni progressive secondo protocollo", "Spirometrie ripetute", "Broncodilatatore al termine quando previsto"],
+    preparation: ["Seguire le indicazioni specifiche sui farmaci", "Non fumare prima dell’esame", "Segnalare infezioni recenti o variazioni cliniche"], availabilityConfirmed: false,
+  },
+  {
+    title: "Test del cammino dei 6 minuti (6MWT)", slug: "test-cammino-6mwt",
+    description: "Valutazione standardizzata della capacità funzionale durante sei minuti di cammino.",
+    purpose: "Misurare la tolleranza allo sforzo e osservare sintomi, distanza percorsa e ossigenazione durante un’attività controllata.",
+    whatToExpect: ["Misurazioni prima del test", "Cammino per sei minuti secondo indicazioni", "Monitoraggio di sintomi e parametri", "Valutazione al termine"],
+    preparation: ["Indossare abiti e scarpe comodi", "Portare gli ausili abitualmente utilizzati", "Seguire le indicazioni ricevute sulle terapie"], availabilityConfirmed: false,
+  },
+  {
+    title: "Saturimetria notturna", slug: "saturimetria-notturna",
+    description: "Registrazione dell’ossigenazione e della frequenza cardiaca durante la notte.",
+    purpose: "Valutare l’andamento notturno della saturazione in quesiti clinici selezionati.",
+    whatToExpect: ["Applicazione del sensore", "Registrazione durante la notte", "Analisi del tracciato nel contesto clinico"],
+    preparation: ["Seguire le istruzioni per il dispositivo", "Mantenere le abituali condizioni di sonno", "Segnalare ossigenoterapia o ventilazione già prescritte"], availabilityConfirmed: false,
+  },
+  {
+    title: "Skin prick test", slug: "skin-prick-test",
+    description: "Test cutaneo per valutare la sensibilizzazione verso allergeni selezionati.",
+    purpose: "Supportare l’inquadramento allergologico quando il risultato può orientare il percorso respiratorio.",
+    whatToExpect: ["Applicazione di estratti allergenici sulla cute", "Puntura superficiale", "Lettura della risposta cutanea dopo il tempo previsto"],
+    preparation: ["Seguire le indicazioni ricevute sui farmaci antistaminici", "Segnalare terapie e reazioni recenti", "Non sospendere farmaci senza istruzioni"], availabilityConfirmed: false,
+  },
+  {
+    title: "Emogasanalisi arteriosa", slug: "emogasanalisi-arteriosa",
+    description: "Prelievo arterioso per misurare ossigeno, anidride carbonica, pH e altri parametri dell’equilibrio acido-base.",
+    purpose: "Valutare in modo diretto ossigenazione e ventilazione in condizioni cliniche selezionate.",
+    whatToExpect: ["Prelievo da un’arteria, solitamente al polso", "Compressione della sede dopo il prelievo", "Interpretazione dei valori nel contesto clinico"],
+    preparation: ["Segnalare terapie anticoagulanti", "Comunicare l’uso di ossigeno o ventilazione", "Seguire le istruzioni specifiche ricevute"], availabilityConfirmed: false,
   },
 ];

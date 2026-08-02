@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-labelledby="title desc">
+  <title id="title">Mappa illustrata di Milano</title>
+  <desc id="desc">Rappresentazione grafica di Milano con indicazione della sede dell’Ospedale San Carlo.</desc>
+  <rect width="900" height="560" fill="#eaf2ef"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M-40 90C110 125 184 70 292 102s180 89 326 56 218-17 322 31" stroke="#c8d9d4" stroke-width="28"/>
+    <path d="M46 510c89-87 168-93 262-159s176-59 275-9 188 36 365-76" stroke="#d2dfdb" stroke-width="34"/>
+    <path d="M107-35c28 104 91 165 172 230s105 142 78 216-20 103 17 180" stroke="#fffdf8" stroke-width="18"/>
+    <path d="M645-25c-70 111-78 191-33 267s42 146-32 223-82 90-94 132" stroke="#fffdf8" stroke-width="16"/>
+    <path d="M-25 282c123 2 188 45 273 20s140-86 249-67 179 82 428 34" stroke="#fffdf8" stroke-width="20"/>
+    <path d="M18 411c118-35 211-19 307 25s166 29 258-33 189-58 339-20" stroke="#fffdf8" stroke-width="12"/>
+    <path d="M179-8c41 91 29 169-21 226s-69 116-17 200 51 99 51 151" stroke="#fffdf8" stroke-width="11"/>
+    <circle cx="504" cy="276" r="116" stroke="#b8cdc7" stroke-width="9"/>
+    <circle cx="504" cy="276" r="65" stroke="#c8d9d4" stroke-width="8"/>
+  </g>
+  <g fill="#c9ded5">
+    <rect x="404" y="199" width="54" height="36" rx="5"/>
+    <rect x="549" y="202" width="72" height="42" rx="5"/>
+    <rect x="426" y="317" width="68" height="40" rx="5"/>
+    <rect x="535" y="310" width="58" height="50" rx="5"/>
+    <rect x="703" y="102" width="86" height="55" rx="7"/>
+    <rect x="89" y="349" width="83" height="50" rx="7"/>
+  </g>
+  <g transform="translate(230 293)">
+    <path d="M0-76c-40 0-72 31-72 70 0 55 72 132 72 132S72 49 72-6c0-39-32-70-72-70Z" fill="#17656b"/>
+    <circle cy="-8" r="27" fill="#fffdf8"/>
+    <path d="M-17-8h34M0-25v34" stroke="#17656b" stroke-width="9" stroke-linecap="round"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#173b40">
+    <text x="504" y="282" text-anchor="middle" font-size="32" font-weight="700">Milano</text>
+  </g>
+</svg>

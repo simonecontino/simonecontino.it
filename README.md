@@ -47,7 +47,7 @@ Non sono necessarie variabili d’ambiente nella milestone attuale. Creare `.env
 - Fotografie: `public/images/`
 - Articoli MDX: `src/content/articles/`
 - Pagina di prenotazione: `src/app/prenota/page.tsx`
-- Modulo contatti non attivo: `src/app/contatti/page.tsx`
+- La pagina Contatti usa recapiti diretti e non raccoglie dati tramite moduli.
 - Bozze legali: `src/app/privacy/page.tsx` e `src/app/cookie-policy/page.tsx`
 - Elenco completo dei dati mancanti: `CONTENT_TODO.md`
 
@@ -55,11 +55,11 @@ Non sono necessarie variabili d’ambiente nella milestone attuale. Creare `.env
 
 ### Articolo
 
-Creare un file MDX in `src/content/articles/` con frontmatter tipizzato: titolo, slug, descrizione, data, autore, categoria, immagine, tempo di lettura, stato di revisione e metadata SEO. Collegarlo all’indice degli articoli. Non pubblicare finché `reviewed` non è confermato.
+Creare un file MDX in `src/content/articles/`, aggiungere i metadata tipizzati in `src/data/home.ts` e collegare il componente in `src/app/articoli/[slug]/page.tsx`. Verificare sempre il testo medico prima della pubblicazione.
 
 ### Problema o patologia
 
-Aggiungere un oggetto tipizzato in `src/data/topics.ts`. Le pagine indice e di dettaglio vengono generate automaticamente dai template in `src/components/sections/`. Ogni nuovo testo deve mantenere `medicallyReviewed: false` fino alla revisione.
+Aggiungere un oggetto tipizzato in `src/data/topics.ts`. Le pagine indice e di dettaglio vengono generate automaticamente dai template in `src/components/sections/`. Ogni nuovo testo deve mantenere `medicallyReviewed: false` fino alla revisione, impostandolo a `true` solo dopo l’approvazione.
 
 ### Esame o valutazione
 

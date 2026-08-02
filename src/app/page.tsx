@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Check, ClipboardCheck, Ear, MapPin, MoonStar, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, ClipboardCheck, Ear, MapPin, MoonStar, Star, Stethoscope } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -23,14 +23,9 @@ export default function HomePage() {
               <ButtonLink href="/prenota">Prenota una visita</ButtonLink>
               <ButtonLink href="#come-posso-aiutarti" variant="secondary">Scopri come posso aiutarti</ButtonLink>
             </div>
-            <ul className="hero-points" aria-label="Informazioni principali">
-              <li><Check aria-hidden="true" /> Pneumologia generale</li>
-              <li><Check aria-hidden="true" /> Disturbi respiratori del sonno</li>
-              <li><Check aria-hidden="true" /> Milano</li>
-            </ul>
           </div>
           <div className="hero-portrait">
-            <div className="portrait-frame"><Image src="/images/simone-contino.jpg" alt="Ritratto professionale del Dr. Simone Contino" fill priority sizes="(max-width: 800px) 92vw, 42vw" /></div>
+            <div className="portrait-frame"><Image src="/images/simone-contino.jpg" alt="Ritratto professionale del Dr. Simone Contino" fill priority loading="eager" sizes="(max-width: 800px) 92vw, 42vw" /></div>
             <div className="portrait-caption"><strong>Capire, spiegare, costruire.</strong><span>Un percorso di cura condiviso e comprensibile.</span></div>
           </div>
         </Container>
@@ -64,8 +59,8 @@ export default function HomePage() {
         <Container>
           <SectionHeading eyebrow="Aree di competenza" title="Pneumologia, sonno e continuità di cura" />
           <div className="expertise-grid">
-            <article><Stethoscope aria-hidden="true" /><h3>Pneumologia</h3><p>Valutazione dei principali sintomi e delle patologie dell’apparato respiratorio.</p><ul><li>Asma e BPCO</li><li>Tosse persistente e dispnea</li><li>Bronchiectasie e malattie interstiziali</li><li>Insufficienza respiratoria</li></ul><Link href="/patologie">Approfondisci <ArrowRight aria-hidden="true" /></Link></article>
-            <article className="expertise-featured"><MoonStar aria-hidden="true" /><h3>Disturbi respiratori del sonno</h3><p>Particolare esperienza nella valutazione di russamento, apnee ostruttive e problemi correlati.</p><ul><li>Russamento e sospette apnee</li><li>Valutazione del sonno</li><li>Poligrafia respiratoria*</li><li>Follow-up e report CPAP</li></ul><small>* Disponibilità da verificare</small><Link href="/sonno">Scopri l’area sonno <ArrowRight aria-hidden="true" /></Link></article>
+            <article><Stethoscope aria-hidden="true" /><h3>Pneumologia</h3><p>Valutazione dei principali sintomi e delle patologie dell’apparato respiratorio.</p><ul><li>Asma e BPCO</li><li>Nodulo polmonare e patologie restrittive</li><li>Bronchiectasie e malattie interstiziali</li><li>Gestione respiratoria delle patologie neuromuscolari</li></ul><Link href="/patologie">Approfondisci <ArrowRight aria-hidden="true" /></Link></article>
+            <article className="expertise-featured"><MoonStar aria-hidden="true" /><h3>Disturbi respiratori del sonno</h3><p>Trascorriamo circa un terzo della vita a letto: una buona salute del sonno sostiene la qualità della vita e la prevenzione.</p><ul><li>Russamento e sospette apnee</li><li>Valutazione del sonno</li><li>Poligrafia notturna</li><li>Follow-up e lettura e interpretazione report CPAP e NIV</li></ul><Link href="/sonno">Scopri l’area sonno <ArrowRight aria-hidden="true" /></Link></article>
             <article><ClipboardCheck aria-hidden="true" /><h3>Controlli e continuità</h3><p>Rivalutazioni comprensibili e indicazioni chiare sui passaggi successivi.</p><ul><li>Monitoraggio della terapia</li><li>Interpretazione degli esami</li><li>Patologie respiratorie croniche</li><li>Percorsi di follow-up</li></ul><Link href="/esami">Esami e valutazioni <ArrowRight aria-hidden="true" /></Link></article>
           </div>
         </Container>
@@ -90,11 +85,18 @@ export default function HomePage() {
         </Container>
       </section>
 
+      <section className="section reviews-section">
+        <Container className="reviews-card">
+          <div><p className="eyebrow">Recensioni verificate</p><h2>Le esperienze condivise dai pazienti</h2><p>Per garantire trasparenza, le recensioni complete e aggiornate sono consultabili direttamente sul profilo Google Business.</p></div>
+          <div className="reviews-action"><div className="stars" aria-label="Recensioni su Google"><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /></div><ButtonLink href={siteConfig.googleBusinessProfile} variant="secondary">Leggi le recensioni su Google</ButtonLink></div>
+        </Container>
+      </section>
+
       <section className="section section--tint">
         <Container>
-          <SectionHeading eyebrow="Informazione e prevenzione" title="Articoli per capire meglio il respiro" text="I contenuti saranno pubblicati solo dopo revisione medica. Le anteprime seguenti mostrano la struttura editoriale prevista." />
+          <SectionHeading eyebrow="Informazione e prevenzione" title="Articoli per capire meglio il respiro" text="Una sezione in sviluppo, pensata per spiegare con chiarezza sintomi, patologie ed esami respiratori." />
           <div className="article-grid">
-            {articles.map((article) => <article className="article-card" key={article.slug}><div><span>{article.category}</span><span className="draft-badge">Bozza · revisione medica</span></div><h3>{article.title}</h3><p>{article.description}</p><footer><span>{article.readingTime} di lettura</span><span>{article.date}</span></footer></article>)}
+            {articles.map((article) => <article className="article-card" key={article.slug}><div><span>{article.category}</span></div><h3>{article.title}</h3><p>{article.description}</p><footer><span>{article.readingTime} di lettura</span></footer></article>)}
           </div>
           <div className="section-action"><ButtonLink href="/articoli" variant="secondary">Leggi tutti gli articoli</ButtonLink></div>
         </Container>
@@ -102,7 +104,7 @@ export default function HomePage() {
 
       <section className="section faq-home">
         <Container className="faq-layout">
-          <div><p className="eyebrow">Domande frequenti</p><h2>Informazioni pratiche prima della visita</h2><p>Le risposte che dipendono dalla sede o dall’organizzazione saranno completate solo dopo conferma.</p><ButtonLink href="/faq" variant="text">Vedi tutte le FAQ <ArrowRight aria-hidden="true" /></ButtonLink></div>
+          <div><p className="eyebrow">Domande frequenti</p><h2>Informazioni pratiche prima della visita</h2><p>Indicazioni utili per prepararsi alla visita e comprendere come si svolge il percorso.</p><ButtonLink href="/faq" variant="text">Vedi tutte le FAQ <ArrowRight aria-hidden="true" /></ButtonLink></div>
           <div className="faq-list">{faqs.slice(0, 5).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p>{faq.needsConfirmation ? <small>Informazione da confermare prima della pubblicazione.</small> : null}</details>)}</div>
         </Container>
       </section>

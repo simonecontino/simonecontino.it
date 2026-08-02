@@ -16,7 +16,7 @@ export const problemTopics: Topic[] = [
     possibleTests: ["Spirometria, quando appropriata", "Esami o imaging scelti in base al quadro clinico", "Ulteriori valutazioni mirate se la causa non appare respiratoria"],
     careOptions: ["Trattamento della causa identificata", "Correzione di esposizioni o fattori aggravanti", "Controllo nel tempo quando indicato"],
     urgentNote: "In caso di grave difficoltà respiratoria, dolore toracico importante, confusione o sangue con la tosse, rivolgersi tempestivamente ai servizi di emergenza.",
-    relatedSlugs: ["fiato-corto", "respiro-sibilante", "infezioni-respiratorie-ricorrenti"], references: [ministryRespiratory, nhsBreathlessness], medicallyReviewed: false,
+    relatedSlugs: ["fiato-corto", "respiro-sibilante", "infezioni-respiratorie-ricorrenti"], references: [ministryRespiratory, nhsBreathlessness], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Fiato corto o dispnea", slug: "fiato-corto",
@@ -28,7 +28,7 @@ export const problemTopics: Topic[] = [
     possibleTests: ["Spirometria", "Esami ematici, cardiologici o imaging se appropriati", "Test funzionali selezionati in base al sospetto clinico"],
     careOptions: ["Trattamento della condizione identificata", "Educazione all’uso corretto delle terapie prescritte", "Monitoraggio dei sintomi e della funzione respiratoria"],
     urgentNote: "Se la difficoltà respiratoria è improvvisa o intensa, impedisce di parlare, si associa a labbra bluastre, dolore toracico, svenimento o confusione, chiamare il 112.",
-    relatedSlugs: ["ridotta-tolleranza-sforzo", "respiro-sibilante", "tosse-persistente"], references: [nhsBreathlessness, whoRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["ridotta-tolleranza-sforzo", "respiro-sibilante", "tosse-persistente"], references: [nhsBreathlessness, whoRespiratory], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Russamento", slug: "russamento",
@@ -39,7 +39,7 @@ export const problemTopics: Topic[] = [
     evaluation: ["Raccolta dei sintomi notturni e diurni", "Valutazione dei fattori anatomici e clinici rilevanti", "Stima della probabilità di apnee ostruttive"],
     possibleTests: ["Studio respiratorio del sonno quando indicato", "Approfondimenti scelti in base al profilo clinico"],
     careOptions: ["Interventi sui fattori modificabili", "Terapie specifiche solo dopo diagnosi", "Follow-up dell’efficacia e della tollerabilità"],
-    relatedSlugs: ["sonnolenza-diurna", "risvegli-notturni"], references: [nhsSleep, ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["sonnolenza-diurna", "risvegli-notturni"], references: [nhsSleep, ministryRespiratory], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Sonnolenza diurna", slug: "sonnolenza-diurna",
@@ -51,7 +51,7 @@ export const problemTopics: Topic[] = [
     possibleTests: ["Questionari clinici come supporto, non come diagnosi", "Studio del sonno quando appropriato"],
     careOptions: ["Trattamento della causa", "Igiene del sonno e modifica dei fattori aggravanti", "Terapia delle apnee se diagnosticate"],
     urgentNote: "Non guidare o utilizzare macchinari se la sonnolenza rende difficile restare vigili; chiedere una valutazione tempestiva.",
-    relatedSlugs: ["russamento", "risvegli-notturni"], references: [nhsSleep], medicallyReviewed: false,
+    relatedSlugs: ["russamento", "risvegli-notturni"], references: [nhsSleep], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Risvegli notturni", slug: "risvegli-notturni",
@@ -62,7 +62,7 @@ export const problemTopics: Topic[] = [
     evaluation: ["Ricostruzione delle abitudini e dei sintomi", "Valutazione di russamento e pause osservate", "Considerazione di cause respiratorie e non respiratorie"],
     possibleTests: ["Studio respiratorio del sonno nei casi appropriati", "Altri approfondimenti se emergono cause diverse"],
     careOptions: ["Intervento sulla causa identificata", "Indicazioni per la qualità del sonno", "Follow-up dei sintomi"],
-    relatedSlugs: ["russamento", "sonnolenza-diurna"], references: [nhsSleep], medicallyReviewed: false,
+    relatedSlugs: ["russamento", "sonnolenza-diurna"], references: [nhsSleep], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Infezioni respiratorie ricorrenti", slug: "infezioni-respiratorie-ricorrenti",
@@ -73,7 +73,7 @@ export const problemTopics: Topic[] = [
     evaluation: ["Revisione della storia degli episodi e dei trattamenti", "Valutazione di immagini ed esami precedenti", "Ricerca di condizioni respiratorie predisponenti"],
     possibleTests: ["Spirometria", "Imaging o esami microbiologici se indicati", "Approfondimenti immunologici o specialistici selezionati"],
     careOptions: ["Trattamento mirato degli episodi documentati", "Gestione delle condizioni predisponenti", "Prevenzione e controlli personalizzati"],
-    relatedSlugs: ["tosse-persistente", "fiato-corto"], references: [ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["tosse-persistente", "fiato-corto"], references: [ministryRespiratory], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Respiro sibilante", slug: "respiro-sibilante",
@@ -85,7 +85,7 @@ export const problemTopics: Topic[] = [
     possibleTests: ["Spirometria", "Test di broncodilatazione quando indicato", "Approfondimenti allergologici o radiologici selezionati"],
     careOptions: ["Terapia della causa identificata", "Verifica della tecnica inalatoria", "Piano di monitoraggio"],
     urgentNote: "Se il respiro sibilante si accompagna a grave difficoltà respiratoria, incapacità di parlare normalmente o peggioramento rapido, chiamare il 112.",
-    relatedSlugs: ["fiato-corto", "tosse-persistente"], references: [whoRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["fiato-corto", "tosse-persistente"], references: [whoRespiratory], medicallyReviewed: true,
   },
   {
     kind: "problema", title: "Ridotta tolleranza allo sforzo", slug: "ridotta-tolleranza-sforzo",
@@ -97,7 +97,7 @@ export const problemTopics: Topic[] = [
     possibleTests: ["Spirometria", "Test del cammino o esercizio nei casi selezionati", "Valutazioni cardiologiche o ematiche quando appropriate"],
     careOptions: ["Trattamento della causa", "Riabilitazione o attività graduata se indicate", "Monitoraggio funzionale"],
     urgentNote: "Se l’affanno compare improvvisamente o insieme a dolore toracico, svenimento o grave malessere, chiamare il 112.",
-    relatedSlugs: ["fiato-corto", "respiro-sibilante"], references: [nhsBreathlessness], medicallyReviewed: false,
+    relatedSlugs: ["fiato-corto", "respiro-sibilante"], references: [nhsBreathlessness], medicallyReviewed: true,
   },
 ];
 
@@ -111,7 +111,7 @@ export const conditionTopics: Topic[] = [
     possibleTests: ["Spirometria", "Test di broncodilatazione", "Altri test selezionati in base al quadro"],
     careOptions: ["Terapia inalatoria personalizzata", "Riduzione dei fattori scatenanti", "Piano di controllo e follow-up"],
     urgentNote: "Un attacco con grave difficoltà respiratoria o scarsa risposta alla terapia di emergenza prescritta richiede assistenza urgente.",
-    relatedSlugs: ["bpco", "patologie-respiratorie-croniche"], references: [ministryRespiratory, { label: "OMS — Asthma", url: "https://www.who.int/news-room/fact-sheets/detail/asthma" }], medicallyReviewed: false,
+    relatedSlugs: ["bpco", "patologie-respiratorie-croniche"], references: [ministryRespiratory, { label: "OMS — Asthma", url: "https://www.who.int/news-room/fact-sheets/detail/asthma" }], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "BPCO", slug: "bpco", description: "Una condizione cronica caratterizzata da limitazione persistente del flusso aereo.",
@@ -122,7 +122,7 @@ export const conditionTopics: Topic[] = [
     possibleTests: ["Spirometria post-broncodilatatore", "Imaging e altri test funzionali quando indicati", "Valutazione dell’ossigenazione"],
     careOptions: ["Sospensione del fumo", "Terapie inalatorie appropriate", "Vaccinazioni, attività fisica e riabilitazione quando indicate"],
     urgentNote: "Un peggioramento rapido di affanno, stato mentale o colorito richiede valutazione urgente.",
-    relatedSlugs: ["asma", "insufficienza-respiratoria"], references: [{ label: "ISS EpiCentro — BPCO", url: "https://www.epicentro.iss.it/broncopneumopatia/" }, whoRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["asma", "insufficienza-respiratoria"], references: [{ label: "ISS EpiCentro — BPCO", url: "https://www.epicentro.iss.it/broncopneumopatia/" }, whoRespiratory], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "Apnee ostruttive del sonno", slug: "apnee-ostruttive-sonno", description: "Episodi ripetuti di ostruzione delle vie aeree durante il sonno, valutabili con uno studio dedicato.",
@@ -130,10 +130,10 @@ export const conditionTopics: Topic[] = [
     commonSigns: ["Russamento intenso", "Pause respiratorie osservate", "Risvegli o sonno non ristoratore", "Sonnolenza e difficoltà di concentrazione"],
     whenToSeekCare: ["Se vengono osservate pause respiratorie", "Se la sonnolenza compromette la sicurezza", "In presenza di fattori di rischio o patologie associate"],
     evaluation: ["Anamnesi del sonno e dei sintomi diurni", "Esame clinico e valutazione dei fattori di rischio", "Studio respiratorio del sonno quando indicato"],
-    possibleTests: ["Poligrafia respiratoria", "Polisonnografia in situazioni selezionate", "Valutazioni aggiuntive secondo il quadro"],
+    possibleTests: ["Poligrafia notturna", "Polisonnografia in situazioni selezionate", "Valutazioni aggiuntive secondo il quadro"],
     careOptions: ["Interventi sui fattori modificabili", "CPAP quando indicata", "Dispositivi orali o altre opzioni nei casi appropriati"],
     urgentNote: "In caso di sonnolenza marcata, evitare la guida e attività che richiedono vigilanza fino a valutazione e controllo dei sintomi.",
-    relatedSlugs: ["patologie-respiratorie-croniche"], references: [ministryRespiratory, nhsSleep], medicallyReviewed: false,
+    relatedSlugs: ["patologie-respiratorie-croniche"], references: [ministryRespiratory, nhsSleep], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "Bronchiectasie", slug: "bronchiectasie", description: "Dilatazioni permanenti dei bronchi che possono favorire ristagno di muco e infezioni ricorrenti.",
@@ -144,7 +144,7 @@ export const conditionTopics: Topic[] = [
     possibleTests: ["Spirometria", "Esame dell’espettorato", "TC e approfondimenti eziologici quando indicati"],
     careOptions: ["Tecniche di disostruzione bronchiale", "Trattamento mirato delle infezioni", "Prevenzione e gestione delle condizioni associate"],
     urgentNote: "La comparsa di sangue in quantità significativa con la tosse o grave difficoltà respiratoria richiede valutazione urgente.",
-    relatedSlugs: ["insufficienza-respiratoria", "patologie-respiratorie-croniche"], references: [ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["insufficienza-respiratoria", "patologie-respiratorie-croniche"], references: [ministryRespiratory], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "Malattie interstiziali polmonari", slug: "malattie-interstiziali-polmonari", description: "Un gruppo eterogeneo di malattie che interessano il tessuto di sostegno del polmone.",
@@ -154,7 +154,7 @@ export const conditionTopics: Topic[] = [
     evaluation: ["Esposizioni, farmaci e malattie associate", "Revisione delle immagini toraciche", "Valutazione funzionale e multidisciplinare quando necessaria"],
     possibleTests: ["Spirometria e volumi polmonari", "DLCO", "TC ad alta risoluzione e ulteriori esami selezionati"],
     careOptions: ["Trattamento specifico della forma identificata", "Gestione dei sintomi e delle comorbidità", "Monitoraggio funzionale e radiologico"],
-    relatedSlugs: ["insufficienza-respiratoria", "patologie-respiratorie-croniche"], references: [ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["insufficienza-respiratoria", "patologie-respiratorie-croniche"], references: [ministryRespiratory], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "Insufficienza respiratoria", slug: "insufficienza-respiratoria", description: "Una condizione in cui gli scambi di ossigeno e anidride carbonica non sono adeguati alle necessità dell’organismo.",
@@ -165,7 +165,39 @@ export const conditionTopics: Topic[] = [
     possibleTests: ["Emogasanalisi quando indicata", "Test funzionali respiratori", "Monitoraggi diurni o notturni selezionati"],
     careOptions: ["Trattamento della causa", "Ossigenoterapia solo quando prescritta", "Ventilazione e follow-up nei casi appropriati"],
     urgentNote: "Grave difficoltà respiratoria, colorito bluastro, confusione o sonnolenza improvvisa richiedono assistenza urgente tramite 112.",
-    relatedSlugs: ["bpco", "malattie-interstiziali-polmonari"], references: [ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["bpco", "malattie-interstiziali-polmonari"], references: [ministryRespiratory], medicallyReviewed: true,
+  },
+  {
+    kind: "patologia", title: "Nodulo polmonare", slug: "nodulo-polmonare", description: "Un reperto radiologico frequente che richiede una valutazione ordinata del rischio e dei controlli appropriati.",
+    intro: "Un nodulo polmonare è una piccola area più densa visibile alla radiografia o, più spesso, alla TC del torace. Nella maggior parte dei casi non causa sintomi e molte forme sono benigne; dimensioni, aspetto, confronto con esami precedenti e fattori individuali guidano il percorso.",
+    commonSigns: ["Spesso nessun sintomo specifico", "Reperto occasionale durante un esame del torace", "Presenza singola o multipla", "Possibile stabilità negli esami successivi"],
+    whenToSeekCare: ["Dopo il riscontro di un nodulo in una radiografia o TC", "Se manca un confronto con immagini precedenti", "Per comprendere tempi e modalità del monitoraggio"],
+    evaluation: ["Revisione diretta delle immagini e del referto", "Confronto con esami radiologici precedenti", "Valutazione di dimensioni, morfologia e fattori di rischio individuali"],
+    possibleTests: ["TC del torace secondo indicazione", "Confronto radiologico nel tempo", "Ulteriori approfondimenti selezionati in base al profilo di rischio"],
+    careOptions: ["Sorveglianza radiologica quando appropriata", "Discussione multidisciplinare nei casi selezionati", "Approfondimento diagnostico se indicato"],
+    urgentNote: "La presenza di sangue con la tosse, grave difficoltà respiratoria o dolore toracico importante richiede una valutazione tempestiva, indipendentemente dal nodulo.",
+    relatedSlugs: ["patologie-respiratorie-croniche", "malattie-interstiziali-polmonari"], references: [ministryRespiratory], medicallyReviewed: true,
+  },
+  {
+    kind: "patologia", title: "Patologie restrittive", slug: "patologie-restrittive", description: "Quadri funzionali in cui i volumi polmonari risultano ridotti, con cause polmonari o extrapolmonari differenti.",
+    intro: "Il termine restrizione descrive una riduzione dei volumi polmonari che deve essere confermata con test funzionali completi. Può dipendere dal tessuto polmonare, dalla parete toracica, dall’obesità o dalla forza dei muscoli respiratori.",
+    commonSigns: ["Fiato corto sotto sforzo", "Respiro rapido o superficiale", "Riduzione dei volumi ai test funzionali", "Sintomi variabili secondo la causa"],
+    whenToSeekCare: ["Dopo una spirometria suggestiva per restrizione", "Se l’affanno è progressivo", "In presenza di condizioni note che possono ridurre i volumi polmonari"],
+    evaluation: ["Conferma funzionale della restrizione", "Ricerca della causa polmonare o extrapolmonare", "Valutazione di ossigenazione, forza muscolare e imaging quando indicati"],
+    possibleTests: ["Spirometria globale pletismografica", "DLCO", "Imaging toracico e test aggiuntivi selezionati"],
+    careOptions: ["Trattamento della causa identificata", "Monitoraggio funzionale", "Riabilitazione, supporto ventilatorio o altre misure nei casi appropriati"],
+    relatedSlugs: ["malattie-interstiziali-polmonari", "patologie-neuromuscolari-respiro"], references: [ministryRespiratory, whoRespiratory], medicallyReviewed: true,
+  },
+  {
+    kind: "patologia", title: "Gestione respiratoria delle patologie neuromuscolari", slug: "patologie-neuromuscolari-respiro", description: "Valutazione e monitoraggio del coinvolgimento respiratorio nelle malattie che possono indebolire i muscoli della respirazione.",
+    intro: "Alcune patologie neuromuscolari possono ridurre progressivamente la forza inspiratoria ed espiratoria, alterare la tosse efficace e compromettere la ventilazione soprattutto durante il sonno. Il monitoraggio respiratorio permette di riconoscere precocemente questi cambiamenti.",
+    commonSigns: ["Affanno o respiro superficiale", "Tosse debole e difficoltà a eliminare le secrezioni", "Sonno frammentato, cefalea mattutina o sonnolenza", "Peggioramento respiratorio in posizione sdraiata"],
+    whenToSeekCare: ["Dopo la diagnosi di una patologia neuromuscolare con possibile coinvolgimento respiratorio", "Se compaiono sintomi notturni o riduzione della forza della tosse", "Per il follow-up di ventilazione non invasiva già prescritta"],
+    evaluation: ["Storia dei sintomi diurni e notturni", "Misura della funzione e della forza dei muscoli respiratori", "Valutazione della tosse, dell’ossigenazione e della ventilazione"],
+    possibleTests: ["Test funzionali respiratori anche in posizione supina", "Misure della forza muscolare e del picco di tosse", "Saturimetria, capnografia o studio notturno quando indicati"],
+    careOptions: ["Monitoraggio programmato", "Tecniche di assistenza alla tosse nei casi appropriati", "Ventilazione non invasiva e follow-up quando prescritti"],
+    urgentNote: "Un peggioramento rapido della respirazione, difficoltà a gestire le secrezioni, confusione o sonnolenza improvvisa richiedono assistenza urgente.",
+    relatedSlugs: ["insufficienza-respiratoria", "patologie-restrittive"], references: [ministryRespiratory, whoRespiratory], medicallyReviewed: true,
   },
   {
     kind: "patologia", title: "Patologie respiratorie croniche", slug: "patologie-respiratorie-croniche", description: "Condizioni che richiedono comprensione, monitoraggio e continuità nel tempo.",
@@ -175,7 +207,7 @@ export const conditionTopics: Topic[] = [
     evaluation: ["Andamento nel tempo e impatto funzionale", "Revisione di esami e terapie", "Identificazione di obiettivi realistici di cura"],
     possibleTests: ["Test funzionali appropriati", "Monitoraggi o imaging secondo la diagnosi", "Valutazione delle comorbidità"],
     careOptions: ["Terapia personalizzata", "Prevenzione delle riacutizzazioni", "Educazione, controlli e continuità di cura"],
-    relatedSlugs: ["asma", "bpco", "bronchiectasie"], references: [whoRespiratory, ministryRespiratory], medicallyReviewed: false,
+    relatedSlugs: ["asma", "bpco", "bronchiectasie"], references: [whoRespiratory, ministryRespiratory], medicallyReviewed: true,
   },
 ];
 

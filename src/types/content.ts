@@ -56,7 +56,7 @@ export type ArticlePreview = {
   slug: string;
   category: string;
   description: string;
-  date: string;
+  date?: string;
   readingTime: string;
   draft: boolean;
 };
