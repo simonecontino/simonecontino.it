@@ -21,6 +21,9 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  verification: {
+    google: "lUsIaWUMg81q6z2QkxG6CVhy6jENdkTmqfRriUi-DNg",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
