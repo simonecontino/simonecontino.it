@@ -6,7 +6,7 @@ Ultimo aggiornamento: 2 agosto 2026.
 
 - Dominio: `simonecontino.it`
 - Telefono professionale e WhatsApp Business: `+39 328 315 9090`
-- Email professionale: `simonecontino@gmail.com`
+- Email professionale: `drsimonecontino@gmail.com`
 - Profilo Google Business configurato
 - Prenotazione online tramite Google Calendar, WhatsApp o email
 - Sede: Ospedale San Carlo Milano, Via Pio II 3, 20153 Milano

@@ -8,7 +8,7 @@ export const locations: Location[] = [
     city: "Milano",
     postalCode: "20153",
     phone: "02 40229",
-    email: "simonecontino@gmail.com",
+    email: "drsimonecontino@gmail.com",
     hours: "Mercoledì, 16:00–19:00",
     directions: "Ingresso in Via Pio II, 3",
     parking: "Sì",
