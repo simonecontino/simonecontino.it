@@ -13,7 +13,14 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   alternates: { canonical: "/" },
   openGraph: { type: "website", locale: "it_IT", siteName: siteConfig.name, title: siteConfig.shortTitle, description: siteConfig.description },
-  robots: { index: false, follow: false },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
