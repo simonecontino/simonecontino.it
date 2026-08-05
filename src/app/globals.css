@@ -28,6 +28,7 @@ h2 { font-size: clamp(2.1rem, 5vw, 3.7rem); line-height: 1.06; letter-spacing: -
 h3 { font-size: 1.25rem; line-height: 1.25; letter-spacing: -.02em; }
 p { color: var(--color-muted); }
 button, a { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
 :focus-visible { outline: 3px solid #f3a712; outline-offset: 4px; }
 
 .container { width: min(1200px, calc(100% - 2rem)); margin-inline: auto; }
@@ -47,7 +48,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .button--primary:hover { background: var(--color-petrol-dark); }
 .button--secondary { border-color: #8dadaa; background: transparent; }
 .button--secondary:hover { border-color: var(--color-petrol); background: #edf5f4; }
-.button--text { padding-inline: 0; color: var(--color-petrol); }
+.button--text { padding-inline: 0; color: var(--color-petrol); background: transparent; }
 .button--light { color: var(--color-petrol-dark); background: white; }
 .button--light:hover { background: #eaf4f2; }
 
@@ -162,10 +163,25 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .footer-grid > div { display: grid; align-content: start; gap: .45rem; }
 .footer-grid strong { margin-bottom: .35rem; }
 .footer-grid a { width: fit-content; color: #bed0ce; text-decoration: none; }
+.footer-cookie-button { width: fit-content; padding: 0; border: 0; color: #bed0ce; background: transparent; cursor: pointer; text-align: left; }
+.footer-cookie-button:hover { color: white; text-decoration: underline; text-underline-offset: .2rem; }
 .footer-grid p { margin: 0; color: #9eb6b3; }
 .footer-note { max-width: 18rem; font-size: .8rem; }
 .footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; margin-top: 3.5rem; padding-top: 1.25rem; border-top: 1px solid rgb(255 255 255 / 15%); color: #9eb6b3; font-size: .8rem; }
 .booking-bar { position: fixed; z-index: 45; right: .75rem; bottom: .75rem; left: .75rem; display: flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: .5rem; border-radius: var(--radius-sm); color: white; background: var(--color-petrol); box-shadow: 0 10px 30px rgb(10 65 71 / 30%); font-weight: 750; text-decoration: none; }
+.cookie-consent-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; align-items: end; padding: 1rem; background: rgb(10 34 38 / 55%); }
+.cookie-consent-dialog { width: min(44rem, 100%); max-height: calc(100dvh - 2rem); margin-inline: auto; padding: clamp(1.25rem, 4vw, 2rem); overflow-y: auto; border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: var(--color-paper); box-shadow: 0 24px 80px rgb(8 35 39 / 28%); }
+.cookie-consent-dialog h2 { margin-bottom: 1rem; font-size: clamp(1.75rem, 6vw, 2.6rem); }
+.cookie-consent-dialog > p:not(.eyebrow) { max-width: 39rem; }
+.cookie-policy-links { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; margin: 1.25rem 0; color: var(--color-petrol); font-size: .9rem; font-weight: 650; }
+.cookie-policy-links a { text-underline-offset: .2rem; }
+.cookie-consent-actions { display: flex; flex-direction: column; gap: .65rem; }
+.cookie-consent-actions .button { width: 100%; cursor: pointer; }
+.cookie-preference-row { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: center; padding: 1rem 0; border-top: 1px solid var(--color-line); }
+.cookie-preference-row p { margin: .25rem 0 0; font-size: .88rem; }
+.cookie-preference-row > span { color: var(--color-petrol); font-size: .8rem; font-weight: 750; }
+.cookie-preference-toggle { cursor: pointer; }
+.cookie-preference-toggle input { width: 1.4rem; height: 1.4rem; accent-color: var(--color-petrol); }
 .placeholder-page { min-height: 65vh; padding: clamp(5rem, 12vw, 9rem) 0; }
 .placeholder-page h1 { max-width: 12ch; }
 .placeholder-page p:not(.eyebrow) { max-width: 42rem; font-size: 1.15rem; }
@@ -361,6 +377,9 @@ button, a { -webkit-tap-highlight-color: transparent; }
   .sleep-steps { grid-template-columns: repeat(2, 1fr); }
   .interest-grid, .article-index-grid { grid-template-columns: repeat(3, 1fr); }
   .location-detail-card, .booking-options, .contact-layout:not(.contact-layout--single) { grid-template-columns: repeat(2, 1fr); }
+  .cookie-consent-backdrop { align-items: center; }
+  .cookie-consent-actions { flex-direction: row; align-items: center; }
+  .cookie-consent-actions .button { width: auto; }
 }
 
 @media (min-width: 820px) {

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { BookingBar } from "@/components/layout/booking-bar";
 import { PhysicianStructuredData } from "@/components/seo/structured-data";
+import { CookieConsent } from "@/components/cookie-consent/cookie-consent";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -37,10 +37,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <BookingBar />
         <PhysicianStructuredData />
+        <CookieConsent
+          gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+          analyticsAvailable={process.env.NODE_ENV === "production"}
+        />
       </body>
-      {process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ? (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-      ) : null}
     </html>
   );
 }
