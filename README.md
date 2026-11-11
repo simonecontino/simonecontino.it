@@ -32,7 +32,16 @@ Il progetto può essere distribuito su una piattaforma compatibile con Next.js. 
 4. completare e revisionare pagine legali e contenuti clinici;
 5. eseguire build e verifiche finali.
 
-Non sono necessarie variabili d’ambiente nella milestone attuale. Creare `.env.example` solo quando verrà scelto un fornitore per form, analytics o servizi esterni.
+Le variabili d’ambiente sono documentate in `.env.example`. Le credenziali reali devono essere salvate solo in `.env.local` e nelle impostazioni Vercel, mai nel repository.
+
+### Recensioni Google
+
+La homepage recupera valutazione, conteggio e fino a cinque recensioni tramite Places API (New). Configurare:
+
+- `GOOGLE_PLACES_API_KEY`: chiave privata con accesso limitato alla Places API;
+- `GOOGLE_BUSINESS_PLACE_ID`: Place ID esatto del profilo professionale.
+
+La richiesta avviene esclusivamente lato server e viene mantenuta in cache per 24 ore. Se la configurazione manca o Google non risponde, il sito mostra automaticamente il collegamento al profilo senza valutazioni o conteggi fittizi.
 
 ## Dove modificare i contenuti
 

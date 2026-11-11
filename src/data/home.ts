@@ -23,6 +23,6 @@ export const faqs: Faq[] = [
   { question: "Serve l’impegnativa?", answer: "No, per la visita non serve l’impegnativa." },
   { question: "Quanto dura una visita?", answer: "La prima visita dura indicativamente 45 minuti. La visita di controllo dura indicativamente 30–40 minuti." },
   { question: "Come si svolge una valutazione per russamento o apnee?", answer: "Il percorso parte dalla storia dei sintomi notturni e diurni. In base alla valutazione clinica possono essere indicati approfondimenti appropriati; modalità e disponibilità devono essere confermate in fase di prenotazione." },
-  { question: "Posso prenotare un controllo per la CPAP?", answer: "Sì. Sono disponibili il follow-up della terapia CPAP e la lettura e interpretazione dei report del dispositivo." },
-  { question: "Dove si svolgono le visite?", answer: "Le visite si svolgono presso l’Ospedale San Carlo Milano, in Via Pio II, 3, 20153 Milano." },
+  { question: "Posso prenotare un controllo per la CPAP?", answer: "Il controllo CPAP domiciliare è previsto nell’attività da gennaio 2027. Disponibilità e modalità saranno concordate telefonicamente." },
+  { question: "Dove si svolgono le visite?", answer: "L’attività libero-professionale è prevista a domicilio nell’area di Milano e Corsico da gennaio 2027." },
 ];

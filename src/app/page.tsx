@@ -1,15 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, ClipboardCheck, Ear, MapPin, MoonStar, Star, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, ClipboardCheck, Ear, MoonStar, Stethoscope } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { siteConfig } from "@/config/site";
 import { articles, faqs, problems } from "@/data/home";
-import { locations } from "@/data/locations";
+import { GoogleReviewsSection } from "@/components/reviews/google-reviews-section";
+import { getGoogleReviews } from "@/lib/google-reviews";
 
-export default function HomePage() {
-  const location = locations[0];
+export default async function HomePage() {
+  const googleReviews = await getGoogleReviews();
   return (
     <>
       <section className="hero">
@@ -85,12 +86,8 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <section className="section reviews-section">
-        <Container className="reviews-card">
-          <div><p className="eyebrow">Recensioni verificate</p><h2>Le esperienze condivise dai pazienti</h2><p>Per garantire trasparenza, le recensioni complete e aggiornate sono consultabili direttamente sul profilo Google Business.</p></div>
-          <div className="reviews-action"><div className="stars" aria-label="Recensioni su Google"><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /><Star aria-hidden="true" /></div><ButtonLink href={siteConfig.googleBusinessProfile} variant="secondary">Leggi le recensioni su Google</ButtonLink></div>
-        </Container>
-      </section>
+      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Da gennaio 2027</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e il controllo CPAP.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Modalità operative e tariffe saranno confermate prima dell’avvio.</p><ButtonLink href="/prestazioni-e-tariffe" variant="secondary">Scopri prestazioni e tariffe</ButtonLink></Container></section>
+      <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleBusinessProfile} />
 
       <section className="section section--tint">
         <Container>
@@ -111,8 +108,7 @@ export default function HomePage() {
 
       <section className="section location-section">
         <Container className="location-card">
-          <a className="map-placeholder" href={location.mapsUrl} target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /><span>Apri la sede in Google Maps</span></a>
-          <div><p className="eyebrow">Dove ricevo</p><h2>Visite a Milano</h2>{!location.confirmed ? <p className="status-note">Sede in fase di configurazione</p> : null}<dl><div><dt>Struttura</dt><dd>{location.name}</dd></div><div><dt>Indirizzo</dt><dd>{location.address}, {location.city}</dd></div><div><dt>Orari</dt><dd>{location.hours}</dd></div></dl><ButtonLink href="/dove-ricevo" variant="secondary">Informazioni sulla sede</ButtonLink></div>
+          <div><p className="eyebrow">Da gennaio 2027</p><h2>Visite a domicilio</h2><p>Attività prevista nell’area di Milano e Corsico. Disponibilità e modalità saranno concordate telefonicamente.</p><ButtonLink href="/dove-ricevo" variant="secondary">Scopri le zone servite</ButtonLink></div>
         </Container>
       </section>
 

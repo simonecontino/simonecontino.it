@@ -11,6 +11,8 @@ type SitemapEntry = {
 };
 
 const staticPages: SitemapEntry[] = [
+  { path: "/poligrafia-respiratoria-milano", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/prestazioni-e-tariffe", changeFrequency: "monthly", priority: 0.9 },
   { path: "/", changeFrequency: "monthly", priority: 1 },
   { path: "/chi-sono", changeFrequency: "yearly", priority: 0.7 },
   { path: "/problemi", changeFrequency: "monthly", priority: 0.9 },
@@ -24,6 +26,7 @@ const staticPages: SitemapEntry[] = [
   { path: "/articoli", changeFrequency: "weekly", priority: 0.8 },
   { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   { path: "/cookie-policy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/termini", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

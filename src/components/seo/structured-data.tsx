@@ -12,17 +12,6 @@ export function PhysicianStructuredData() {
     email: siteConfig.email,
     sameAs: [siteConfig.googleBusinessProfile],
     areaServed: { "@type": "City", name: "Milano" },
-    workLocation: {
-      "@type": "Place",
-      name: "Ospedale San Carlo Milano",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "Via Pio II, 3",
-        postalCode: "20153",
-        addressLocality: "Milano",
-        addressCountry: "IT",
-      },
-    },
     medicalSpecialty: "Pulmonary",
   };
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />;
