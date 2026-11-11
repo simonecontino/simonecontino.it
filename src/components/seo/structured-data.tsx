@@ -8,7 +8,6 @@ export function PhysicianStructuredData() {
     jobTitle: "Medico Chirurgo, Specialista in Pneumologia",
     description: siteConfig.description,
     url: siteConfig.domain,
-    telephone: siteConfig.phone,
     email: siteConfig.email,
     sameAs: [siteConfig.googleBusinessProfile],
     areaServed: { "@type": "City", name: "Milano" },

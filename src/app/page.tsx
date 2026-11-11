@@ -1,3 +1,5 @@
+import { booking } from "@/config/booking";
+import { features } from "@/config/features";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BookOpen, ClipboardCheck, Ear, MoonStar, Stethoscope } from "lucide-react";
@@ -21,7 +23,7 @@ export default async function HomePage() {
             <p className="hero-lead">{siteConfig.home.subtitle}</p>
             <p className="hero-support">{siteConfig.home.support}</p>
             <div className="hero-actions">
-              <ButtonLink href="/prenota">Prenota una visita</ButtonLink>
+              <ButtonLink href={booking.requestUrl}>Prenota una visita</ButtonLink>
               <ButtonLink href="#come-posso-aiutarti" variant="secondary">Scopri come posso aiutarti</ButtonLink>
             </div>
           </div>
@@ -86,10 +88,10 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Da gennaio 2027</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e il controllo CPAP.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Modalità operative e tariffe saranno confermate prima dell’avvio.</p><ButtonLink href="/prestazioni-e-tariffe" variant="secondary">Scopri prestazioni e tariffe</ButtonLink></Container></section>
+      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Disponibilità da concordare</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e il controllo CPAP.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Modalità operative e tariffe saranno confermate prima dell’avvio.</p><ButtonLink href={booking.path} variant="secondary">Prestazioni e prenotazioni</ButtonLink></Container></section>
       <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleBusinessProfile} />
 
-      <section className="section section--tint">
+      {features.articlesEnabled ? (      <section className="section section--tint">
         <Container>
           <SectionHeading eyebrow="Informazione e prevenzione" title="Articoli per capire meglio il respiro" text="Una sezione in sviluppo, pensata per spiegare con chiarezza sintomi, patologie ed esami respiratori." />
           <div className="article-grid">
@@ -98,6 +100,7 @@ export default async function HomePage() {
           <div className="section-action"><ButtonLink href="/articoli" variant="secondary">Leggi tutti gli articoli</ButtonLink></div>
         </Container>
       </section>
+      ) : null}
 
       <section className="section faq-home">
         <Container className="faq-layout">
@@ -108,12 +111,12 @@ export default async function HomePage() {
 
       <section className="section location-section">
         <Container className="location-card">
-          <div><p className="eyebrow">Da gennaio 2027</p><h2>Visite a domicilio</h2><p>Attività prevista nell’area di Milano e Corsico. Disponibilità e modalità saranno concordate telefonicamente.</p><ButtonLink href="/dove-ricevo" variant="secondary">Scopri le zone servite</ButtonLink></div>
+          <div><p className="eyebrow">Milano e Corsico</p><h2>Visite a domicilio</h2><p>Attività prevista nell’area di Milano e Corsico. Disponibilità e modalità saranno concordate telefonicamente.</p><ButtonLink href="/dove-ricevo" variant="secondary">Scopri le zone servite</ButtonLink></div>
         </Container>
       </section>
 
       <section className="final-cta">
-        <Container><BookOpen aria-hidden="true" /><h2>{siteConfig.home.closing}</h2><p>Se desideri discutere un sintomo respiratorio o una condizione già nota, il passo successivo è richiedere una valutazione.</p><ButtonLink href="/prenota">Prenota una visita</ButtonLink></Container>
+        <Container><BookOpen aria-hidden="true" /><h2>{siteConfig.home.closing}</h2><p>Se desideri discutere un sintomo respiratorio o una condizione già nota, il passo successivo è richiedere una valutazione.</p><ButtonLink href={booking.requestUrl}>Prenota una visita</ButtonLink></Container>
       </section>
     </>
   );

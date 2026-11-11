@@ -1,7 +1,8 @@
+import { features } from "@/config/features";
 import type { NavigationItem } from "@/types/content";
 
-export const navigation: NavigationItem[] = [
-  { label: "Prestazioni e tariffe", href: "/prestazioni-e-tariffe" },
+const items: NavigationItem[] = [
+  { label: "Prestazioni e prenotazioni", href: "/prestazioni-e-prenotazioni" },
   { label: "Problemi", href: "/problemi" },
   { label: "Patologie", href: "/patologie" },
   { label: "Sonno", href: "/sonno" },
@@ -9,3 +10,5 @@ export const navigation: NavigationItem[] = [
   { label: "Chi sono", href: "/chi-sono" },
   { label: "Articoli", href: "/articoli" },
 ];
+
+export const navigation = items.filter(item => features.articlesEnabled || item.href !== "/articoli");

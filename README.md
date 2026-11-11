@@ -1,5 +1,7 @@
 # Sito personale del Dr. Simone Contino
 
+Per la configurazione attuale di navigazione, pagina unificata, Articoli disabilitati e modulo di richiesta, consultare [BOOKING_SETUP.md](BOOKING_SETUP.md). Questa guida include le variabili server e le condizioni obbligatorie di attivazione; il modulo resta spento finché invio email e privacy non sono verificati.
+
 Sito Next.js mobile-first per il Dr. Simone Contino, medico specialista in Pneumologia a Milano. Il progetto comprende sistema visivo, homepage, pagine cliniche riutilizzabili, area sonno, esami, profilo professionale, FAQ, articoli MDX, sede, prenotazione, contatti e bozze legali. I contenuti clinici e le informazioni non confermate sono esplicitamente marcati prima della pubblicazione.
 
 ## Avvio locale

@@ -4,5 +4,11 @@ const withMDX = createMDX();
 
 export default withMDX({
   pageExtensions: ["ts", "tsx", "md", "mdx"],
+  async redirects() {
+    return [
+      { source: "/prenota", destination: "/prestazioni-e-prenotazioni#richiedi-appuntamento", permanent: true },
+      { source: "/prestazioni-e-tariffe", destination: "/prestazioni-e-prenotazioni", permanent: true },
+    ];
+  },
   images: { formats: ["image/avif", "image/webp"] },
 });

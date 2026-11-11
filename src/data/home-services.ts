@@ -10,7 +10,6 @@ export type HomeService = {
 };
 
 export const homeActivity = {
-  startLabel: "gennaio 2027",
   areas: "Milano e Corsico",
   supplementNote: "Per alcune località o zone di difficile accesso potrebbe essere previsto un supplemento, comunicato prima della conferma dell'appuntamento.",
 };
