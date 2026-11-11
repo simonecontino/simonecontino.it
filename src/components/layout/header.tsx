@@ -1,9 +1,9 @@
 import { booking } from "@/config/booking";
 import Link from "next/link";
-import { Menu } from "lucide-react";
 import { navigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
 import { Container } from "@/components/ui/container";
+import { MobileNavigation } from "@/components/layout/mobile-navigation";
 
 export function Header() {
   return (
@@ -17,13 +17,7 @@ export function Header() {
           {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
           <Link className="header-booking" href={booking.requestUrl}>Prenota</Link>
         </nav>
-        <details className="mobile-menu">
-          <summary aria-label="Apri il menu"><Menu aria-hidden="true" /></summary>
-          <nav aria-label="Navigazione mobile">
-            {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
-            <Link className="header-booking" href={booking.requestUrl}>Prenota</Link>
-          </nav>
-        </details>
+        <MobileNavigation />
       </Container>
     </header>
   );
