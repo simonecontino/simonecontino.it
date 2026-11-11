@@ -6,7 +6,7 @@ Pagina: `/prestazioni-e-prenotazioni`, con ancore `#prestazioni`, `#richiedi-app
 
 La preselezione dalla card al modulo usa un evento locale al browser: nessun identificativo della prestazione viene aggiunto all’URL o inviato ad Analytics.
 
-Le prestazioni restano in `src/data/home-services.ts`: enabled controlla card e select; status planned diventa «Disponibilità da concordare» e non equivale ad attivazione. I prezzi sono conservati: 220 € resta provvisorio non confermato, le altre tariffe restano null. Nessun prezzo nuovo.
+Le prestazioni restano in `src/data/home-services.ts`: enabled controlla card e select; status planned diventa «Disponibilità da concordare» e non equivale ad attivazione. Tariffe confermate: visita pneumologica 180 €, visita per disturbi respiratori del sonno 180 €, poligrafia notturna 220 €, saturimetria notturna 100 €. Sono le sole quattro opzioni del catalogo e del modulo. Il controllo CPAP rimane trattato nelle pagine informative, ma non è nel listino.
 
 ## Articoli reversibili
 

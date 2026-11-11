@@ -88,7 +88,7 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Disponibilità da concordare</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e il controllo CPAP.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Modalità operative e tariffe saranno confermate prima dell’avvio.</p><ButtonLink href={booking.path} variant="secondary">Prestazioni e prenotazioni</ButtonLink></Container></section>
+      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Disponibilità da concordare</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e la saturimetria notturna.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Consulta il listino e richiedi informazioni sulle modalità e sulla disponibilità.</p><ButtonLink href={booking.path} variant="secondary">Prestazioni e prenotazioni</ButtonLink></Container></section>
       <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleBusinessProfile} />
 
       {features.articlesEnabled ? (      <section className="section section--tint">

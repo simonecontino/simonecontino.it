@@ -2,7 +2,6 @@ import { features } from "@/config/features";
 import type { NavigationItem } from "@/types/content";
 
 const items: NavigationItem[] = [
-  { label: "Prestazioni e prenotazioni", href: "/prestazioni-e-prenotazioni" },
   { label: "Problemi", href: "/problemi" },
   { label: "Patologie", href: "/patologie" },
   { label: "Sonno", href: "/sonno" },

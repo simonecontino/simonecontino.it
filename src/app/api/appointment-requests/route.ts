@@ -51,7 +51,7 @@ export async function POST(request: Request) {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST", headers: { Authorization: `Bearer ${config.apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `appointment-${digest}` },
       body: JSON.stringify({ from: config.from, to: [config.to], reply_to: data.email,
-        subject: `Nuova richiesta appuntamento dal sito — ${data.firstName} ${data.lastName}`,
+        subject: "Nuova richiesta appuntamento — Dr. Simone Contino",
         text: [`Nome: ${data.firstName} ${data.lastName}`, `Email: ${data.email}`, `Telefono: ${data.phone || "Non indicato"}`, `Prestazione: ${service.title}`, `Preferenza: ${data.contactPreference === "phone" ? "Telefono" : "Email"}`, `Note organizzative: ${data.notes || "Nessuna"}`, `Richiesta (orario indicativo): ${new Date(body.requestedAt).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}`].join("\n"),
       }), signal: AbortSignal.timeout(12_000),
     });

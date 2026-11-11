@@ -13,6 +13,19 @@ function load(file, dependencies = {}, extra = {}) {
   return exports;
 }
 const validation = load('src/lib/appointment-validation.ts');
+const { homeServices } = load('src/data/home-services.ts');
+test('public catalogue and form share exactly the four confirmed tariffs', () => {
+  const services = homeServices.filter(s => s.enabled);
+  assert.equal(services.length, 4);
+  assert.equal(JSON.stringify(services.map(s => [s.title, s.priceEur])), JSON.stringify([
+    ['Visita pneumologica domiciliare', 180],
+    ['Visita domiciliare per disturbi respiratori del sonno', 180],
+    ['Poligrafia notturna domiciliare', 220],
+    ['Saturimetria notturna domiciliare', 100],
+  ]));
+  assert.ok(services.every(s => s.priceConfirmed));
+  assert.ok(!services.some(s => s.id === 'controllo-cpap-domiciliare'));
+});
 const input = { firstName: 'Test', lastName: 'Verifica', email: 'test@example.invalid', phone: '', service: 'cpap', contactPreference: 'email', notes: '', privacy: true };
 test('validates required fields, limits, privacy and selected enabled service', () => {
   assert.ok(validation.validateAppointment(input, ['cpap']));
@@ -63,7 +76,7 @@ test('success includes all email fields and stable idempotency for retries', asy
   assert.equal(first.options.headers['Idempotency-Key'], second.options.headers['Idempotency-Key']);
   assert.equal(first.options.body, second.options.body);
   const email = JSON.parse(first.options.body);
-  assert.equal(email.subject, 'Nuova richiesta appuntamento dal sito — Test Verifica');
+  assert.equal(email.subject, 'Nuova richiesta appuntamento — Dr. Simone Contino');
   assert.equal(email.reply_to, input.email);
   assert.ok(email.text.includes('Prestazione: CPAP'));
 });

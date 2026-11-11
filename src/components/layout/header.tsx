@@ -1,3 +1,4 @@
+import { booking } from "@/config/booking";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { navigation } from "@/config/navigation";
@@ -14,11 +15,13 @@ export function Header() {
         </Link>
         <nav className="desktop-nav" aria-label="Navigazione principale">
           {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+          <Link className="header-booking" href={booking.requestUrl}>Prenota</Link>
         </nav>
         <details className="mobile-menu">
           <summary aria-label="Apri il menu"><Menu aria-hidden="true" /></summary>
           <nav aria-label="Navigazione mobile">
             {navigation.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+            <Link className="header-booking" href={booking.requestUrl}>Prenota</Link>
           </nav>
         </details>
       </Container>
