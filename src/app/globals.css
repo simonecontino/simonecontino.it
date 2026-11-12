@@ -486,16 +486,16 @@ button { font: inherit; }
 .booking-contact-options .booking-contact-email:hover { background: #eaf2f3; }
 .booking-contact-options svg { flex: none; }
 .booking-contact-options small { grid-column: 1 / -1; color: var(--color-muted); font-size: .8rem; }
-.booking-service-list { margin: 1.25rem 0 0; padding: 0; list-style: none; }
+.booking-service-list { margin: 0; padding: 0; list-style: none; }
 .booking-service-list > li + li { border-top: 1px solid var(--color-line); }
-.booking-service-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1.2rem; padding-block: 1.2rem; }
+.booking-service-row { display: grid; grid-template-columns: minmax(0,1fr) 6rem; gap: 1rem; padding-block: 1rem; }
 .booking-service-list > li:first-child .booking-service-row { padding-top: 0; }
 .booking-service-content { min-width: 0; }
 .booking-service-action { display: flex; flex-direction: column; align-items: flex-end; gap: .65rem; }
 .booking-service-detail { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
-.booking-service-content h3 { margin: 0 0 .55rem; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
-.booking-service-content h3:only-child { margin-bottom: 0; }
-.booking-service-price { color: var(--color-petrol); font-size: 1.5rem; line-height: 1.2; font-variant-numeric: tabular-nums; text-align: right; }
+.booking-unified-grid .booking-service-content h2 { margin: 0 0 .55rem; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
+.booking-unified-grid .booking-service-content h2:only-child { margin-bottom: 0; }
+.booking-service-price { color: var(--color-petrol); font-size: 1.25rem; font-weight: 600; line-height: 1.4; font-variant-numeric: tabular-nums; text-align: right; }
 .booking-service-content > p { margin-bottom: 0; font-size: .92rem; }
 .booking-service-links { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .8rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
 .booking-service-links .button { min-height: 2.75rem; padding: .6rem 1rem; }
@@ -508,6 +508,12 @@ button { font: inherit; }
 .appointment-fields label > span, .appointment-fields small { color: var(--color-muted); font-size: .8rem; font-weight: 400; }
 .appointment-fields .appointment-field-label { color: var(--color-ink); font-size: .95rem; font-weight: 650; }
 .appointment-fields input, .appointment-fields select, .appointment-fields textarea { width: 100%; min-width: 0; min-height: 2.9rem; padding: .65rem; border: 1px solid #8dadaa; border-radius: var(--radius-sm); background: var(--color-paper); color: var(--color-ink); font: inherit; font-size: 1rem; }
+.booking-request-column .appointment-fields :is(input, select) { -webkit-appearance: none; appearance: none; box-sizing: border-box; height: 46px; min-height: 46px; padding: 0 .75rem; font-family: inherit; font-size: 1rem; font-weight: 400; line-height: 1.25; }
+.booking-request-column .appointment-fields select { padding-right: 2.5rem; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23155E63' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .75rem center; background-size: 1rem; }
+.booking-request-column .appointment-fields :is(input, select):hover:not(:disabled) { border-color: var(--color-petrol); }
+.booking-request-column .appointment-fields :is(input, select):focus-visible { outline: 2px solid var(--color-petrol); outline-offset: 3px; }
+.booking-request-column .appointment-fields :is(input, select):disabled { cursor: not-allowed; opacity: .65; }
+.booking-request-column .appointment-fields :is(input, select)[aria-invalid="true"] { border-color: #a32727; }
 .appointment-privacy { display: flex; align-items: flex-start; gap: .7rem; padding-block: 1.3rem; font-size: .9rem; }
 .appointment-privacy input { flex: none; width: 1.2rem; height: 1.2rem; margin-top: .2rem; }
 .appointment-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
@@ -525,8 +531,7 @@ button { font: inherit; }
 @media (min-width: 960px) {
   .booking-request-column .appointment-form-panel { padding: .9rem; border-radius: var(--radius-md); }
   .booking-request-column .appointment-fields { gap: .6rem .8rem; }
-  .booking-request-column .appointment-fields input,
-  .booking-request-column .appointment-fields select { min-height: 2.625rem; padding: .4rem .6rem; line-height: 1.35; }
+  .booking-service-price { font-size: 1.375rem; }
   .booking-request-column .appointment-privacy { padding-block: .65rem; }
   .booking-request-column .appointment-challenge { margin-bottom: .7rem; }
   .booking-request-column .appointment-disclaimer { margin-top: .7rem; }
