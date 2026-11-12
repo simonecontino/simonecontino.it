@@ -3,7 +3,6 @@ import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { ServiceRequestLink } from "@/components/forms/service-request-link";
 import { AppointmentForm } from "@/components/forms/appointment-form";
 import { homeActivity, homeServices } from "@/data/home-services";
 import { booking } from "@/config/booking";
@@ -42,7 +41,7 @@ export default function ServicesBookingPage() {
                       ? s.priceEur.toLocaleString("it-IT", { maximumFractionDigits: 0 })
                       : "Tariffa in definizione"}
                   </strong>
-                  <ServiceRequestLink serviceId={s.id} />
+                  <a className="button button--primary" href="#richiedi-appuntamento">Prenota</a>
                 </div>
               </article>
             </li>
@@ -50,7 +49,7 @@ export default function ServicesBookingPage() {
         </ul>
         <p className="appointment-disclaimer">{homeActivity.supplementNote}</p>
       </div>
-      <div className="booking-request-column"><section id="richiedi-appuntamento" aria-labelledby="request-heading"><p className="eyebrow">Il prossimo passo</p><h2 id="request-heading">Richiedi una visita o un esame</h2><p>Seleziona la visita specialistica o l’esame diagnostico di cui hai bisogno e invia la tua richiesta. Ti ricontatterò per concordare disponibilità e modalità della prestazione.</p><AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} services={services.map(({id, title}) => ({id, title}))} /></section><section className="booking-whatsapp" id="whatsapp"><MessageCircle aria-hidden="true" /><h3>Preferisci WhatsApp?</h3><p>Puoi utilizzare WhatsApp Business per richieste organizzative, senza inviare informazioni sanitarie.</p><a className="button button--secondary" href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" />Contatta su WhatsApp</a><p className="appointment-disclaimer">In alternativa: <a href={siteConfig.emailHref}>{siteConfig.email}</a></p></section></div>
+      <div className="booking-request-column"><section id="richiedi-appuntamento" aria-labelledby="request-heading"><p className="eyebrow">Il prossimo passo</p><h2 id="request-heading">Richiedi di essere ricontattato</h2><p>Lascia i tuoi recapiti e scegli come preferisci essere contattato. Concorderemo successivamente i dettagli della visita o dell’esame, senza raccogliere informazioni cliniche nel modulo.</p><AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} /></section><section className="booking-whatsapp" id="whatsapp"><MessageCircle aria-hidden="true" /><h3>Preferisci WhatsApp?</h3><p>Puoi utilizzare WhatsApp Business per richieste organizzative, senza inviare informazioni sanitarie.</p><a className="button button--secondary" href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" />Contatta su WhatsApp</a><p className="appointment-disclaimer">In alternativa: <a href={siteConfig.emailHref}>{siteConfig.email}</a></p></section></div>
     </Container></section>
   </>;
 }

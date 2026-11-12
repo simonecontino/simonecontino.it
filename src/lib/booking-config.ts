@@ -13,6 +13,7 @@ export function getAppointmentConfig() {
   const to = process.env.APPOINTMENT_TO_EMAIL || siteConfig.email;
   const siteKey = process.env.TURNSTILE_SITE_KEY;
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  const enabled = process.env.APPOINTMENT_FORM_ENABLED === "true" && process.env.APPOINTMENT_PRIVACY_VERIFIED === "true" && process.env.APPOINTMENT_EMAIL_VERIFIED === "true" && Boolean(apiKey && from && to && siteKey && secret);
+  // Operational owner approval is not an assertion of legal certification.
+  const enabled = process.env.APPOINTMENT_FORM_ENABLED === "true" && process.env.APPOINTMENT_OWNER_APPROVED === "true" && process.env.APPOINTMENT_EMAIL_VERIFIED === "true" && Boolean(apiKey && from && to && siteKey && secret);
   return { enabled, apiKey, from, to, siteKey, secret };
 }

@@ -49,12 +49,15 @@ Prestazioni già confermate: prima visita pneumologica, controllo pneumologico, 
 
 ### Modulo richieste — aggiornamento 12 novembre 2026
 
+- Decisione successiva: autorizzata dal titolare la pubblicazione della versione minimale di solo ricontatto. Eliminati prestazione e testo libero anche nel payload email. Nessuna certificazione di conformità; verifiche fornitori ancora aperte. Il gate operativo è APPOINTMENT_OWNER_APPROVED; il vecchio flag privacy non attesta verifiche non svolte.
+
 - Titolare confermato: Dr. Simone Contino; recapito privacy: drsimonecontino@gmail.com.
 - Conservazione richiesta: 30 giorni dalla conclusione della gestione. Predisporre cancellazione nella casella, cestino e copie; nessuna cancellazione automatica implementata dal sito.
 - Nessun indirizzo professionale aperto al pubblico dichiarato: non usare automaticamente l’ospedale come recapito del titolare. Verificare eventuali ulteriori dati identificativi richiesti.
 - Bozza privacy aggiornata, NON approvata: verificare basi giuridiche, accordi/ruoli fornitori, trasferimenti e conservazione presso Vercel, Resend, Cloudflare e Google/Gmail.
 - Dominio Resend verificato da screenshot; cinque variabili Production salvate secondo conferma del titolare. Valori non letti né verificati dall’agente.
-- Invio reale al recapito professionale e prova completa Turnstile/modulo ancora da eseguire. Nessun flag di verifica attivato.
+- Invio tecnico Resend a drsimonecontino@gmail.com riuscito; ricezione in Posta in arrivo confermata dal titolare il 12 novembre 2026. Prova completa browser/Turnstile/modulo ancora da eseguire. Nessun flag di verifica attivato.
+- Il titolare conferma Gmail standard e accordi fornitori non ancora verificati. Prima dell’attivazione: verificare piano/DPA Vercel, restrizioni sulle categorie particolari di dati, idoneità Gmail, accordi Resend/Turnstile, basi giuridiche ex artt. 6 e 9 GDPR, tracking email/GA e cancellazione effettiva. Vedere PRIVACY_REVIEW.md.
 
 - `[FORNIRE TESTO, AUTORE E DATA DELLE RECENSIONI GOOGLE DA MOSTRARE DIRETTAMENTE NEL SITO]`
 - `[REVISIONE LEGALE PRIVACY POLICY]`

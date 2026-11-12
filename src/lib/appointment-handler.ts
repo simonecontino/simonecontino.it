@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { createHash } from "node:crypto";
 import { getAppointmentConfig } from "@/lib/booking-config";
 import { validateAppointment } from "@/lib/appointment-validation";
-import { homeServices } from "@/data/home-services";
 import { siteConfig } from "@/config/site";
 
 function reply(error: string, status: number) {
@@ -32,8 +31,7 @@ export async function handleAppointmentRequest(request: Request) {
   try { body = JSON.parse(Buffer.concat(chunks).toString("utf8")); } catch { return reply("Dati non validi.", 400); }
   if (!body || typeof body !== "object" || Array.isArray(body)) return reply("Dati non validi.", 400);
   if (body.website) return reply("Impossibile inviare la richiesta.", 400);
-  const services = homeServices.filter(s => s.enabled);
-  const data = validateAppointment(body, services.map(s => s.id));
+  const data = validateAppointment(body);
   if (!data) return reply("Controlla i campi. Per il contatto telefonico è necessario indicare un numero.", 400);
   if (typeof body.token !== "string" || !body.token || body.token.length > 2048) return reply("Completa la verifica antispam.", 400);
   if (typeof body.requestedAt !== "string" || !Number.isFinite(Date.parse(body.requestedAt)) || Math.abs(Date.now() - Date.parse(body.requestedAt)) > 86_400_000) return reply("Richiesta scaduta. Ricarica la pagina e riprova.", 400);
@@ -45,16 +43,17 @@ export async function handleAppointmentRequest(request: Request) {
     const result = await verification.json();
     const hostnames = Array.from(allowedOrigins).map(o => new URL(o).hostname);
     if (!verification.ok || !result.success || result.action !== "appointment" || !hostnames.includes(result.hostname)) return reply("Verifica antispam scaduta o non valida. Riprova.", 400);
-    const service = services.find(s => s.id === data.service)!;
     const digest = createHash("sha256").update(JSON.stringify({ ...data, requestedAt: body.requestedAt })).digest("hex");
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST", headers: { Authorization: `Bearer ${config.apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `appointment-${digest}` },
       body: JSON.stringify({ from: config.from, to: [config.to], reply_to: data.email,
-        subject: "Nuova richiesta appuntamento — Dr. Simone Contino",
-        text: [`Nome: ${data.firstName} ${data.lastName}`, `Email: ${data.email}`, `Telefono: ${data.phone || "Non indicato"}`, `Prestazione: ${service.title}`, `Preferenza: ${data.contactPreference === "phone" ? "Telefono" : "Email"}`, `Note organizzative: ${data.notes || "Nessuna"}`, `Richiesta (orario indicativo): ${new Date(body.requestedAt).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}`].join("\n"),
+        subject: "Nuova richiesta di ricontatto — Dr. Simone Contino",
+        text: [`Nome: ${data.firstName} ${data.lastName}`, `Email: ${data.email}`, `Telefono: ${data.phone || "Non indicato"}`, `Preferenza: ${data.contactPreference === "phone" ? "Telefono" : "Email"}`, "Informativa privacy: presa visione dichiarata nel modulo di ricontatto.", `Richiesta (orario indicativo): ${new Date(body.requestedAt).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}`].join("\n"),
       }), signal: AbortSignal.timeout(12_000),
     });
     if (!response.ok) return reply("Invio non riuscito. I dati restano nel modulo: puoi riprovare oppure utilizzare WhatsApp.", 502);
+    const accepted = await response.json();
+    if (!accepted || typeof accepted.id !== "string" || !accepted.id.trim()) return reply("Il servizio email non ha confermato l’accettazione. Riprova oppure contattami via email.", 502);
     return NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } });
   } catch { return reply("Non è stato possibile verificare l’invio. Riprova mantenendo gli stessi dati.", 502); }
 }

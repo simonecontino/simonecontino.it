@@ -4,7 +4,7 @@
 
 Pagina: `/prestazioni-e-prenotazioni`, con ancore `#prestazioni`, `#richiedi-appuntamento`, `#whatsapp`. Configurazione URL in `src/config/booking.ts`. I vecchi URL `/prenota` e `/prestazioni-e-tariffe` reindirizzano permanentemente (308) senza perdere i contenuti del catalogo.
 
-La preselezione dalla card al modulo usa un evento locale al browser: nessun identificativo della prestazione viene aggiunto all’URL o inviato ad Analytics.
+Il modulo raccoglie solo recapiti e preferenza di contatto. Le card conducono alla stessa ancora senza preselezionare o trasmettere prestazioni; non sono presenti note, messaggi o allegati. Il server rifiuta anche i precedenti campi service/notes inviati manualmente. Il catalogo e le tariffe restano consultabili, separati dalla richiesta.
 
 Le prestazioni restano in `src/data/home-services.ts`: enabled controlla card e select; status planned diventa «Disponibilità da concordare» e non equivale ad attivazione. Tariffe confermate: visita pneumologica 180 €, visita per disturbi respiratori del sonno 180 €, poligrafia notturna 220 €, saturimetria notturna 100 €. Sono le sole quattro opzioni del catalogo e del modulo. Il controllo CPAP rimane trattato nelle pagine informative, ma non è nel listino.
 
@@ -18,7 +18,7 @@ Il numero non è nel testo visibile, nei link tel o nei dati strutturati. L’UR
 
 ## Attivazione del modulo (disabilitato per default)
 
-Non esisteva un provider email nel progetto. Adapter predisposto: Resend tramite fetch lato server, senza SDK o nuove dipendenze. Non sono stati creati account, chiavi, abbonamenti né inviati messaggi reali. Occorre approvare/configurare il fornitore prima dell’utilizzo; eventuali limiti/costi dipendono dal piano scelto.
+Adapter Resend tramite fetch lato server, senza SDK o nuove dipendenze. Il 12 novembre 2026 il titolare ha confermato la ricezione della prova tecnica nella casella professionale e ha autorizzato la pubblicazione della versione di solo ricontatto. Non sono stati accettati accordi per conto del titolare né attestata conformità legale; le verifiche contrattuali indicate in PRIVACY_REVIEW.md restano aperte.
 
 Variabili private:
 
@@ -28,7 +28,7 @@ Variabili private:
 - `TURNSTILE_SITE_KEY`: identificativo pubblico del widget, passato al client solo se attivo.
 - `TURNSTILE_SECRET_KEY`: segreto per Siteverify, solo server.
 - `WHATSAPP_BUSINESS_NUMBER`: numero internazionale senza +.
-- `APPOINTMENT_PRIVACY_VERIFIED=true`: solo dopo completamento e verifica dell’informativa.
+- `APPOINTMENT_OWNER_APPROVED=true`: autorizzazione operativa del titolare alla versione minimale dopo esposizione dei rischi residui. Non è una certificazione legale. Il precedente flag APPOINTMENT_PRIVACY_VERIFIED non viene impostato né usato per attestare verifiche mai eseguite.
 - `APPOINTMENT_EMAIL_VERIFIED=true`: solo dopo configurazione e prova controllata della consegna.
 - `APPOINTMENT_FORM_ENABLED=true`: interruttore finale di attivazione.
 
@@ -38,7 +38,7 @@ Per una prova controllata usare ambiente locale/staging e destinatario di test a
 
 ## Sicurezza e dati
 
-Validazione client e server, limiti sui campi e body (12 KB letti come stream), allowlist servizio abilitato e preferenza, controllo Origin, honeypot, challenge Turnstile obbligatoria con controllo hostname/action. Il telefono diventa necessario scegliendo contatto telefonico. Le note non possono contenere controlli arbitrari, ma ammettono normali ritorni a capo; sono inviate in email di testo semplice, senza rendering HTML. Nome/cognome/email rifiutano CR/LF per impedire injection.
+Validazione client e server, limiti sui campi e body (12 KB letti come stream), preferenza ammessa, controllo Origin, honeypot e Turnstile obbligatorio con hostname/action. Il telefono diventa necessario scegliendo contatto telefonico. Nessuna prestazione o testo libero viene accettato o inserito in email. Nome/cognome/email rifiutano CR/LF; email in testo semplice. Le risposte positive di Resend devono contenere un ID prima di mostrare successo.
 
 Nessun database, nessun log con contenuto delle richieste, nessun evento analytics contenente campi o scelta clinica. Le email restano nella casella del destinatario/provider: definirne conservazione e accessi prima dell’attivazione. Disabilitare in GA le misurazioni avanzate automatiche dei moduli se configurate: non sono gestite da questo endpoint. La richiesta può indirettamente rivelare un interesse sanitario e va trattata con adeguate misure.
 

@@ -14,7 +14,7 @@ function load(file, dependencies = {}, extra = {}) {
 }
 const validation = load('src/lib/appointment-validation.ts');
 const { homeServices } = load('src/data/home-services.ts');
-test('public catalogue and form share exactly the four confirmed tariffs', () => {
+test('public catalogue retains exactly the four confirmed tariffs', () => {
   const services = homeServices.filter(s => s.enabled);
   assert.equal(services.length, 4);
   assert.equal(JSON.stringify(services.map(s => [s.title, s.priceEur])), JSON.stringify([
@@ -26,13 +26,13 @@ test('public catalogue and form share exactly the four confirmed tariffs', () =>
   assert.ok(services.every(s => s.priceConfirmed));
   assert.ok(!services.some(s => s.id === 'controllo-cpap-domiciliare'));
 });
-const input = { firstName: 'Test', lastName: 'Verifica', email: 'test@example.invalid', phone: '', service: 'cpap', contactPreference: 'email', notes: '', privacy: true };
-test('validates required fields, limits, privacy and selected enabled service', () => {
-  assert.ok(validation.validateAppointment(input, ['cpap']));
-  for (const changes of [{ privacy: false }, { email: 'invalid' }, { firstName: 'A'.repeat(61) }, { service: 'disabled' }, { contactPreference: 'phone' }, { firstName: 'Test\r\nBcc: somebody@example.invalid' }]) assert.equal(validation.validateAppointment({ ...input, ...changes }, ['cpap']), null);
+const input = { firstName: 'Test', lastName: 'Verifica', email: 'test@example.invalid', phone: '', contactPreference: 'email', privacy: true };
+test('callback validates required fields and rejects service selection and free text', () => {
+  assert.ok(validation.validateAppointment(input));
+  for (const changes of [{ privacy: false }, { email: 'invalid' }, { firstName: 'A'.repeat(61) }, { service: 'cpap' }, { notes: '' }, { message: 'sintomi' }, { attachments: [] }, { contactPreference: 'phone' }, { firstName: 'Test\r\nBcc: somebody@example.invalid' }]) assert.equal(validation.validateAppointment({ ...input, ...changes }), null);
 });
 
-function endpoint({ enabled = true, antiSpam = true, mail = true } = {}) {
+function endpoint({ enabled = true, antiSpam = true, mail = true, challenge = {}, mailBody = { id: 'test-only' }, failNetwork = false } = {}) {
   const calls = [];
   const { handleAppointmentRequest } = load('src/lib/appointment-handler.ts', {
     'next/server': { NextResponse: { json: (body, init) => Response.json(body, init) } },
@@ -43,7 +43,8 @@ function endpoint({ enabled = true, antiSpam = true, mail = true } = {}) {
   }, {
     fetch: async (url, options) => {
       calls.push({ url, options });
-      return url.includes('siteverify') ? Response.json({ success: antiSpam, action: 'appointment', hostname: 'www.simonecontino.it' }) : Response.json(mail ? { id: 'test-only' } : { error: 'test' }, { status: mail ? 200 : 500 });
+      if (failNetwork) throw new Error('Simulated provider outage');
+      return url.includes('siteverify') ? Response.json({ success: antiSpam, action: 'appointment', hostname: 'www.simonecontino.it', ...challenge }) : Response.json(mail ? mailBody : { error: 'test' }, { status: mail ? 200 : 500 });
     },
   });
   return { POST: handleAppointmentRequest, calls };
@@ -55,7 +56,7 @@ const payload = () => ({ ...input, token: 'test-token', website: '', requestedAt
 test('disabled production form refuses direct POST without contacting providers', async () => {
   const e = endpoint({ enabled: false }); assert.equal((await e.POST(request(payload()))).status, 503); assert.equal(e.calls.length, 0);
 });
-test('rejects foreign origin, honeypot, malformed data, oversize and disabled services', async () => {
+test('rejects foreign origin, honeypot, malformed data, oversize and legacy service selection', async () => {
   const e = endpoint();
   assert.equal((await e.POST(request(payload(), 'https://foreign.invalid'))).status, 403);
   for (const v of [null, [], { ...payload(), website: 'spam' }, { ...payload(), service: 'disabled' }, { ...payload(), token: '' }]) assert.equal((await e.POST(request(v))).status, 400);
@@ -76,7 +77,56 @@ test('success includes all email fields and stable idempotency for retries', asy
   assert.equal(first.options.headers['Idempotency-Key'], second.options.headers['Idempotency-Key']);
   assert.equal(first.options.body, second.options.body);
   const email = JSON.parse(first.options.body);
-  assert.equal(email.subject, 'Nuova richiesta appuntamento — Dr. Simone Contino');
+  assert.equal(email.subject, 'Nuova richiesta di ricontatto — Dr. Simone Contino');
   assert.equal(email.reply_to, input.email);
-  assert.ok(email.text.includes('Prestazione: CPAP'));
+  assert.ok(email.text.includes('Preferenza: Email'));
+  assert.ok(!email.text.includes('Prestazione:'));
+  assert.ok(!email.text.includes('Note organizzative:'));
+});
+
+test('challenge must belong to the expected hostname and action', async () => {
+  for (const challenge of [{ hostname: 'foreign.invalid' }, { action: 'other' }, { success: false }]) {
+    const e = endpoint({ challenge });
+    assert.equal((await e.POST(request(payload()))).status, 400);
+    assert.equal(e.calls.length, 1);
+  }
+});
+
+test('expired requests, absent privacy acknowledgement and oversized tokens never reach providers', async () => {
+  const e = endpoint();
+  for (const changes of [{ privacy: false }, { token: 'x'.repeat(2049) }, { requestedAt: 'not-a-date' }, { requestedAt: new Date(Date.now() - 90000000).toISOString() }]) {
+    assert.equal((await e.POST(request({ ...payload(), ...changes }))).status, 400);
+  }
+  assert.equal(e.calls.length, 0);
+});
+
+test('malformed JSON and non-JSON requests fail before external calls', async () => {
+  const e = endpoint();
+  const headers = { origin: 'https://www.simonecontino.it', 'Content-Type': 'application/json' };
+  assert.equal((await e.POST(new Request('https://www.simonecontino.it/api/appointment-requests', { method: 'POST', headers, body: '{bad' }))).status, 400);
+  assert.equal((await e.POST(new Request('https://www.simonecontino.it/api/appointment-requests', { method: 'POST', headers: { ...headers, 'Content-Type': 'text/plain' }, body: '{}' }))).status, 415);
+  assert.equal(e.calls.length, 0);
+});
+
+test('network failure and missing provider receipt never display successful submission', async () => {
+  const offline = endpoint({ failNetwork: true });
+  assert.equal((await offline.POST(request(payload()))).status, 502);
+  for (const mailBody of [{}, { id: '' }, null]) {
+    const e = endpoint({ mailBody });
+    assert.equal((await e.POST(request(payload()))).status, 502);
+  }
+});
+
+test('readiness requires every flag and credential; email success alone does not enable the form', () => {
+  const env = { APPOINTMENT_FORM_ENABLED: 'true', APPOINTMENT_OWNER_APPROVED: 'true', APPOINTMENT_EMAIL_VERIFIED: 'true', RESEND_API_KEY: 'TEST', APPOINTMENT_FROM_EMAIL: 'test@example.invalid', APPOINTMENT_TO_EMAIL: 'doctor@example.invalid', TURNSTILE_SITE_KEY: 'TEST', TURNSTILE_SECRET_KEY: 'TEST' };
+  function config(settings) {
+    return load('src/lib/booking-config.ts', {
+      'server-only': {}, '@/config/booking': { booking: { whatsappMessage: 'Test' } }, '@/config/site': { siteConfig: { email: 'doctor@example.invalid' } },
+    }, { process: { env: settings } }).getAppointmentConfig();
+  }
+  assert.equal(config(env).enabled, true);
+  for (const key of ['APPOINTMENT_FORM_ENABLED', 'APPOINTMENT_OWNER_APPROVED', 'APPOINTMENT_EMAIL_VERIFIED', 'RESEND_API_KEY', 'APPOINTMENT_FROM_EMAIL', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY']) {
+    assert.equal(config({ ...env, [key]: '' }).enabled, false);
+  }
+  assert.equal(config({ ...env, APPOINTMENT_OWNER_APPROVED: 'false', APPOINTMENT_PRIVACY_VERIFIED: 'true' }).enabled, false);
 });
