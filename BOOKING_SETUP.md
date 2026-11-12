@@ -4,7 +4,7 @@
 
 Pagina: `/prestazioni-e-prenotazioni`, con ancore `#prestazioni`, `#richiedi-appuntamento`, `#whatsapp`. Configurazione URL in `src/config/booking.ts`. I vecchi URL `/prenota` e `/prestazioni-e-tariffe` reindirizzano permanentemente (308) senza perdere i contenuti del catalogo.
 
-Il modulo raccoglie solo recapiti e preferenza di contatto. Il catalogo non contiene pulsanti Prenota ripetuti: non vengono preselezionate o trasmesse prestazioni; non sono presenti note, messaggi o allegati. Il server rifiuta anche i precedenti campi service/notes inviati manualmente. Catalogo e modulo sono affiancati da 960px; su mobile il modulo precede il catalogo. Introduzione compatta, senza menu di ancore e senza barra flottante nella stessa pagina. Gli URL con le ancore precedenti restano validi.
+Il modulo raccoglie recapiti, preferenza di contatto e una prestazione obbligatoria da un menu chiuso. Le opzioni derivano dalle sole voci enabled di src/data/home-services.ts: la pagina passa id/titolo al client e il server applica la stessa allowlist, ricavando il titolo email dal catalogo e non dal client. Nessuna opzione è preselezionata; nessuna selezione viene aggiunta all’URL o inviata esplicitamente ad Analytics. Il nome leggibile della prestazione viene trasmesso a Resend nell’email al medico, senza pretendere anonimizzazione tramite codici. Note, messaggi e allegati restano rifiutati. Il catalogo non contiene pulsanti Prenota ripetuti. Catalogo e modulo sono affiancati da 960px; su mobile il modulo precede il catalogo. Gli URL con le ancore precedenti restano validi.
 
 Le prestazioni restano in `src/data/home-services.ts`: enabled controlla card e select; status planned diventa «Disponibilità da concordare» e non equivale ad attivazione. Tariffe confermate: visita pneumologica 180 €, visita per disturbi respiratori del sonno 180 €, poligrafia notturna 220 €, saturimetria notturna 100 €. Sono le sole quattro opzioni del catalogo e del modulo. Il controllo CPAP rimane trattato nelle pagine informative, ma non è nel listino.
 
@@ -38,7 +38,7 @@ Per una prova controllata usare ambiente locale/staging e destinatario di test a
 
 ## Sicurezza e dati
 
-Validazione client e server, limiti sui campi e body (12 KB letti come stream), preferenza ammessa, controllo Origin, honeypot e Turnstile obbligatorio con hostname/action. Il telefono diventa necessario scegliendo contatto telefonico. Nessuna prestazione o testo libero viene accettato o inserito in email. Nome/cognome/email rifiutano CR/LF; email in testo semplice. Le risposte positive di Resend devono contenere un ID prima di mostrare successo.
+Validazione client e server, limiti sui campi e body (12 KB letti come stream), prestazione e preferenza ammesse, controllo Origin, honeypot e Turnstile obbligatorio con hostname/action. Il telefono diventa necessario scegliendo contatto telefonico. Solo il titolo della prestazione validata viene aggiunto all’email; nessun testo clinico libero. Nome/cognome/email rifiutano CR/LF; email in testo semplice. Le risposte positive di Resend devono contenere un ID prima di mostrare successo.
 
 Nessun database, nessun log con contenuto delle richieste, nessun evento analytics contenente campi o scelta clinica. Le email restano nella casella del destinatario/provider: definirne conservazione e accessi prima dell’attivazione. Disabilitare in GA le misurazioni avanzate automatiche dei moduli se configurate: non sono gestite da questo endpoint. La richiesta può indirettamente rivelare un interesse sanitario e va trattata con adeguate misure.
 

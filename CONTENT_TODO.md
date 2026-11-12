@@ -49,6 +49,8 @@ Prestazioni già confermate: prima visita pneumologica, controllo pneumologico, 
 
 ### Modulo richieste — aggiornamento 12 novembre 2026
 
+- Aggiornamento successivo all’audit: su richiesta esplicita del titolare, menu obbligatorio con le quattro prestazioni enabled del catalogo. Nessun campo libero/allegato, nessun database. La prestazione leggibile entra nell’email Resend. L’autorizzazione all’implementazione non chiude le verifiche privacy/contrattuali elencate sotto.
+
 - Decisione successiva: autorizzata dal titolare la pubblicazione della versione minimale di solo ricontatto. Eliminati prestazione e testo libero anche nel payload email. Nessuna certificazione di conformità; verifiche fornitori ancora aperte. Il gate operativo è APPOINTMENT_OWNER_APPROVED; il vecchio flag privacy non attesta verifiche non svolte.
 
 - Titolare confermato: Dr. Simone Contino; recapito privacy: drsimonecontino@gmail.com.

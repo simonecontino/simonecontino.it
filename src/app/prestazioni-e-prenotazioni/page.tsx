@@ -26,8 +26,8 @@ export default function ServicesBookingPage() {
       <div className="booking-request-column">
         <section id="richiedi-appuntamento" aria-labelledby="request-heading">
           <h2 id="request-heading">Richiedi un ricontatto</h2>
-          <p className="booking-request-intro">Lascia i recapiti: concorderemo i dettagli al ricontatto.</p>
-          <AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} />
+          <p className="booking-request-intro">Scegli una visita o un esame e lascia i recapiti: ti ricontatterò per concordare i dettagli.</p>
+          <AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} services={services.map(({id, title}) => ({id, title}))} />
         </section>
         <div className="booking-contact-options" id="whatsapp">
           <p>Preferisci un contatto diretto?</p>

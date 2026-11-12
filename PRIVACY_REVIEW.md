@@ -1,5 +1,7 @@
 # Revisione privacy e verifica modulo — 12 novembre 2026
 
+Aggiornamento successivo: dopo l’audit in sola lettura il titolare ha richiesto l’implementazione del menu chiuso delle prestazioni. Client e server utilizzano il catalogo enabled; il titolo della prestazione è incluso nell’email Resend. Nessun database o testo libero aggiunto. Le descrizioni della versione minimale sotto sono storiche; il flusso corrente include nuovamente la tipologia di prestazione. Le riserve contrattuali e giuridiche dell’audit non sono dichiarate risolte da questa modifica, né vengono accettati accordi esterni.
+
 Documento operativo, non parere legale né attestazione di conformità. Nessun accordo esterno è stato accettato per conto del titolare; nessun flag di certificazione privacy è stato attivato.
 
 ## Decisione successiva del titolare

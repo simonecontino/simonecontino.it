@@ -26,10 +26,17 @@ test('public catalogue retains exactly the four confirmed tariffs', () => {
   assert.ok(services.every(s => s.priceConfirmed));
   assert.ok(!services.some(s => s.id === 'controllo-cpap-domiciliare'));
 });
-const input = { firstName: 'Test', lastName: 'Verifica', email: 'test@example.invalid', phone: '', contactPreference: 'email', privacy: true };
-test('callback validates required fields and rejects service selection and free text', () => {
-  assert.ok(validation.validateAppointment(input));
-  for (const changes of [{ privacy: false }, { email: 'invalid' }, { firstName: 'A'.repeat(61) }, { service: 'cpap' }, { notes: '' }, { message: 'sintomi' }, { attachments: [] }, { contactPreference: 'phone' }, { firstName: 'Test\r\nBcc: somebody@example.invalid' }]) assert.equal(validation.validateAppointment({ ...input, ...changes }), null);
+const input = { firstName: 'Test', lastName: 'Verifica', email: 'test@example.invalid', phone: '', service: 'cpap', contactPreference: 'email', privacy: true };
+test('callback accepts only an explicitly allowed service and rejects free text', () => {
+  assert.ok(validation.validateAppointment(input, ['cpap']));
+  for (const changes of [{ privacy: false }, { email: 'invalid' }, { firstName: 'A'.repeat(61) }, { service: 'disabled' }, { service: '' }, { service: undefined }, { service: { id: 'cpap' } }, { notes: '' }, { message: 'sintomi' }, { attachments: [] }, { contactPreference: 'phone' }, { firstName: 'Test\r\nBcc: somebody@example.invalid' }]) assert.equal(validation.validateAppointment({ ...input, ...changes }, ['cpap']), null);
+});
+
+test('every enabled catalogue option is valid and an unknown option is refused', () => {
+  const allowed = homeServices.filter(s => s.enabled).map(s => s.id);
+  for (const service of allowed) assert.ok(validation.validateAppointment({ ...input, service }, allowed));
+  assert.equal(validation.validateAppointment({ ...input, service: 'unlisted-service' }, allowed), null);
+  assert.equal(validation.validateAppointment({ ...input, service: 'visita-pneumologica-controllo' }, allowed), null);
 });
 
 function endpoint({ enabled = true, antiSpam = true, mail = true, challenge = {}, mailBody = { id: 'test-only' }, failNetwork = false } = {}) {
@@ -56,7 +63,7 @@ const payload = () => ({ ...input, token: 'test-token', website: '', requestedAt
 test('disabled production form refuses direct POST without contacting providers', async () => {
   const e = endpoint({ enabled: false }); assert.equal((await e.POST(request(payload()))).status, 503); assert.equal(e.calls.length, 0);
 });
-test('rejects foreign origin, honeypot, malformed data, oversize and legacy service selection', async () => {
+test('rejects foreign origin, honeypot, malformed data, oversize and unlisted services', async () => {
   const e = endpoint();
   assert.equal((await e.POST(request(payload(), 'https://foreign.invalid'))).status, 403);
   for (const v of [null, [], { ...payload(), website: 'spam' }, { ...payload(), service: 'disabled' }, { ...payload(), token: '' }]) assert.equal((await e.POST(request(v))).status, 400);
@@ -80,7 +87,7 @@ test('success includes all email fields and stable idempotency for retries', asy
   assert.equal(email.subject, 'Nuova richiesta di ricontatto — Dr. Simone Contino');
   assert.equal(email.reply_to, input.email);
   assert.ok(email.text.includes('Preferenza: Email'));
-  assert.ok(!email.text.includes('Prestazione:'));
+  assert.ok(email.text.includes('Prestazione richiesta: CPAP'));
   assert.ok(!email.text.includes('Note organizzative:'));
 });
 

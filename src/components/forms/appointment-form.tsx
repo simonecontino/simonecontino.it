@@ -12,7 +12,7 @@ type TurnstileApi = {
 };
 declare global { interface Window { turnstile?: TurnstileApi } }
 
-export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKey?: string }) {
+export function AppointmentForm({ enabled, siteKey, services }: { enabled: boolean; siteKey?: string; services: { id: string; title: string }[] }) {
   const [preference, setPreference] = useState("email");
   const [token, setToken] = useState("");
   const [scriptReady, setScriptReady] = useState(false);
@@ -53,10 +53,10 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
     const form = new FormData(event.currentTarget);
     const input = {
       firstName: form.get("firstName"), lastName: form.get("lastName"), email: form.get("email"),
-      phone: form.get("phone"), contactPreference: preference, privacy: form.get("privacy") === "on",
+      phone: form.get("phone"), service: form.get("service"), contactPreference: preference, privacy: form.get("privacy") === "on",
     };
-    if (!validateAppointment(input)) {
-      setError("Controlla i campi inseriti. Se scegli il contatto telefonico, indica anche il numero.");
+    if (!validateAppointment(input, services.map(s => s.id))) {
+      setError("Controlla i campi e scegli una prestazione. Se scegli il contatto telefonico, indica anche il numero.");
       return;
     }
     if (!token) { setError("Completa la verifica antispam prima di inviare."); return; }
@@ -94,6 +94,7 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
             <label><span className="appointment-field-label">Email <small>(obbligatoria)</small></span><input type="email" name="email" autoComplete="email" required maxLength={fieldLimits.email} /></label>
             <label><span className="appointment-field-label">Telefono <small>{preference === "phone" ? "(obbligatorio)" : "(facoltativo)"}</small></span><input type="tel" name="phone" autoComplete="tel" required={preference === "phone"} maxLength={fieldLimits.phone} /></label>
             <label className="field-full">Preferenza di contatto<select name="contactPreference" value={preference} onChange={e => setPreference(e.target.value)}><option value="email">Email</option><option value="phone">Telefono</option></select></label>
+            <label className="field-full"><span className="appointment-field-label">Prestazione richiesta <small>(obbligatoria)</small></span><select name="service" required defaultValue="" aria-describedby="service-help"><option value="" disabled>Scegli una visita o un esame</option>{services.map(s => <option value={s.id} key={s.id}>{s.title}</option>)}</select><small id="service-help">La disponibilità verrà concordata al ricontatto.</small></label>
           </div>
           <div className="appointment-honeypot" aria-hidden="true"><label>Lascia vuoto questo campo<input name="website" autoComplete="off" tabIndex={-1} /></label></div>
           <label className="appointment-privacy"><input type="checkbox" name="privacy" required /><span>Ho preso visione dell’<Link href="/privacy" target="_blank">informativa privacy</Link>.</span></label>
@@ -102,7 +103,7 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
           <button className="button button--primary" type="submit">{status === "sending" ? "Invio in corso…" : "Invia richiesta"}</button>
         </fieldset>
       </form>
-      <p className="appointment-disclaimer">Solo recapiti, senza informazioni sanitarie. L’invio non conferma un appuntamento.</p>
+      <p className="appointment-disclaimer">Indica solo la tipologia di prestazione, senza sintomi, diagnosi o referti. L’invio non conferma un appuntamento.</p>
     </> : null}
     {enabled ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} onError={() => setError("Impossibile caricare la verifica antispam. Utilizza WhatsApp o email.")} /> : null}
   </div>;
