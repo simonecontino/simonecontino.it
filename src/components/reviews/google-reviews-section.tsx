@@ -87,10 +87,10 @@ export function GoogleReviewsSection({ data, fallbackUrl }: { data: GoogleReview
             <Image src="/images/google-maps-logo.png" width="98" height="18" alt="Google Maps" />
           </div>
           <p className="eyebrow">Recensioni dei pazienti</p>
-          <h2 id="reviews-title">Le esperienze condivise dai pazienti</h2>
-          <p>Consulta le recensioni complete e aggiornate direttamente sul profilo Google Business.</p>
-          <ButtonLink href={fallbackUrl} target="_blank" rel="noreferrer" variant="secondary">
-            Leggi tutte le recensioni su Google
+          <h2 id="reviews-title">Le esperienze dei pazienti</h2>
+          <p>Leggi le esperienze condivise dai pazienti nella sezione recensioni del mio profilo Google.</p>
+          <ButtonLink href={fallbackUrl} target="_blank" rel="noreferrer" variant="primary">
+            Leggi le recensioni su Google <ExternalLink size={16} aria-hidden="true" />
           </ButtonLink>
         </Container>
       </section>

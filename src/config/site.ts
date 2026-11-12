@@ -11,6 +11,7 @@ export const siteConfig = {
   email: "drsimonecontino@gmail.com",
   emailHref: "mailto:drsimonecontino@gmail.com",
   googleBusinessProfile: "https://share.google/Qq56qiI9AxivfvXKn",
+  googleReviewsUrl: "https://www.google.com/search?hl=it&q=Dott.+Simone+Contino+-+Specialista+Pneumologo+Recensioni&si=AE1YtOqiKPb2pdLXAi8quZ9vbH4aVq_aX8-3H9iFBLpRNK95c8MZOtEEzgtmhAxBs7dH-t8sNz1BI69YdclZC_hRSqx_zBiWdOWBrQCHGuDBblWGkhh82Y0YbO1j_crMMKNuRTnqTsejzZLjTXnFxN5UntgTdTrT21rb-8B3_MZJbUMsEoBkoOATLFe5zcukZ1gHN-6omo5d",
   bookingMethods: ["Modulo di richiesta", "WhatsApp", "Email"],
   social: {},
   home: {

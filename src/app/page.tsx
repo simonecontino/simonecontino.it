@@ -97,7 +97,7 @@ export default async function HomePage() {
           <ButtonLink href={booking.path} variant="secondary">Prestazioni e tariffe</ButtonLink>
         </Container>
       </section>
-      <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleBusinessProfile} />
+      <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleReviewsUrl} />
 
       {features.articlesEnabled ? (      <section className="section section--tint">
         <Container>
