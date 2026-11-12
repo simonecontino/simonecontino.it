@@ -457,6 +457,11 @@ button { font: inherit; }
 .home-service-card .button { margin-top: auto; align-self: flex-start; }
 .home-service-price { color: var(--color-petrol); font-weight: 700; }
 
+.home-domestic-services { padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+.home-domestic-services h2 { margin-bottom: .75rem; }
+.home-domestic-services p:not(.eyebrow) { max-width: 75ch; margin-bottom: .75rem; }
+.home-domestic-services .button { margin-top: .25rem; }
+
 .booking-unified-hero { padding-block: 1.25rem; }
 .booking-unified-hero .breadcrumbs { margin-bottom: 1rem; }
 .booking-unified-hero .eyebrow { margin-bottom: .5rem; }

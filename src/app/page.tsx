@@ -88,7 +88,15 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint"><Container><p className="eyebrow">Attività domiciliare · Disponibilità da concordare</p><h2>Pneumologia e Medicina del Sonno a domicilio</h2><p>Prestazioni in preparazione nell’area di Milano e Corsico, incluse la visita pneumologica, la poligrafia respiratoria domiciliare e la saturimetria notturna.</p><p>La poligrafia registra parametri respiratori durante la notte e non equivale alla polisonnografia completa. Consulta il listino e richiedi informazioni sulle modalità e sulla disponibilità.</p><ButtonLink href={booking.path} variant="secondary">Prestazioni e prenotazioni</ButtonLink></Container></section>
+      <section className="section section--tint home-domestic-services" aria-labelledby="home-domestic-title">
+        <Container>
+          <p className="eyebrow">PRESTAZIONI DOMICILIARI · MILANO E CORSICO</p>
+          <h2 id="home-domestic-title">Pneumologia e Medicina del Sonno a domicilio</h2>
+          <p>Visite specialistiche ed esami diagnostici respiratori eseguiti direttamente al domicilio del paziente, con valutazione medica e refertazione specialistica.</p>
+          <p>Consulta le prestazioni disponibili, le tariffe e le modalità di prenotazione.</p>
+          <ButtonLink href={booking.path} variant="secondary">Prestazioni e tariffe</ButtonLink>
+        </Container>
+      </section>
       <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleBusinessProfile} />
 
       {features.articlesEnabled ? (      <section className="section section--tint">
@@ -106,12 +114,6 @@ export default async function HomePage() {
         <Container className="faq-layout">
           <div><p className="eyebrow">Domande frequenti</p><h2>Informazioni pratiche prima della visita</h2><p>Indicazioni utili per prepararsi alla visita e comprendere come si svolge il percorso.</p><ButtonLink href="/faq" variant="text">Vedi tutte le FAQ <ArrowRight aria-hidden="true" /></ButtonLink></div>
           <div className="faq-list">{faqs.slice(0, 5).map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p>{faq.needsConfirmation ? <small>Informazione da confermare prima della pubblicazione.</small> : null}</details>)}</div>
-        </Container>
-      </section>
-
-      <section className="section location-section">
-        <Container className="location-card">
-          <div><p className="eyebrow">Milano e Corsico</p><h2>Visite a domicilio</h2><p>Attività prevista nell’area di Milano e Corsico. Disponibilità e modalità saranno concordate telefonicamente.</p><ButtonLink href="/dove-ricevo" variant="secondary">Scopri le zone servite</ButtonLink></div>
         </Container>
       </section>
 
