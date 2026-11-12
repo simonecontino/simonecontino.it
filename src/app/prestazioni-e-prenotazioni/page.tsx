@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { AppointmentForm } from "@/components/forms/appointment-form";
@@ -26,13 +26,13 @@ export default function ServicesBookingPage() {
       <div className="booking-request-column">
         <section id="richiedi-appuntamento" aria-labelledby="request-heading">
           <h2 id="request-heading">Richiedi un ricontatto</h2>
-          <p className="booking-request-intro">Lascia i tuoi recapiti. La prestazione desiderata e i dettagli dell’appuntamento verranno concordati al ricontatto.</p>
+          <p className="booking-request-intro">Lascia i recapiti: concorderemo i dettagli al ricontatto.</p>
           <AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} />
         </section>
         <div className="booking-contact-options" id="whatsapp">
           <p>Preferisci un contatto diretto?</p>
-          <a href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />WhatsApp</a>
-          <a href={siteConfig.emailHref}>Scrivi un’email</a>
+          <a className="button booking-contact-whatsapp" href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={20} aria-hidden="true" />WhatsApp</a>
+          <a className="button booking-contact-email" href={siteConfig.emailHref}><Mail size={20} aria-hidden="true" />Scrivi un’email</a>
           <small>Solo richieste organizzative, senza informazioni sanitarie.</small>
         </div>
       </div>
@@ -44,7 +44,7 @@ export default function ServicesBookingPage() {
               <article className="booking-service-row">
                 <div className="booking-service-content">
                   <h3>{s.title}</h3>
-                  <p>{s.description}</p>
+                  {s.bookingNote ? <p>{s.bookingNote}</p> : null}
                   {s.id === "poligrafia-domiciliare" ? <Link className="booking-service-detail" href="/poligrafia-respiratoria-milano">Approfondisci</Link> : null}
                 </div>
                 <div className="booking-service-action">

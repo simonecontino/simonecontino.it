@@ -102,7 +102,7 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
           <button className="button button--primary" type="submit">{status === "sending" ? "Invio in corso…" : "Invia richiesta"}</button>
         </fieldset>
       </form>
-      <p className="appointment-disclaimer">Il modulo raccoglie soltanto i recapiti. Non inserire informazioni sanitarie nei campi. L’invio non conferma un appuntamento: i dettagli saranno concordati successivamente.</p>
+      <p className="appointment-disclaimer">Solo recapiti, senza informazioni sanitarie. L’invio non conferma un appuntamento.</p>
     </> : null}
     {enabled ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} onError={() => setError("Impossibile caricare la verifica antispam. Utilizza WhatsApp o email.")} /> : null}
   </div>;
