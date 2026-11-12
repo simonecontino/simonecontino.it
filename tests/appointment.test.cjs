@@ -14,12 +14,13 @@ function load(file, dependencies = {}, extra = {}) {
 }
 const validation = load('src/lib/appointment-validation.ts');
 const { homeServices } = load('src/data/home-services.ts');
-test('public catalogue retains exactly the four confirmed tariffs', () => {
+test('public catalogue retains the five confirmed tariffs in order', () => {
   const services = homeServices.filter(s => s.enabled);
-  assert.equal(services.length, 4);
+  assert.equal(services.length, 5);
   assert.equal(JSON.stringify(services.map(s => [s.title, s.priceEur])), JSON.stringify([
     ['Visita pneumologica domiciliare', 180],
     ['Visita domiciliare per disturbi respiratori del sonno', 180],
+    ['Televisita pneumologica', 100],
     ['Poligrafia notturna domiciliare', 220],
     ['Saturimetria notturna domiciliare', 100],
   ]));
@@ -39,13 +40,13 @@ test('every enabled catalogue option is valid and an unknown option is refused',
   assert.equal(validation.validateAppointment({ ...input, service: 'visita-pneumologica-controllo' }, allowed), null);
 });
 
-function endpoint({ enabled = true, antiSpam = true, mail = true, challenge = {}, mailBody = { id: 'test-only' }, failNetwork = false } = {}) {
+function endpoint({ enabled = true, antiSpam = true, mail = true, challenge = {}, mailBody = { id: 'test-only' }, failNetwork = false, catalogue = [{ id: 'cpap', title: 'CPAP', enabled: true }, { id: 'disabled', enabled: false }] } = {}) {
   const calls = [];
   const { handleAppointmentRequest } = load('src/lib/appointment-handler.ts', {
     'next/server': { NextResponse: { json: (body, init) => Response.json(body, init) } },
     '@/lib/booking-config': { getAppointmentConfig: () => ({ enabled, siteKey: 'TEST', secret: 'TEST', apiKey: 'TEST', from: 'test@example.invalid', to: 'doctor@example.invalid' }) },
     '@/lib/appointment-validation': validation,
-    '@/data/home-services': { homeServices: [{ id: 'cpap', title: 'CPAP', enabled: true }, { id: 'disabled', enabled: false }] },
+    '@/data/home-services': { homeServices: catalogue },
     '@/config/site': { siteConfig: { domain: 'https://simonecontino.it', email: 'drsimonecontino@gmail.com' } },
   }, {
     fetch: async (url, options) => {
@@ -60,6 +61,12 @@ function request(body, origin = 'https://www.simonecontino.it') {
   return new Request('https://www.simonecontino.it/api/appointment-requests', { method: 'POST', headers: { 'Content-Type': 'application/json', origin }, body: JSON.stringify(body) });
 }
 const payload = () => ({ ...input, token: 'test-token', website: '', requestedAt: new Date().toISOString() });
+test('televisita reaches the mocked email provider with its catalogue title', async () => {
+  const e = endpoint({ catalogue: homeServices });
+  assert.equal((await e.POST(request({ ...payload(), service: 'televisita-pneumologica' }))).status, 200);
+  const email = JSON.parse(e.calls[1].options.body);
+  assert.match(email.text, /Prestazione richiesta: Televisita pneumologica/);
+});
 test('disabled production form refuses direct POST without contacting providers', async () => {
   const e = endpoint({ enabled: false }); assert.equal((await e.POST(request(payload()))).status, 503); assert.equal(e.calls.length, 0);
 });

@@ -37,12 +37,13 @@ export default function ServicesBookingPage() {
         </div>
       </div>
       <div id="prestazioni" className="booking-catalog">
+        <h2>Listino prezzi</h2>
         <ul className="booking-service-list">
           {services.map(s => (
             <li key={s.id}>
               <article className="booking-service-row">
                 <div className="booking-service-content">
-                  <h2>{s.title}</h2>
+                  <h3>{s.title}</h3>
                   {s.bookingNote ? <p>{s.bookingNote}</p> : null}
                   {s.id === "poligrafia-domiciliare" ? <Link className="booking-service-detail" href="/poligrafia-respiratoria-milano">Approfondisci</Link> : null}
                 </div>
