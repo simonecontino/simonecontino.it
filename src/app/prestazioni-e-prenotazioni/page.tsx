@@ -21,10 +21,22 @@ export default function ServicesBookingPage() {
   const config = getAppointmentConfig();
   const services = homeServices.filter(s => s.enabled);
   return <>
-    <section className="internal-hero booking-unified-hero"><Container><Breadcrumbs items={[{ label: "Prestazioni e prenotazioni" }]} /><p className="eyebrow">Pneumologia e Medicina del Sonno · A domicilio</p><h1>Prestazioni e prenotazioni</h1><p className="internal-lead">Consulta le prestazioni nell’area di {homeActivity.areas} e scegli come richiedere un appuntamento. La disponibilità viene concordata dopo il contatto.</p><nav className="booking-anchor-nav" aria-label="Sezioni prestazioni e prenotazioni"><a className="button button--primary" href="#richiedi-appuntamento">Prenota una visita o esame</a><a className="button button--secondary" href="#prestazioni">Prestazioni e tariffe</a><a className="button button--secondary" href="#whatsapp">Contatto WhatsApp</a></nav></Container></section>
+    <section className="internal-hero booking-unified-hero"><Container><Breadcrumbs items={[{ label: "Prestazioni e prenotazioni" }]} /><p className="eyebrow">Pneumologia e Medicina del Sonno · A domicilio</p><h1>Prestazioni e prenotazioni</h1><p className="internal-lead">Visite ed esami a domicilio a {homeActivity.areas}. Consulta le tariffe e lascia i tuoi recapiti: concorderemo insieme la disponibilità.</p></Container></section>
     <section className="section booking-unified-body"><Container className="booking-unified-grid">
-      <div id="prestazioni">
-        <p className="eyebrow">Cosa comprende il percorso</p>
+      <div className="booking-request-column">
+        <section id="richiedi-appuntamento" aria-labelledby="request-heading">
+          <h2 id="request-heading">Richiedi un ricontatto</h2>
+          <p className="booking-request-intro">Lascia i tuoi recapiti. La prestazione desiderata e i dettagli dell’appuntamento verranno concordati al ricontatto.</p>
+          <AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} />
+        </section>
+        <div className="booking-contact-options" id="whatsapp">
+          <p>Preferisci un contatto diretto?</p>
+          <a href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle size={18} aria-hidden="true" />WhatsApp</a>
+          <a href={siteConfig.emailHref}>Scrivi un’email</a>
+          <small>Solo richieste organizzative, senza informazioni sanitarie.</small>
+        </div>
+      </div>
+      <div id="prestazioni" className="booking-catalog">
         <h2>Prestazioni e tariffe</h2>
         <ul className="booking-service-list">
           {services.map(s => (
@@ -41,7 +53,6 @@ export default function ServicesBookingPage() {
                       ? s.priceEur.toLocaleString("it-IT", { maximumFractionDigits: 0 })
                       : "Tariffa in definizione"}
                   </strong>
-                  <a className="button button--primary" href="#richiedi-appuntamento">Prenota</a>
                 </div>
               </article>
             </li>
@@ -49,7 +60,6 @@ export default function ServicesBookingPage() {
         </ul>
         <p className="appointment-disclaimer">{homeActivity.supplementNote}</p>
       </div>
-      <div className="booking-request-column"><section id="richiedi-appuntamento" aria-labelledby="request-heading"><p className="eyebrow">Il prossimo passo</p><h2 id="request-heading">Richiedi di essere ricontattato</h2><p>Lascia i tuoi recapiti e scegli come preferisci essere contattato. Concorderemo successivamente i dettagli della visita o dell’esame, senza raccogliere informazioni cliniche nel modulo.</p><AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} /></section><section className="booking-whatsapp" id="whatsapp"><MessageCircle aria-hidden="true" /><h3>Preferisci WhatsApp?</h3><p>Puoi utilizzare WhatsApp Business per richieste organizzative, senza inviare informazioni sanitarie.</p><a className="button button--secondary" href={getWhatsappUrl()} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" />Contatta su WhatsApp</a><p className="appointment-disclaimer">In alternativa: <a href={siteConfig.emailHref}>{siteConfig.email}</a></p></section></div>
     </Container></section>
   </>;
 }

@@ -89,10 +89,10 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
         <fieldset disabled={!enabled || status === "sending"}>
           <legend className="sr-only">Dati per la richiesta di ricontatto</legend>
           <div className="appointment-fields">
-            <label>Nome <span>(obbligatorio)</span><input name="firstName" autoComplete="given-name" required maxLength={fieldLimits.firstName} /></label>
-            <label>Cognome <span>(obbligatorio)</span><input name="lastName" autoComplete="family-name" required maxLength={fieldLimits.lastName} /></label>
-            <label>Email <span>(obbligatoria)</span><input type="email" name="email" autoComplete="email" required maxLength={fieldLimits.email} /></label>
-            <label>Telefono <span>{preference === "phone" ? "(necessario per essere richiamato)" : "(facoltativo)"}</span><input type="tel" name="phone" autoComplete="tel" required={preference === "phone"} maxLength={fieldLimits.phone} /></label>
+            <label><span className="appointment-field-label">Nome <small>(obbligatorio)</small></span><input name="firstName" autoComplete="given-name" required maxLength={fieldLimits.firstName} /></label>
+            <label><span className="appointment-field-label">Cognome <small>(obbligatorio)</small></span><input name="lastName" autoComplete="family-name" required maxLength={fieldLimits.lastName} /></label>
+            <label><span className="appointment-field-label">Email <small>(obbligatoria)</small></span><input type="email" name="email" autoComplete="email" required maxLength={fieldLimits.email} /></label>
+            <label><span className="appointment-field-label">Telefono <small>{preference === "phone" ? "(obbligatorio)" : "(facoltativo)"}</small></span><input type="tel" name="phone" autoComplete="tel" required={preference === "phone"} maxLength={fieldLimits.phone} /></label>
             <label className="field-full">Preferenza di contatto<select name="contactPreference" value={preference} onChange={e => setPreference(e.target.value)}><option value="email">Email</option><option value="phone">Telefono</option></select></label>
           </div>
           <div className="appointment-honeypot" aria-hidden="true"><label>Lascia vuoto questo campo<input name="website" autoComplete="off" tabIndex={-1} /></label></div>

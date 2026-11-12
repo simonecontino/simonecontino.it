@@ -21,5 +21,6 @@ export function BookingBar() {
     observer.observe(section);
     return () => { observer.disconnect(); link.hidden = false; };
   }, [pathname]);
+  if (pathname === booking.path) return null;
   return <Link ref={linkRef} className="booking-bar" href={booking.requestUrl}><CalendarDays size={18} aria-hidden="true" />Prenota una visita o esame</Link>;
 }

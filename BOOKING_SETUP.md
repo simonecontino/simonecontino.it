@@ -4,7 +4,7 @@
 
 Pagina: `/prestazioni-e-prenotazioni`, con ancore `#prestazioni`, `#richiedi-appuntamento`, `#whatsapp`. Configurazione URL in `src/config/booking.ts`. I vecchi URL `/prenota` e `/prestazioni-e-tariffe` reindirizzano permanentemente (308) senza perdere i contenuti del catalogo.
 
-Il modulo raccoglie solo recapiti e preferenza di contatto. Le card conducono alla stessa ancora senza preselezionare o trasmettere prestazioni; non sono presenti note, messaggi o allegati. Il server rifiuta anche i precedenti campi service/notes inviati manualmente. Il catalogo e le tariffe restano consultabili, separati dalla richiesta.
+Il modulo raccoglie solo recapiti e preferenza di contatto. Il catalogo non contiene pulsanti Prenota ripetuti: non vengono preselezionate o trasmesse prestazioni; non sono presenti note, messaggi o allegati. Il server rifiuta anche i precedenti campi service/notes inviati manualmente. Catalogo e modulo sono affiancati da 960px; su mobile il modulo precede il catalogo. Introduzione compatta, senza menu di ancore e senza barra flottante nella stessa pagina. Gli URL con le ancore precedenti restano validi.
 
 Le prestazioni restano in `src/data/home-services.ts`: enabled controlla card e select; status planned diventa «Disponibilità da concordare» e non equivale ad attivazione. Tariffe confermate: visita pneumologica 180 €, visita per disturbi respiratori del sonno 180 €, poligrafia notturna 220 €, saturimetria notturna 100 €. Sono le sole quattro opzioni del catalogo e del modulo. Il controllo CPAP rimane trattato nelle pagine informative, ma non è nel listino.
 
