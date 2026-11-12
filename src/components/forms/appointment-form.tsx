@@ -14,7 +14,7 @@ type TurnstileApi = {
 };
 declare global { interface Window { turnstile?: TurnstileApi } }
 
-export function AppointmentForm({ enabled, siteKey, services, endpoint = "/api/appointment-requests" }: { enabled: boolean; siteKey?: string; services: ServiceOption[]; endpoint?: string }) {
+export function AppointmentForm({ enabled, siteKey, services }: { enabled: boolean; siteKey?: string; services: ServiceOption[] }) {
   const [service, setService] = useState("");
   const [preference, setPreference] = useState("email");
   const [token, setToken] = useState("");
@@ -64,7 +64,7 @@ export function AppointmentForm({ enabled, siteKey, services, endpoint = "/api/a
     requestTime.current ??= new Date().toISOString();
     setStatus("sending"); setError("");
     try {
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/appointment-requests", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...input, token, website: form.get("website"), requestedAt: requestTime.current }),
       });

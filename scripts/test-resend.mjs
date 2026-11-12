@@ -5,13 +5,16 @@ const missing = required.filter(key => !process.env[key]);
 if (missing.length) {
   console.error(`Variabili mancanti: ${missing.join(", ")}`);
   process.exitCode = 1;
+} else if (process.argv.includes("--professional-recipient") && process.env.APPOINTMENT_TO_EMAIL !== "drsimonecontino@gmail.com") {
+  console.error("Test annullato: il destinatario configurato non coincide con il recapito professionale confermato.");
+  process.exitCode = 1;
 } else if (!process.argv.includes("--send")) {
   console.log("Configurazione presente. Nessuna email inviata. Aggiungere --send per inviare una sola email tecnica al destinatario configurato.");
 } else {
   try {
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json", ...(process.env.VERCEL_GIT_COMMIT_SHA ? { "Idempotency-Key": `delivery-test-${process.env.VERCEL_GIT_COMMIT_SHA}` } : {}) },
       body: JSON.stringify({
         from: process.env.APPOINTMENT_FROM_EMAIL,
         to: [process.env.APPOINTMENT_TO_EMAIL],

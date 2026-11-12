@@ -8,10 +8,9 @@ import { siteConfig } from "@/config/site";
 function reply(error: string, status: number) {
   return NextResponse.json({ error }, { status, headers: { "Cache-Control": "no-store" } });
 }
-export async function handleAppointmentRequest(request: Request, testMode = false) {
+export async function handleAppointmentRequest(request: Request) {
   const config = getAppointmentConfig();
-  const ready = Boolean(config.apiKey && config.from && config.to && config.siteKey && config.secret);
-  if (testMode ? !ready : !config.enabled) return reply("Il modulo non è ancora disponibile. Puoi contattarmi tramite WhatsApp o email.", 503);
+  if (!config.enabled) return reply("Il modulo non è ancora disponibile. Puoi contattarmi tramite WhatsApp o email.", 503);
   const origin = request.headers.get("origin");
   const allowedOrigins = new Set([new URL(siteConfig.domain).origin, "https://www.simonecontino.it"]);
   if (process.env.NODE_ENV !== "production") allowedOrigins.add(new URL(request.url).origin);
@@ -36,7 +35,6 @@ export async function handleAppointmentRequest(request: Request, testMode = fals
   const services = homeServices.filter(s => s.enabled);
   const data = validateAppointment(body, services.map(s => s.id));
   if (!data) return reply("Controlla i campi. Per il contatto telefonico è necessario indicare un numero.", 400);
-  if (testMode && (data.firstName !== "Test" || data.lastName !== "Tecnico" || data.email !== siteConfig.email || data.phone || data.notes || data.contactPreference !== "email")) return reply("Usa soltanto i dati tecnici indicati nella pagina di prova.", 400);
   if (typeof body.token !== "string" || !body.token || body.token.length > 2048) return reply("Completa la verifica antispam.", 400);
   if (typeof body.requestedAt !== "string" || !Number.isFinite(Date.parse(body.requestedAt)) || Math.abs(Date.now() - Date.parse(body.requestedAt)) > 86_400_000) return reply("Richiesta scaduta. Ricarica la pagina e riprova.", 400);
   try {
@@ -52,7 +50,7 @@ export async function handleAppointmentRequest(request: Request, testMode = fals
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST", headers: { Authorization: `Bearer ${config.apiKey}`, "Content-Type": "application/json", "Idempotency-Key": `appointment-${digest}` },
       body: JSON.stringify({ from: config.from, to: [config.to], reply_to: data.email,
-        subject: testMode ? "Prova tecnica modulo sito — Dr. Simone Contino" : "Nuova richiesta appuntamento — Dr. Simone Contino",
+        subject: "Nuova richiesta appuntamento — Dr. Simone Contino",
         text: [`Nome: ${data.firstName} ${data.lastName}`, `Email: ${data.email}`, `Telefono: ${data.phone || "Non indicato"}`, `Prestazione: ${service.title}`, `Preferenza: ${data.contactPreference === "phone" ? "Telefono" : "Email"}`, `Note organizzative: ${data.notes || "Nessuna"}`, `Richiesta (orario indicativo): ${new Date(body.requestedAt).toLocaleString("it-IT", { timeZone: "Europe/Rome" })}`].join("\n"),
       }), signal: AbortSignal.timeout(12_000),
     });
