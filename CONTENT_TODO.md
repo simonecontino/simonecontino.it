@@ -47,6 +47,15 @@ Prestazioni già confermate: prima visita pneumologica, controllo pneumologico, 
 
 ## Contenuti, reputazione e conformità
 
+### Modulo richieste — aggiornamento 12 novembre 2026
+
+- Titolare confermato: Dr. Simone Contino; recapito privacy: drsimonecontino@gmail.com.
+- Conservazione richiesta: 30 giorni dalla conclusione della gestione. Predisporre cancellazione nella casella, cestino e copie; nessuna cancellazione automatica implementata dal sito.
+- Nessun indirizzo professionale aperto al pubblico dichiarato: non usare automaticamente l’ospedale come recapito del titolare. Verificare eventuali ulteriori dati identificativi richiesti.
+- Bozza privacy aggiornata, NON approvata: verificare basi giuridiche, accordi/ruoli fornitori, trasferimenti e conservazione presso Vercel, Resend, Cloudflare e Google/Gmail.
+- Dominio Resend verificato da screenshot; cinque variabili Production salvate secondo conferma del titolare. Valori non letti né verificati dall’agente.
+- Invio reale al recapito professionale e prova completa Turnstile/modulo ancora da eseguire. Nessun flag di verifica attivato.
+
 - `[FORNIRE TESTO, AUTORE E DATA DELLE RECENSIONI GOOGLE DA MOSTRARE DIRETTAMENTE NEL SITO]`
 - `[REVISIONE LEGALE PRIVACY POLICY]`
 - `[REVISIONE LEGALE COOKIE POLICY]`

@@ -34,19 +34,19 @@ test('validates required fields, limits, privacy and selected enabled service', 
 
 function endpoint({ enabled = true, antiSpam = true, mail = true } = {}) {
   const calls = [];
-  const { POST } = load('src/app/api/appointment-requests/route.ts', {
+  const { handleAppointmentRequest } = load('src/lib/appointment-handler.ts', {
     'next/server': { NextResponse: { json: (body, init) => Response.json(body, init) } },
-    '@/lib/booking-config': { getAppointmentConfig: () => ({ enabled, secret: 'TEST', apiKey: 'TEST', from: 'test@example.invalid', to: 'doctor@example.invalid' }) },
+    '@/lib/booking-config': { getAppointmentConfig: () => ({ enabled, siteKey: 'TEST', secret: 'TEST', apiKey: 'TEST', from: 'test@example.invalid', to: 'doctor@example.invalid' }) },
     '@/lib/appointment-validation': validation,
     '@/data/home-services': { homeServices: [{ id: 'cpap', title: 'CPAP', enabled: true }, { id: 'disabled', enabled: false }] },
-    '@/config/site': { siteConfig: { domain: 'https://simonecontino.it' } },
+    '@/config/site': { siteConfig: { domain: 'https://simonecontino.it', email: 'drsimonecontino@gmail.com' } },
   }, {
     fetch: async (url, options) => {
       calls.push({ url, options });
       return url.includes('siteverify') ? Response.json({ success: antiSpam, action: 'appointment', hostname: 'www.simonecontino.it' }) : Response.json(mail ? { id: 'test-only' } : { error: 'test' }, { status: mail ? 200 : 500 });
     },
   });
-  return { POST, calls };
+  return { POST: handleAppointmentRequest, calls };
 }
 function request(body, origin = 'https://www.simonecontino.it') {
   return new Request('https://www.simonecontino.it/api/appointment-requests', { method: 'POST', headers: { 'Content-Type': 'application/json', origin }, body: JSON.stringify(body) });
@@ -79,4 +79,41 @@ test('success includes all email fields and stable idempotency for retries', asy
   assert.equal(email.subject, 'Nuova richiesta appuntamento — Dr. Simone Contino');
   assert.equal(email.reply_to, input.email);
   assert.ok(email.text.includes('Prestazione: CPAP'));
+});
+
+test('isolated test accepts only synthetic inputs while public form stays disabled', async () => {
+  const e = endpoint({ enabled: false });
+  const p = { ...payload(), firstName: 'Test', lastName: 'Tecnico', email: 'drsimonecontino@gmail.com' };
+  assert.equal((await e.POST(request(p))).status, 503);
+  assert.equal((await e.POST(request(payload()), true)).status, 400);
+  assert.equal(e.calls.length, 0);
+  assert.equal((await e.POST(request(p), true)).status, 200);
+  assert.equal(JSON.parse(e.calls[1].options.body).subject, 'Prova tecnica modulo sito — Dr. Simone Contino');
+});
+
+test('test sessions are signed, expire and stop working after password rotation', () => {
+  const env = { APPOINTMENT_TEST_PASSWORD: 'a'.repeat(32), APPOINTMENT_TEST_UNTIL: String(Date.now() + 3600000) };
+  const access = load('src/lib/appointment-test-access.ts', { 'server-only': {} }, { process: { env } });
+  assert.ok(access.testAccessAvailable());
+  assert.equal(access.validTestPassword('wrong'), false);
+  assert.ok(access.validTestPassword('a'.repeat(32)));
+  const session = access.issueTestSession();
+  assert.ok(access.validTestSession(session));
+  assert.equal(access.validTestSession(session + 'tampered'), false);
+  assert.equal(access.validTestSession(undefined), false);
+  env.APPOINTMENT_TEST_PASSWORD = 'b'.repeat(32);
+  assert.equal(access.validTestSession(session), false);
+  env.APPOINTMENT_TEST_UNTIL = String(Date.now() - 1);
+  assert.equal(access.testAccessAvailable(), false);
+  assert.equal(access.validTestSession(access.issueTestSession()), false);
+});
+
+test('test endpoint refuses unauthenticated requests before reaching providers', async () => {
+  const { POST } = load('src/app/api/test-prenotazione/route.ts', {
+    'next/headers': { cookies: async () => ({ get: () => undefined }) },
+    'next/server': { NextResponse: { json: (body, init) => Response.json(body, init) } },
+    '@/lib/appointment-test-access': { testCookie: 'test', validTestSession: () => false },
+    '@/lib/appointment-handler': { handleAppointmentRequest: () => assert.fail('Must not call provider without authentication') },
+  });
+  assert.equal((await POST(request(payload()))).status, 403);
 });

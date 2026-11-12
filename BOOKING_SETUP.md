@@ -46,6 +46,12 @@ Turnstile verifica sul server un token monouso prima di chiamare Resend; è il c
 
 ## Verifiche
 
+### Prova isolata Resend, senza aprire il modulo pubblico
+
+È disponibile anche `/test-prenotazione`, esclusa dalla sitemap e noindex. Richiede `APPOINTMENT_TEST_PASSWORD` (casuale, almeno 32 caratteri) e `APPOINTMENT_TEST_UNTIL` (timestamp Unix in millisecondi). Senza configurazione o dopo la scadenza la pagina non è disponibile. Login tramite Server Action e cookie HttpOnly, Secure in produzione, SameSite Strict, firmato HMAC e valido al massimo un’ora e comunque non oltre la scadenza. Nessuna chiave Resend viene esposta. `/api/test-prenotazione` rifiuta richieste senza sessione valida; usa lo stesso handler e Turnstile del modulo normale ma permette solo nome Test, cognome Tecnico, email professionale, nessun telefono o nota e preferenza email. Non richiede di impostare i flag privacy/email come verificati. Il modulo pubblico e il suo endpoint restano disabilitati. Per chiudere la prova rimuovere le due variabili e ridistribuire, oppure attendere la scadenza già prevista nel codice.
+
+`scripts/test-resend.mjs` legge le tre variabili Resend dall’ambiente del processo; non le stampa e non contiene credenziali. Senza `--send` controlla solo la presenza della configurazione. Con `--send` invia una sola notifica tecnica al destinatario configurato, senza dati paziente. Se le variabili sono state predisposte in un `.env.local` ignorato da Git, usare `node scripts/test-resend.mjs --env-local --send`. Non incollare chiavi nella chat o nella riga di comando. Non attivare flag del modulo per questa prova. La prova non verifica Turnstile né il flusso browser completo: questi richiedono una successiva prova controllata, con privacy completata. Verificare manualmente inbox/spam e stato Delivered in Resend prima di dichiarare la consegna riuscita.
+
 `node --test tests/appointment.test.cjs` esegue i moduli TypeScript reali tramite la dipendenza TypeScript già presente, con confini provider isolati: validazione, injection, disabled, Origin, null/array, honeypot, payload troppo grande, servizio disabilitato, antispam fallito, errore provider, successo e idempotenza. Questi test non provano la consegna reale e non inviano email.
 
 Comandi: lint, typecheck, build (webpack come alternativa al Turbopack bloccato dall’ambiente). Verificare in HTTP redirect, 404 articoli, sitemap, canonical, assenza telefono e stato modulo; verifica visiva desktop/mobile da effettuare con browser disponibile.
