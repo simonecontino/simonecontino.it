@@ -103,11 +103,13 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
           </div>
           <div className="appointment-honeypot" aria-hidden="true"><label>Lascia vuoto questo campo<input name="website" autoComplete="off" tabIndex={-1} /></label></div>
           <label className="appointment-privacy"><input type="checkbox" name="privacy" required /><span>Ho preso visione dell’<Link href="/privacy" target="_blank">informativa privacy</Link>.</span></label>
-          {enabled ? <div ref={widgetRef} className="appointment-challenge" /> : null}
           <p role="alert" className="appointment-error">{error}</p>
-          <div className="appointment-submit-row">
-            <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
-            <p>L’invio non conferma l’appuntamento.</p>
+          <div className="appointment-actions">
+            {enabled ? <div ref={widgetRef} className="appointment-challenge" /> : null}
+            <div className="appointment-submit-row">
+              <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
+              <p>L’invio non conferma l’appuntamento.</p>
+            </div>
           </div>
         </fieldset>
       </form>
