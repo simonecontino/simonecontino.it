@@ -21,10 +21,10 @@ export default function ServicesBookingPage() {
   const config = getAppointmentConfig();
   const services = homeServices.filter(s => s.enabled);
   return <>
-    <section className="internal-hero booking-unified-hero"><Container><Breadcrumbs items={[{ label: "Prestazioni e prenotazioni" }]} /><p className="eyebrow">Pneumologia e Medicina del Sonno · A domicilio</p><h1>Prestazioni e prenotazioni</h1><p className="internal-lead">Visite ed esami a domicilio a {homeActivity.areas}. Consulta le tariffe e lascia i tuoi recapiti: concorderemo insieme la disponibilità.</p></Container></section>
+    <section className="internal-hero booking-unified-hero"><Container><Breadcrumbs items={[{ label: "Prestazioni e prenotazioni" }]} /><p className="eyebrow">Pneumologia e Medicina del Sonno</p><h1>Prestazioni e prenotazioni</h1></Container></section>
     <section className="section booking-unified-body"><Container className="booking-unified-grid">
       <div className="booking-request-column">
-        <section id="richiedi-appuntamento" aria-labelledby="request-heading">
+        <section id="richiedi-appuntamento" className="booking-request-box" aria-labelledby="request-heading">
           <h2 id="request-heading">Richiedi un ricontatto</h2>
           <p className="booking-request-intro">Scegli una visita o un esame e lascia i recapiti: ti ricontatterò per concordare i dettagli.</p>
           <AppointmentForm enabled={config.enabled} siteKey={config.enabled ? config.siteKey : undefined} services={services.map(({id, title}) => ({id, title}))} />
