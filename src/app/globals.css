@@ -324,8 +324,10 @@ button { font: inherit; }
 .reviews-buttons { display: flex; flex-wrap: wrap; gap: .65rem; }
 .reviews-footer > p { max-width: 52rem; margin: 0; color: var(--color-muted); font-size: .75rem; }
 .reviews-footer > p a { color: inherit; }
-.reviews-fallback { display: block !important; }
-.reviews-fallback > p:not(.eyebrow) { max-width: 40rem; margin-block: 1rem 1.5rem; }
+.reviews-section > .reviews-fallback { display: flex; flex-direction: column; align-items: center; gap: .75rem; padding: clamp(1.25rem, 3vw, 2rem); text-align: center; box-shadow: none; }
+.reviews-fallback .eyebrow, .reviews-fallback h2 { margin: 0; }
+.reviews-fallback > p:not(.eyebrow) { max-width: 40rem; margin: 0; line-height: 1.5; }
+.reviews-fallback .button { margin-top: .25rem; max-width: 100%; }
 .faq-page-layout { display: grid; gap: 2.5rem; }
 .faq-list--large summary { padding-block: 1.5rem; font-size: 1.05rem; }
 .locations-list { display: grid; gap: 1.5rem; }

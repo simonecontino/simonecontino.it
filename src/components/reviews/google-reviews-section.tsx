@@ -83,12 +83,9 @@ export function GoogleReviewsSection({ data, fallbackUrl }: { data: GoogleReview
     return (
       <section className="section reviews-section" aria-labelledby="reviews-title">
         <Container className="reviews-fallback">
-          <div className="google-maps-attribution">
-            <Image src="/images/google-maps-logo.png" width="98" height="18" alt="Google Maps" />
-          </div>
           <p className="eyebrow">Recensioni dei pazienti</p>
           <h2 id="reviews-title">Le esperienze dei pazienti</h2>
-          <p>Leggi le esperienze condivise dai pazienti nella sezione recensioni del mio profilo Google.</p>
+          <p>Le opinioni condivise dai pazienti sul mio profilo Google.</p>
           <ButtonLink href={fallbackUrl} target="_blank" rel="noreferrer" variant="primary">
             Leggi le recensioni su Google <ExternalLink size={16} aria-hidden="true" />
           </ButtonLink>
