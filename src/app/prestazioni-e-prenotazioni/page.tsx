@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronDown, Info, Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle } from "lucide-react";
+import { ServiceInformation } from "@/components/ui/service-information";
 import { Container } from "@/components/ui/container";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { AppointmentForm } from "@/components/forms/appointment-form";
@@ -52,13 +53,10 @@ export default function ServicesBookingPage() {
                       : "Tariffa in definizione"}
                   </strong>
                 </div>
-                {s.bookingNote ? <details className="booking-service-information">
-                  <summary><Info size={16} aria-hidden="true" /><span>Informazioni<span className="sr-only">: {s.title}</span></span><ChevronDown size={16} className="booking-information-chevron" aria-hidden="true" /></summary>
-                  <div className="booking-information-panel">
+                {s.bookingNote ? <ServiceInformation title={s.title}>
                     <p>{s.bookingNote}</p>
                     {s.informationHref ? <Link className="booking-service-detail" href={s.informationHref}>Approfondisci</Link> : null}
-                  </div>
-                </details> : null}
+                </ServiceInformation> : null}
               </article>
             </li>
           ))}

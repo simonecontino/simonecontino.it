@@ -52,6 +52,7 @@ test('feedback waits for application success and blocks duplicates while sending
   await pending;
   tree = h.render();
   assert.match(h.text(tree), /Richiesta inviata con successo!/);
+  assert.equal(tree.props.style, undefined, 'Success must not retain an artificial form height');
   assert.match(h.text(tree), /La richiesta non costituisce conferma di appuntamento/);
   assert.equal(h.find(tree, 'form'), undefined);
   assert.ok(h.find(tree, 'svg'));

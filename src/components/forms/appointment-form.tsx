@@ -22,8 +22,6 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
   const widgetId = useRef<string | null>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const requestTime = useRef<string | null>(null);
-  const panelRef = useRef<HTMLDivElement>(null);
-  const [reservedHeight, setReservedHeight] = useState<number>();
 
   const successful = status === "success";
   useEffect(() => {
@@ -66,7 +64,6 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
     }
     if (!token) { setError("Completa la verifica antispam prima di inviare."); return; }
     requestTime.current ??= new Date().toISOString();
-    setReservedHeight(panelRef.current?.getBoundingClientRect().height);
     setStatus("sending"); setError("");
     try {
       const response = await fetch("/api/appointment-requests", {
@@ -85,7 +82,7 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
     }
   }
 
-  return <div ref={panelRef} className="appointment-form-panel" style={successful ? { minHeight: reservedHeight } : undefined}>
+  return <div className="appointment-form-panel">
     <div ref={feedbackRef} tabIndex={-1} role="status" aria-live="polite" aria-atomic="true" className={successful ? "appointment-success" : undefined}>
       {successful ? <>
         <svg className="appointment-success-icon" viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle className="appointment-success-circle" cx="40" cy="40" r="36" /><path className="appointment-success-check" d="m23 40 11 11 23-24" pathLength="1" /></svg>
