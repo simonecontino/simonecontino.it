@@ -125,6 +125,14 @@ test('readiness requires every flag and credential; email success alone does not
     }, { process: { env: settings } }).getAppointmentConfig();
   }
   assert.equal(config(env).enabled, true);
+  const pasted = config({ ...env, RESEND_API_KEY: ' TEST\n', APPOINTMENT_FROM_EMAIL: ' test@example.invalid\r\n', APPOINTMENT_TO_EMAIL: ' doctor@example.invalid\n', TURNSTILE_SITE_KEY: ' TEST\n\n', TURNSTILE_SECRET_KEY: ' TEST\r\n' });
+  assert.equal(pasted.siteKey, 'TEST');
+  assert.equal(pasted.secret, 'TEST');
+  assert.equal(pasted.apiKey, 'TEST');
+  assert.equal(pasted.from, 'test@example.invalid');
+  assert.equal(pasted.to, 'doctor@example.invalid');
+  assert.equal(pasted.enabled, true);
+  assert.equal(config({ ...env, TURNSTILE_SITE_KEY: '\r\n ' }).enabled, false);
   for (const key of ['APPOINTMENT_FORM_ENABLED', 'APPOINTMENT_OWNER_APPROVED', 'APPOINTMENT_EMAIL_VERIFIED', 'RESEND_API_KEY', 'APPOINTMENT_FROM_EMAIL', 'TURNSTILE_SITE_KEY', 'TURNSTILE_SECRET_KEY']) {
     assert.equal(config({ ...env, [key]: '' }).enabled, false);
   }

@@ -26,14 +26,25 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
   const successful = status === "success";
   useEffect(() => {
     if (!enabled || !scriptReady || !siteKey || !widgetRef.current || !window.turnstile || successful) return;
-    const id = window.turnstile.render(widgetRef.current, {
-      sitekey: siteKey, action: "appointment", theme: "light", size: "flexible",
-      callback: (value: string) => setToken(value),
-      "expired-callback": () => setToken(""),
-      "error-callback": () => { setToken(""); setError("Verifica antispam non disponibile. Riprova o utilizza WhatsApp."); },
-    });
-    widgetId.current = id;
-    return () => { window.turnstile?.remove(id); widgetId.current = null; };
+    try {
+      const id = window.turnstile.render(widgetRef.current, {
+        sitekey: siteKey.trim(), action: "appointment", theme: "light", size: "flexible",
+        callback: (value: string) => setToken(value),
+        "expired-callback": () => setToken(""),
+        "error-callback": () => { setToken(""); setError("Verifica antispam non disponibile. Riprova o utilizza WhatsApp."); },
+      });
+      widgetId.current = id;
+      return () => {
+        try { window.turnstile?.remove(id); } catch { /* Provider unavailable during unmount. */ }
+        widgetId.current = null;
+      };
+    } catch {
+      // SDK initialization is an external synchronization; surface its failure without crashing the page.
+      /* eslint-disable react-hooks/set-state-in-effect */
+      setToken("");
+      setError("Verifica antispam non disponibile. Ricarica la pagina oppure contattami via email o WhatsApp.");
+      /* eslint-enable react-hooks/set-state-in-effect */
+    }
   }, [enabled, scriptReady, siteKey, successful]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -63,7 +74,9 @@ export function AppointmentForm({ enabled, siteKey }: { enabled: boolean; siteKe
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Invio non riuscito. I dati sono ancora nel modulo.");
       setStatus("idle"); setToken("");
-      if (widgetId.current) window.turnstile?.reset(widgetId.current);
+      if (widgetId.current) {
+        try { window.turnstile?.reset(widgetId.current); } catch { /* Keep submission blocked without a valid token. */ }
+      }
     }
   }
 
