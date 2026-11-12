@@ -85,8 +85,7 @@ button { font: inherit; }
 .problem-grid { display: grid; gap: .8rem; }
 .problem-card { position: relative; padding: 1.35rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); text-decoration: none; background: var(--color-white); transition: border-color .18s ease, transform .18s ease; }
 .problem-card:hover { transform: translateY(-2px); border-color: #77a39f; }
-.problem-card > span { color: var(--color-petrol); font-size: .76rem; font-weight: 750; }
-.problem-card h3 { margin: 1rem 0 .5rem; }
+.problem-card h3 { margin: 0 0 .5rem; }
 .problem-card p { margin-bottom: 1.4rem; font-size: .92rem; }
 .problem-card svg { position: absolute; right: 1.25rem; bottom: 1.15rem; color: var(--color-petrol); }
 
@@ -463,12 +462,15 @@ button { font: inherit; }
 .booking-unified-grid { display: grid; gap: 2rem; }
 .booking-service-list { margin: 1.25rem 0 0; padding: 0; list-style: none; }
 .booking-service-list > li + li { border-top: 1px solid var(--color-line); }
-.booking-service-row { padding-block: 1.2rem; }
+.booking-service-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 1.2rem; padding-block: 1.2rem; }
 .booking-service-list > li:first-child .booking-service-row { padding-top: 0; }
-.booking-service-heading { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: .75rem; margin-bottom: .55rem; }
-.booking-service-heading h3 { margin: 0; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
+.booking-service-content { min-width: 0; }
+.booking-service-action { display: flex; flex-direction: column; align-items: flex-end; gap: .65rem; }
+.booking-service-action .button { min-height: 2.75rem; padding: .6rem .9rem; }
+.booking-service-detail { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
+.booking-service-content h3 { margin: 0 0 .55rem; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
 .booking-service-price { color: var(--color-petrol); font-size: 1.5rem; line-height: 1.2; font-variant-numeric: tabular-nums; text-align: right; }
-.booking-service-row > p { margin-bottom: 0; font-size: .92rem; }
+.booking-service-content > p { margin-bottom: 0; font-size: .92rem; }
 .booking-service-links { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .8rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
 .booking-service-links .button { min-height: 2.75rem; padding: .6rem 1rem; }
 .booking-service-links > a:not(.button) { display: inline-flex; min-height: 2.75rem; align-items: center; }
@@ -486,7 +488,6 @@ button { font: inherit; }
 .appointment-error:empty { display: none; }
 .appointment-disclaimer { margin: 1rem 0 0; font-size: .83rem; color: var(--color-muted); }
 .appointment-challenge { margin-bottom: 1rem; }
-.form-availability-note { padding: 1rem; border-radius: var(--radius-sm); background: var(--color-mist); color: var(--color-ink); }
 .booking-whatsapp { margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); }
 .booking-whatsapp > svg { color: var(--color-petrol); }
 .booking-whatsapp .button svg { width: 1.15rem; }
@@ -503,3 +504,5 @@ button { font: inherit; }
 .booking-unified-hero h1 { max-width: none; }
 @media (min-width: 820px) { .hero-grid { grid-template-columns: minmax(0,1.35fr) minmax(0,.75fr); } }
 @media (max-width: 599px) { .footer-grid { gap: 1.5rem; } .brand-copy strong { font-size: .85rem; } }
+@media (max-width: 359px) { .booking-service-row { gap: .65rem; } .booking-service-action .button { padding-inline: .65rem; } }
+.booking-bar[hidden] { display: none; }

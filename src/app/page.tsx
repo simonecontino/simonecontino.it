@@ -23,7 +23,7 @@ export default async function HomePage() {
             <p className="hero-lead">{siteConfig.home.subtitle}</p>
             <p className="hero-support">{siteConfig.home.support}</p>
             <div className="hero-actions">
-              <ButtonLink href={booking.requestUrl}>Prenota una visita</ButtonLink>
+              <ButtonLink href={booking.requestUrl}>Prenota una visita o esame</ButtonLink>
               <ButtonLink href="#come-posso-aiutarti" variant="secondary">Scopri come posso aiutarti</ButtonLink>
             </div>
           </div>
@@ -38,9 +38,9 @@ export default async function HomePage() {
         <Container>
           <SectionHeading eyebrow="Partire dai sintomi" title="Hai uno di questi problemi?" text="Non è necessario conoscere già la diagnosi. Il primo passo è descrivere con precisione ciò che accade e da quanto tempo." />
           <div className="problem-grid">
-            {problems.map((problem, index) => (
+            {problems.map((problem) => (
               <Link className="problem-card" href={problem.slug === "asma" || problem.slug === "bpco" ? `/patologie/${problem.slug}` : problem.slug === "valutazione-pneumologica" ? "/esami/prima-visita-pneumologica" : `/problemi/${problem.slug}`} key={problem.slug}>
-                <span>{String(index + 1).padStart(2, "0")}</span><h3>{problem.title}</h3><p>{problem.description}</p><ArrowRight aria-hidden="true" />
+                <h3>{problem.title}</h3><p>{problem.description}</p><ArrowRight aria-hidden="true" />
               </Link>
             ))}
           </div>
@@ -116,7 +116,7 @@ export default async function HomePage() {
       </section>
 
       <section className="final-cta">
-        <Container><BookOpen aria-hidden="true" /><h2>{siteConfig.home.closing}</h2><p>Se desideri discutere un sintomo respiratorio o una condizione già nota, il passo successivo è richiedere una valutazione.</p><ButtonLink href={booking.requestUrl}>Prenota una visita</ButtonLink></Container>
+        <Container><BookOpen aria-hidden="true" /><h2>{siteConfig.home.closing}</h2><p>Se desideri discutere un sintomo respiratorio o una condizione già nota, il passo successivo è richiedere una valutazione.</p><ButtonLink href={booking.requestUrl}>Prenota una visita o esame</ButtonLink></Container>
       </section>
     </>
   );

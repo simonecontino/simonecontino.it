@@ -84,8 +84,7 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
       {status === "success" ? <><h3>Richiesta inviata correttamente</h3><p>Grazie per avermi contattato. Ti risponderò per concordare la disponibilità e le modalità dell’appuntamento.</p><p>L’appuntamento non è ancora confermato.</p></> : null}
     </div>
     {status !== "success" ? <>
-      {!enabled ? <p className="form-availability-note" id="form-availability">Il modulo non è ancora attivo. Per una richiesta organizzativa puoi utilizzare WhatsApp oppure email.</p> : null}
-      <form onSubmit={submit} aria-describedby={!enabled ? "form-availability" : undefined}>
+      <form onSubmit={submit}>
         <fieldset disabled={!enabled || status === "sending"}>
           <legend className="sr-only">Dati per la richiesta di appuntamento</legend>
           <div className="appointment-fields">
