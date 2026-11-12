@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useId, useRef, useState } from "react";
 import { booking } from "@/config/booking";
 import { navigation } from "@/config/navigation";
@@ -58,7 +58,7 @@ export function MobileNavigation() {
         aria-expanded={isOpen}
         aria-controls={navigationId}
       >
-        <Menu aria-hidden="true" />
+        {isOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
       </summary>
       <nav id={navigationId} aria-label="Navigazione mobile" onClick={(event) => {
         if (event.target instanceof Element && event.target.closest("a")) closeMenu();
