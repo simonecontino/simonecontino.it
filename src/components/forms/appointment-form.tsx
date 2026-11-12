@@ -110,7 +110,6 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
               <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
             </div>
           </div>
-          <p className="appointment-submit-note">L’invio non conferma l’appuntamento.</p>
         </fieldset>
       </form>
     </> : null}
