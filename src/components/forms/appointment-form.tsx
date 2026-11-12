@@ -108,12 +108,11 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
             {enabled ? <div ref={widgetRef} className="appointment-challenge" /> : null}
             <div className="appointment-submit-row">
               <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
-              <p>L’invio non conferma l’appuntamento.</p>
             </div>
           </div>
+          <p className="appointment-submit-note">L’invio non conferma l’appuntamento.</p>
         </fieldset>
       </form>
-      <p className="appointment-disclaimer">Non inserire sintomi, diagnosi o referti.</p>
     </> : null}
     {enabled ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} onError={() => setError("Impossibile caricare la verifica antispam. Utilizza WhatsApp o email.")} /> : null}
   </div>;
