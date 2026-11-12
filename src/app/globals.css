@@ -489,15 +489,30 @@ button { font: inherit; }
 .booking-contact-options small { grid-column: 1 / -1; color: var(--color-muted); font-size: .8rem; }
 .booking-service-list { margin: 0; padding: 0; list-style: none; }
 .booking-service-list > li + li { border-top: 1px solid var(--color-line); }
-.booking-service-row { display: grid; grid-template-columns: minmax(0,1fr) 6rem; gap: 1rem; padding-block: 1rem; }
+.booking-service-row { display: grid; grid-template-columns: minmax(0,1fr) 6rem; gap: .25rem 1rem; padding-block: 1rem; }
 .booking-service-list > li:first-child .booking-service-row { padding-top: 0; }
 .booking-service-content { min-width: 0; }
 .booking-service-action { display: flex; flex-direction: column; align-items: flex-end; gap: .65rem; }
 .booking-service-detail { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
-.booking-unified-grid .booking-service-content h3 { margin: 0 0 .55rem; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
+.booking-unified-grid .booking-service-content h3 { margin: 0; font-size: 1.12rem; line-height: 1.4; text-wrap: pretty; }
 .booking-unified-grid .booking-service-content h3:only-child { margin-bottom: 0; }
 .booking-service-price { color: var(--color-petrol); font-size: 1.25rem; font-weight: 600; line-height: 1.4; font-variant-numeric: tabular-nums; text-align: right; }
 .booking-service-content > p { margin-bottom: 0; font-size: .92rem; }
+.booking-service-information { grid-column: 1 / -1; min-width: 0; }
+.booking-service-information summary { display: flex; width: fit-content; min-height: 44px; align-items: center; gap: .4rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; cursor: pointer; list-style: none; border-radius: var(--radius-sm); }
+.booking-service-information summary::-webkit-details-marker { display: none; }
+.booking-service-information summary::marker { content: ""; }
+.booking-service-information summary:focus-visible { outline: 2px solid var(--color-petrol); outline-offset: 3px; }
+.booking-information-chevron { transition: transform 160ms ease; }
+.booking-service-information[open] .booking-information-chevron { transform: rotate(180deg); }
+.booking-information-panel { padding: .75rem; border-radius: var(--radius-sm); background: var(--color-mist); color: var(--color-muted); }
+.booking-information-panel p { margin: 0; font-size: .9rem; line-height: 1.45; overflow-wrap: anywhere; }
+.booking-information-panel .booking-service-detail { margin-top: .25rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .booking-service-information[open] .booking-information-panel { animation: booking-information-reveal 160ms ease; }
+  @keyframes booking-information-reveal { from { opacity: 0; } to { opacity: 1; } }
+}
+@media (prefers-reduced-motion: reduce) { .booking-information-chevron { transition: none; } }
 .booking-service-links { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .8rem; color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
 .booking-service-links .button { min-height: 2.75rem; padding: .6rem 1rem; }
 .booking-service-links > a:not(.button) { display: inline-flex; min-height: 2.75rem; align-items: center; }
@@ -520,6 +535,24 @@ button { font: inherit; }
 .appointment-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
 .appointment-error { color: #a32727; font-weight: 600; }
 .appointment-error:empty { display: none; }
+.appointment-success { padding-block: 1.5rem; outline-offset: 4px; }
+.appointment-success-icon { display: block; width: 80px; height: 80px; margin-bottom: 1rem; overflow: visible; }
+.appointment-success-circle { fill: #e7f3ec; stroke: #267344; stroke-width: 2; transform-origin: center; }
+.appointment-success-check { stroke: #267344; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+.appointment-success-copy h3 { margin-bottom: .75rem; }
+.appointment-success-copy p { margin-bottom: .75rem; line-height: 1.5; }
+.appointment-success-copy .appointment-success-note { margin-bottom: 0; font-size: .9rem; color: var(--color-muted); }
+.appointment-spinner { width: 1rem; height: 1rem; flex: none; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; }
+@media (prefers-reduced-motion: no-preference) {
+  .appointment-success-circle { animation: appointment-scale-in 250ms ease-out both; }
+  .appointment-success-check { animation: appointment-draw-check 350ms 200ms ease-out both; }
+  .appointment-success-copy { animation: appointment-fade-in 300ms 450ms ease-out both; }
+  .appointment-spinner { animation: appointment-spin 800ms linear infinite; }
+  @keyframes appointment-scale-in { from { opacity: 0; transform: scale(.85); } to { opacity: 1; transform: scale(1); } }
+  @keyframes appointment-draw-check { from { stroke-dasharray: 1; stroke-dashoffset: 1; } to { stroke-dasharray: 1; stroke-dashoffset: 0; } }
+  @keyframes appointment-fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes appointment-spin { to { transform: rotate(360deg); } }
+}
 .appointment-disclaimer { margin: 1rem 0 0; font-size: .83rem; color: var(--color-muted); }
 .appointment-challenge { margin-bottom: 1rem; }
 .booking-whatsapp { margin-top: 1.5rem; padding: 1.5rem; border: 1px solid var(--color-line); border-radius: var(--radius-md); }

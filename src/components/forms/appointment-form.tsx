@@ -22,8 +22,13 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
   const widgetId = useRef<string | null>(null);
   const feedbackRef = useRef<HTMLDivElement>(null);
   const requestTime = useRef<string | null>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [reservedHeight, setReservedHeight] = useState<number>();
 
   const successful = status === "success";
+  useEffect(() => {
+    if (successful) feedbackRef.current?.focus({ preventScroll: true });
+  }, [successful]);
   useEffect(() => {
     if (!enabled || !scriptReady || !siteKey || !widgetRef.current || !window.turnstile || successful) return;
     try {
@@ -61,6 +66,7 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
     }
     if (!token) { setError("Completa la verifica antispam prima di inviare."); return; }
     requestTime.current ??= new Date().toISOString();
+    setReservedHeight(panelRef.current?.getBoundingClientRect().height);
     setStatus("sending"); setError("");
     try {
       const response = await fetch("/api/appointment-requests", {
@@ -68,11 +74,10 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
         body: JSON.stringify({ ...input, token, website: form.get("website"), requestedAt: requestTime.current }),
       });
       const result = await response.json();
-      if (!response.ok || !result.ok) throw new Error(result.error || "Invio non riuscito. Riprova.");
+      if (!response.ok || result?.ok !== true) throw new Error("Invio non riuscito");
       setStatus("success");
-      feedbackRef.current?.focus();
-    } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "Invio non riuscito. I dati sono ancora nel modulo.");
+    } catch {
+      setError("Non è stato possibile inviare la richiesta. Riprova tra qualche istante oppure contattami tramite WhatsApp o email.");
       setStatus("idle"); setToken("");
       if (widgetId.current) {
         try { window.turnstile?.reset(widgetId.current); } catch { /* Keep submission blocked without a valid token. */ }
@@ -80,12 +85,15 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
     }
   }
 
-  return <div className="appointment-form-panel">
-    <div ref={feedbackRef} tabIndex={-1} role="status" aria-live="polite">
-      {status === "success" ? <><h3>Richiesta inviata correttamente</h3><p>Grazie per avermi contattato. Ti risponderò per concordare la disponibilità e le modalità dell’appuntamento.</p><p>L’appuntamento non è ancora confermato.</p></> : null}
+  return <div ref={panelRef} className="appointment-form-panel" style={successful ? { minHeight: reservedHeight } : undefined}>
+    <div ref={feedbackRef} tabIndex={-1} role="status" aria-live="polite" aria-atomic="true" className={successful ? "appointment-success" : undefined}>
+      {successful ? <>
+        <svg className="appointment-success-icon" viewBox="0 0 80 80" fill="none" aria-hidden="true"><circle className="appointment-success-circle" cx="40" cy="40" r="36" /><path className="appointment-success-check" d="m23 40 11 11 23-24" pathLength="1" /></svg>
+        <div className="appointment-success-copy"><h3>Richiesta inviata con successo!</h3><p>Grazie per avermi contattato. Ti risponderò tramite il recapito indicato per concordare i dettagli della prestazione.</p><p className="appointment-success-note">La richiesta non costituisce conferma di appuntamento.</p></div>
+      </> : null}
     </div>
     {status !== "success" ? <>
-      <form onSubmit={submit}>
+      <form onSubmit={submit} aria-busy={status === "sending"}>
         <fieldset disabled={!enabled || status === "sending"}>
           <legend className="sr-only">Dati per la richiesta di ricontatto</legend>
           <div className="appointment-fields">
@@ -100,7 +108,7 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
           <label className="appointment-privacy"><input type="checkbox" name="privacy" required /><span>Ho preso visione dell’<Link href="/privacy" target="_blank">informativa privacy</Link>.</span></label>
           {enabled ? <div ref={widgetRef} className="appointment-challenge" /> : null}
           <p role="alert" className="appointment-error">{error}</p>
-          <button className="button button--primary" type="submit">{status === "sending" ? "Invio in corso…" : "Invia richiesta"}</button>
+          <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
         </fieldset>
       </form>
       <p className="appointment-disclaimer">Indica solo la tipologia di prestazione, senza sintomi, diagnosi o referti. L’invio non conferma un appuntamento.</p>
