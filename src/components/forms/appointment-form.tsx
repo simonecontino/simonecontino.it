@@ -31,7 +31,7 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
     if (!enabled || !scriptReady || !siteKey || !widgetRef.current || !window.turnstile || successful) return;
     try {
       const id = window.turnstile.render(widgetRef.current, {
-        sitekey: siteKey.trim(), action: "appointment", theme: "light", size: "flexible",
+        sitekey: siteKey.trim(), action: "appointment", theme: "light", size: widgetRef.current.clientWidth < 300 ? "compact" : "normal",
         callback: (value: string) => setToken(value),
         "expired-callback": () => setToken(""),
         "error-callback": () => { setToken(""); setError("Verifica antispam non disponibile. Riprova o utilizza WhatsApp."); },
@@ -99,16 +99,19 @@ export function AppointmentForm({ enabled, siteKey, services }: { enabled: boole
             <label><span className="appointment-field-label">Email <small>(obbligatoria)</small></span><input type="email" name="email" autoComplete="email" required maxLength={fieldLimits.email} /></label>
             <label><span className="appointment-field-label">Telefono <small>{preference === "phone" ? "(obbligatorio)" : "(facoltativo)"}</small></span><input type="tel" name="phone" autoComplete="tel" required={preference === "phone"} maxLength={fieldLimits.phone} /></label>
             <label className="field-full">Preferenza di contatto<select name="contactPreference" value={preference} onChange={e => setPreference(e.target.value)}><option value="email">Email</option><option value="phone">Telefono</option></select></label>
-            <label className="field-full"><span className="appointment-field-label">Prestazione richiesta <small>(obbligatoria)</small></span><select name="service" required defaultValue="" aria-describedby="service-help"><option value="" disabled>Scegli una visita o un esame</option>{services.map(s => <option value={s.id} key={s.id}>{s.title}</option>)}</select><small id="service-help">La disponibilità verrà concordata al ricontatto.</small></label>
+            <label className="field-full appointment-service-field"><span className="appointment-field-label">Prestazione richiesta <small>(obbligatoria)</small></span><select name="service" required defaultValue="" aria-describedby="service-help"><option value="" disabled>Scegli una visita o un esame</option>{services.map(s => <option value={s.id} key={s.id}>{s.title}</option>)}</select><small id="service-help">La disponibilità verrà concordata al ricontatto.</small></label>
           </div>
           <div className="appointment-honeypot" aria-hidden="true"><label>Lascia vuoto questo campo<input name="website" autoComplete="off" tabIndex={-1} /></label></div>
           <label className="appointment-privacy"><input type="checkbox" name="privacy" required /><span>Ho preso visione dell’<Link href="/privacy" target="_blank">informativa privacy</Link>.</span></label>
           {enabled ? <div ref={widgetRef} className="appointment-challenge" /> : null}
           <p role="alert" className="appointment-error">{error}</p>
-          <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
+          <div className="appointment-submit-row">
+            <button className="button button--primary" type="submit" disabled={!enabled || status === "sending"}>{status === "sending" ? <><span className="appointment-spinner" aria-hidden="true" />Invio in corso...</> : "Invia richiesta"}</button>
+            <p>L’invio non conferma l’appuntamento.</p>
+          </div>
         </fieldset>
       </form>
-      <p className="appointment-disclaimer">Indica solo la tipologia di prestazione, senza sintomi, diagnosi o referti. L’invio non conferma un appuntamento.</p>
+      <p className="appointment-disclaimer">Non inserire sintomi, diagnosi o referti.</p>
     </> : null}
     {enabled ? <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" onReady={() => setScriptReady(true)} onError={() => setError("Impossibile caricare la verifica antispam. Utilizza WhatsApp o email.")} /> : null}
   </div>;
