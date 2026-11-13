@@ -109,6 +109,9 @@ button { font: inherit; }
 .expertise-featured > svg, .expertise-featured > a { color: #bce7e1 !important; }
 
 .trust-section { color: white; background: var(--color-petrol-dark); }
+.home-clinical-method { padding-block: clamp(1.75rem, 4vw, 3rem); }
+.home-clinical-method h2 { max-width: 30ch; margin-bottom: 1rem; }
+.home-clinical-method p:not(.eyebrow) { max-width: 75ch; margin-bottom: 0; }
 .trust-grid { display: grid; gap: 3rem; }
 .trust-grid h2 { max-width: 30ch; }
 .trust-grid > div:first-child p:not(.eyebrow) { max-width: 34rem; color: #c4d9d8; }

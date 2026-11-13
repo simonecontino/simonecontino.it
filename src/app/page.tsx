@@ -2,7 +2,7 @@ import { booking } from "@/config/booking";
 import { features } from "@/config/features";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, ClipboardCheck, Ear, MoonStar, Stethoscope } from "lucide-react";
+import { ArrowRight, BookOpen, ClipboardCheck, MoonStar, Stethoscope } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Container } from "@/components/ui/container";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -47,14 +47,11 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint">
+      <section className="section section--tint home-clinical-method" aria-labelledby="clinical-method-title">
         <Container>
-          <SectionHeading eyebrow="Il percorso di cura" title="Una valutazione costruita con metodo" text="Ogni indicazione nasce dalla comprensione della storia clinica e da scelte motivate, spiegate con parole chiare." />
-          <ol className="care-path">
-            <li><span>01</span><Ear aria-hidden="true" /><h3>Ti ascolto</h3><p>Prima di formulare ipotesi o indicare esami, è importante comprendere la storia clinica, i sintomi e le esigenze della persona.</p></li>
-            <li><span>02</span><ClipboardCheck aria-hidden="true" /><h3>Valutiamo il problema</h3><p>La valutazione clinica e gli eventuali approfondimenti vengono scelti in modo appropriato e motivato.</p></li>
-            <li><span>03</span><Stethoscope aria-hidden="true" /><h3>Costruiamo il percorso</h3><p>L’obiettivo è definire insieme un percorso diagnostico e terapeutico comprensibile e personalizzato.</p></li>
-          </ol>
+          <p className="eyebrow">Il percorso di cura</p>
+          <h2 id="clinical-method-title">Un percorso di cura chiaro e personalizzato</h2>
+          <p>Ogni percorso inizia dall’ascolto dei sintomi e dalla valutazione della storia clinica. L’obiettivo è individuare gli approfondimenti realmente necessari, spiegare con chiarezza i risultati e definire insieme al paziente le successive decisioni diagnostiche e terapeutiche.</p>
         </Container>
       </section>
 
@@ -65,18 +62,6 @@ export default async function HomePage() {
             <article><Stethoscope aria-hidden="true" /><h3>Pneumologia</h3><p>Valutazione dei principali sintomi e delle patologie dell’apparato respiratorio.</p><ul><li>Asma e BPCO</li><li>Nodulo polmonare e patologie restrittive</li><li>Bronchiectasie e malattie interstiziali</li><li>Gestione respiratoria delle patologie neuromuscolari</li></ul><Link href="/patologie">Approfondisci <ArrowRight aria-hidden="true" /></Link></article>
             <article className="expertise-featured"><MoonStar aria-hidden="true" /><h3>Disturbi respiratori del sonno</h3><p>Trascorriamo circa un terzo della vita a letto: una buona salute del sonno sostiene la qualità della vita e la prevenzione.</p><ul><li>Russamento e sospette apnee</li><li>Valutazione del sonno</li><li>Poligrafia notturna</li><li>Follow-up e lettura e interpretazione report CPAP e NIV</li></ul><Link href="/sonno">Scopri l’area sonno <ArrowRight aria-hidden="true" /></Link></article>
             <article><ClipboardCheck aria-hidden="true" /><h3>Controlli e continuità</h3><p>Rivalutazioni comprensibili e indicazioni chiare sui passaggi successivi.</p><ul><li>Monitoraggio della terapia</li><li>Interpretazione degli esami</li><li>Patologie respiratorie croniche</li><li>Percorsi di follow-up</li></ul><Link href="/esami">Esami e valutazioni <ArrowRight aria-hidden="true" /></Link></article>
-          </div>
-        </Container>
-      </section>
-
-      <section className="section trust-section">
-        <Container className="trust-grid">
-          <div><p className="eyebrow">Un rapporto di cura concreto</p><h2>Competenza che si traduce in scelte comprensibili</h2><p>La qualità di una visita emerge dall’attenzione ai dettagli, dalla pertinenza degli approfondimenti e dalla capacità di rendere chiaro il percorso.</p></div>
-          <div className="trust-list">
-            <article><span>01</span><div><h3>Approccio specialistico</h3><p>Valutazione clinica aggiornata e orientata dalle evidenze scientifiche.</p></div></article>
-            <article><span>02</span><div><h3>Ascolto</h3><p>Spazio alla storia clinica, ai sintomi e ai dubbi della persona.</p></div></article>
-            <article><span>03</span><div><h3>Esperienza nell’area sonno</h3><p>Attenzione specifica ai disturbi respiratori notturni, senza separarla dalla pneumologia generale.</p></div></article>
-            <article><span>04</span><div><h3>Chiarezza e continuità</h3><p>Spiegazioni accessibili e indicazioni precise sui passaggi successivi.</p></div></article>
           </div>
         </Container>
       </section>
