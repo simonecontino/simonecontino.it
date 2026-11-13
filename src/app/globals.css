@@ -109,9 +109,53 @@ button { font: inherit; }
 .expertise-featured > svg, .expertise-featured > a { color: #bce7e1 !important; }
 
 .trust-section { color: white; background: var(--color-petrol-dark); }
-.home-clinical-method { padding-block: clamp(1.75rem, 4vw, 3rem); }
-.home-clinical-method h2 { max-width: 30ch; margin-bottom: 1rem; }
-.home-clinical-method p:not(.eyebrow) { max-width: 75ch; margin-bottom: 0; }
+.polygraphy-editorial { display: grid; gap: 1.5rem; align-items: start; }
+.polygraphy-reading { max-width: 56rem; }
+.polygraphy-editorial p, .polygraphy-reading p { max-width: 75ch; }
+.polygraphy-note { padding: 1.25rem; border-left: 2px solid var(--color-petrol); background: var(--color-mist); }
+.polygraphy-note p { margin-bottom: 0; }
+.polygraphy-process { display: grid; gap: 1.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }
+.polygraphy-process li { padding-top: 1rem; border-top: 1px solid var(--color-line); }
+.polygraphy-process span { color: var(--color-petrol); font-size: .85rem; font-weight: 650; }
+.polygraphy-process h3 { margin-block: .6rem; font-size: 1.15rem; }
+.polygraphy-process p { margin: 0; font-size: .95rem; line-height: 1.5; }
+.polygraphy-device { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+.booking-service-entry { scroll-margin-top: 6.5rem; }
+@media (min-width: 600px) { .polygraphy-process { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 960px) { .polygraphy-editorial { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; } .polygraphy-process { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.home-sleep-test { padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+.home-sleep-test-grid { display: grid; gap: 1rem; }
+.home-sleep-test h2 { max-width: 24ch; margin-bottom: .75rem; }
+.home-sleep-test p { max-width: 65ch; }
+.home-sleep-test-lead { margin-bottom: 0; }
+@media (min-width: 800px) { .home-sleep-test-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center; gap: 2.5rem; } }
+.diagnostic-guide { max-width: 64rem; }
+.diagnostic-context { color: var(--color-muted); max-width: 75ch; }
+.diagnostic-index { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin-block: 1.5rem 2.5rem; }
+.diagnostic-index a, .diagnostic-links a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-petrol); text-underline-offset: .2rem; }
+.diagnostic-group { margin-top: 2.5rem; scroll-margin-top: 6rem; }
+.diagnostic-group h2 { margin-bottom: .6rem; }
+.diagnostic-group-intro { color: var(--color-muted); margin-bottom: 1.25rem; }
+.diagnostic-exam { border-top: 1px solid var(--color-line); }
+.diagnostic-exam:last-child { border-bottom: 1px solid var(--color-line); }
+.diagnostic-exam summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; cursor: pointer; list-style: none; }
+.diagnostic-exam summary::-webkit-details-marker { display: none; }
+.diagnostic-exam summary::marker { content: ""; }
+.diagnostic-exam summary > div { min-width: 0; }
+.diagnostic-exam h3 { margin: 0 0 .5rem; font-size: 1.15rem; line-height: 1.4; }
+.diagnostic-exam summary p { max-width: 78ch; margin: 0; font-size: .95rem; line-height: 1.5; color: var(--color-muted); }
+.diagnostic-exam summary > svg { flex: none; width: 20px; margin-top: .2rem; color: var(--color-petrol); }
+.diagnostic-exam[open] summary > svg { transform: rotate(180deg); }
+.diagnostic-exam-body { padding-bottom: 1.25rem; max-width: 78ch; font-size: .95rem; line-height: 1.5; }
+.diagnostic-exam-body dl { margin: 0; }
+.diagnostic-exam-body dt { margin-bottom: .3rem; font-weight: 650; }
+.diagnostic-exam-body dd { margin: 0 0 .85rem; color: var(--color-muted); }
+.diagnostic-links { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; }
+.diagnostic-sources { margin-block: 2rem; font-size: .85rem; }
+.diagnostic-sources summary { min-height: 44px; padding-block: .6rem; cursor: pointer; }
+.diagnostic-sources li { margin-block: .5rem; overflow-wrap: anywhere; }
+.diagnostic-next-step { padding-top: 2rem; border-top: 1px solid var(--color-line); }
+.diagnostic-next-step p { max-width: 75ch; }
 .trust-grid { display: grid; gap: 3rem; }
 .trust-grid h2 { max-width: 30ch; }
 .trust-grid > div:first-child p:not(.eyebrow) { max-width: 34rem; color: #c4d9d8; }

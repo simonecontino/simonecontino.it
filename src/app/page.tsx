@@ -47,14 +47,6 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint home-clinical-method" aria-labelledby="clinical-method-title">
-        <Container>
-          <p className="eyebrow">Il percorso di cura</p>
-          <h2 id="clinical-method-title">Un percorso di cura chiaro e personalizzato</h2>
-          <p>Ogni percorso inizia dall’ascolto dei sintomi e dalla valutazione della storia clinica. L’obiettivo è individuare gli approfondimenti realmente necessari, spiegare con chiarezza i risultati e definire insieme al paziente le successive decisioni diagnostiche e terapeutiche.</p>
-        </Container>
-      </section>
-
       <section className="section expertise-section">
         <Container>
           <SectionHeading eyebrow="Aree di competenza" title="Pneumologia, sonno e continuità di cura" />
@@ -62,6 +54,20 @@ export default async function HomePage() {
             <article><Stethoscope aria-hidden="true" /><h3>Pneumologia</h3><p>Valutazione dei principali sintomi e delle patologie dell’apparato respiratorio.</p><ul><li>Asma e BPCO</li><li>Nodulo polmonare e patologie restrittive</li><li>Bronchiectasie e malattie interstiziali</li><li>Gestione respiratoria delle patologie neuromuscolari</li></ul><Link href="/patologie">Approfondisci <ArrowRight aria-hidden="true" /></Link></article>
             <article className="expertise-featured"><MoonStar aria-hidden="true" /><h3>Disturbi respiratori del sonno</h3><p>Trascorriamo circa un terzo della vita a letto: una buona salute del sonno sostiene la qualità della vita e la prevenzione.</p><ul><li>Russamento e sospette apnee</li><li>Valutazione del sonno</li><li>Poligrafia notturna</li><li>Follow-up e lettura e interpretazione report CPAP e NIV</li></ul><Link href="/sonno">Scopri l’area sonno <ArrowRight aria-hidden="true" /></Link></article>
             <article><ClipboardCheck aria-hidden="true" /><h3>Controlli e continuità</h3><p>Rivalutazioni comprensibili e indicazioni chiare sui passaggi successivi.</p><ul><li>Monitoraggio della terapia</li><li>Interpretazione degli esami</li><li>Patologie respiratorie croniche</li><li>Percorsi di follow-up</li></ul><Link href="/esami">Esami e valutazioni <ArrowRight aria-hidden="true" /></Link></article>
+          </div>
+        </Container>
+      </section>
+
+      <section className="section section--tint home-sleep-test" aria-labelledby="home-sleep-test-title">
+        <Container className="home-sleep-test-grid">
+          <div>
+            <p className="eyebrow">Approfondire le apnee del sonno</p>
+            <h2 id="home-sleep-test-title">Poligrafia notturna a domicilio</h2>
+            <p className="home-sleep-test-lead">Un esame per studiare la respirazione durante il sonno e individuare eventuali apnee notturne.</p>
+          </div>
+          <div>
+            <p>Il monitoraggio cardiorespiratorio notturno consente di registrare diversi parametri respiratori mentre dormi, direttamente a casa tua. I dati raccolti vengono successivamente analizzati e interpretati dallo specialista pneumologo.</p>
+            <ButtonLink href="/poligrafia-notturna" variant="secondary">Scopri come funziona l’esame</ButtonLink>
           </div>
         </Container>
       </section>

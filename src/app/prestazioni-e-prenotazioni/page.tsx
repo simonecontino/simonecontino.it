@@ -41,7 +41,7 @@ export default function ServicesBookingPage() {
         <h2>Listino prezzi</h2>
         <ul className="booking-service-list">
           {services.map(s => (
-            <li key={s.id}>
+            <li key={s.id} id={s.id} className="booking-service-entry">
               <article className="booking-service-row">
                 <div className="booking-service-content">
                   <h3>{s.title}</h3>
@@ -55,7 +55,7 @@ export default function ServicesBookingPage() {
                 </div>
                 {s.bookingNote ? <ServiceInformation title={s.title}>
                     <p>{s.bookingNote}</p>
-                    {s.informationHref ? <Link className="booking-service-detail" href={s.informationHref}>Approfondisci</Link> : null}
+                    {s.informationHref ? <Link className="booking-service-detail" href={s.id === "poligrafia-domiciliare" ? "/poligrafia-notturna" : s.informationHref}>{s.id === "poligrafia-domiciliare" ? "Scopri come si svolge l’esame" : "Approfondisci"}</Link> : null}
                 </ServiceInformation> : null}
               </article>
             </li>

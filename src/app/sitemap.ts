@@ -12,7 +12,7 @@ type SitemapEntry = {
 };
 
 const staticPages: SitemapEntry[] = [
-  { path: "/poligrafia-respiratoria-milano", changeFrequency: "monthly", priority: 0.9 },
+  { path: "/poligrafia-notturna", changeFrequency: "monthly", priority: 0.9 },
   { path: "/prestazioni-e-prenotazioni", changeFrequency: "monthly", priority: 0.9 },
   { path: "/", changeFrequency: "monthly", priority: 1 },
   { path: "/chi-sono", changeFrequency: "yearly", priority: 0.7 },
