@@ -79,15 +79,6 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="section section--tint home-domestic-services" aria-labelledby="home-domestic-title">
-        <Container>
-          <p className="eyebrow">PRESTAZIONI DOMICILIARI · MILANO E CORSICO</p>
-          <h2 id="home-domestic-title">Pneumologia e Medicina del Sonno a domicilio</h2>
-          <p>Visite specialistiche ed esami diagnostici respiratori eseguiti direttamente al domicilio del paziente, con valutazione medica e refertazione specialistica.</p>
-          <p>Consulta le prestazioni disponibili, le tariffe e le modalità di prenotazione.</p>
-          <ButtonLink href={booking.path} variant="secondary">Prestazioni e tariffe</ButtonLink>
-        </Container>
-      </section>
       <GoogleReviewsSection data={googleReviews} fallbackUrl={siteConfig.googleReviewsUrl} />
 
       {features.articlesEnabled ? (      <section className="section section--tint">

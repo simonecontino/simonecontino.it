@@ -123,7 +123,11 @@ button { font: inherit; }
 .booking-service-entry { scroll-margin-top: 6.5rem; }
 @media (min-width: 600px) { .polygraphy-process { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 960px) { .polygraphy-editorial { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; } .polygraphy-process { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-.home-sleep-test { padding-block: clamp(1.5rem, 3vw, 2.5rem); }
+.home-sleep-test { padding-block: clamp(1.5rem, 3vw, 2.5rem); color: white; background: var(--color-petrol-dark); }
+.home-sleep-test .eyebrow { color: #94d5ce; }
+.home-sleep-test p:not(.eyebrow) { color: #d2e3e1; }
+.home-sleep-test .button { color: var(--color-petrol-dark); background: white; border-color: white; }
+.home-sleep-test .button:hover { background: #eaf2f3; border-color: #eaf2f3; }
 .home-sleep-test-grid { display: grid; gap: 1rem; }
 .home-sleep-test h2 { max-width: 24ch; margin-bottom: .75rem; }
 .home-sleep-test p { max-width: 65ch; }
