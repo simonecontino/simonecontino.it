@@ -11,18 +11,20 @@ export const metadata: Metadata = { title: "Esami in pneumologia e medicina del 
 
 export default function ExamsPage() {
   return <>
-    <section className="internal-hero"><Container>
+    <section className="internal-hero diagnostic-hero"><Container>
       <Breadcrumbs items={[{ label: "Esami" }]} />
       <p className="eyebrow">Guida alla diagnostica respiratoria</p>
       <h1>Gli esami in pneumologia e medicina del sonno</h1>
       <p className="internal-lead">Conoscere gli esami diagnostici aiuta a comprendere meglio il proprio percorso di cura. Una guida alle principali indagini utilizzate per valutare la funzione respiratoria, l’ossigenazione e i disturbi respiratori del sonno.</p>
     </Container></section>
-    <section className="section"><Container className="diagnostic-guide">
+    <section className="section diagnostic-section"><Container className="diagnostic-guide">
       <p className="diagnostic-context">Questa guida descrive le metodiche diagnostiche in generale, non l’elenco delle prestazioni prenotabili con il medico. Le informazioni non sostituiscono una valutazione medica.</p>
-      <nav className="diagnostic-index" aria-label="Argomenti della guida">{diagnosticGroups.map(group => <a href={`#${group.id}`} key={group.id}>{group.title}</a>)}</nav>
+      <nav className="diagnostic-index" aria-label="Argomenti della guida"><p className="eyebrow">In questa guida</p><div>{diagnosticGroups.map(group => <a href={`#${group.id}`} key={group.id}>{group.title}</a>)}</div></nav>
       {diagnosticGroups.map(group => <section className="diagnostic-group" id={group.id} key={group.id} aria-labelledby={`${group.id}-title`}>
+        <header className="diagnostic-group-header">
         <h2 id={`${group.id}-title`}>{group.title}</h2>
         <p className="diagnostic-group-intro">{group.description}</p>
+        </header>
         <div className="diagnostic-list">{group.exams.map(exam => <details className="diagnostic-exam" key={exam.id}>
           <summary><div><h3>{exam.title}</h3><p>{exam.purpose}</p></div><ChevronDown aria-hidden="true" /></summary>
           <div className="diagnostic-exam-body">
