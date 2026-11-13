@@ -112,6 +112,19 @@ button { font: inherit; }
 .polygraphy-editorial { display: grid; gap: 1.5rem; align-items: start; }
 .polygraphy-reading { max-width: 56rem; }
 .polygraphy-editorial p, .polygraphy-reading p { max-width: 75ch; }
+.polygraphy-hero { padding-block: clamp(1.75rem, 4vw, 3rem); }
+.polygraphy-hero h1 { max-width: 25ch; font-size: clamp(2rem, 4vw, 3.25rem); }
+.polygraphy-hero .polygraphy-report-hint { margin: 1rem 0 0; font-size: .95rem; line-height: 1.5; color: var(--color-petrol-dark); }
+.polygraphy-editorial h2, .polygraphy-reading h2 { margin-bottom: 1rem; }
+.polygraphy-editorial h3 { font-size: 1.2rem; line-height: 1.4; margin-bottom: .75rem; }
+.polygraphy-list { list-style: disc; margin: 1rem 0 0; padding-left: 1.25rem; }
+.polygraphy-list li { padding-left: .25rem; margin-block: .55rem; line-height: 1.5; }
+.polygraphy-list li::marker { color: var(--color-petrol); }
+.polygraphy-report { padding: clamp(1.5rem, 3vw, 2rem); border-radius: var(--radius-md); background: var(--color-petrol-dark); color: white; }
+.polygraphy-report .eyebrow { color: #94d5ce; }
+.polygraphy-report h3 { font-size: 1.25rem; }
+.polygraphy-report h3 strong { display: block; margin-top: .35rem; font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 650; }
+.polygraphy-report p:last-child { margin: 0; color: #d2e3e1; line-height: 1.5; }
 .polygraphy-note { padding: 1.25rem; border-left: 2px solid var(--color-petrol); background: var(--color-mist); }
 .polygraphy-note p { margin-bottom: 0; }
 .polygraphy-process { display: grid; gap: 1.5rem; margin: 1.5rem 0 0; padding: 0; list-style: none; }

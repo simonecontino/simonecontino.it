@@ -17,22 +17,23 @@ export default function PolygraphyPage() {
   const requestUrl = `${booking.path}#${polygraphy.serviceId}`;
   const showEquipment = equipment.confirmed && equipment.manufacturer && equipment.model && equipment.image && equipment.description;
   return <>
-    <section className="internal-hero"><Container>
+    <section className="internal-hero polygraphy-hero"><Container>
       <Breadcrumbs items={[{ label: "Esami", href: "/esami" }, { label: "Poligrafia notturna" }]} />
       <p className="eyebrow">Pneumologia e medicina del sonno · Milano</p>
       <h1>Monitoraggio cardiorespiratorio notturno a domicilio</h1>
       <p className="internal-lead">Un esame diagnostico per valutare la respirazione durante il sonno e identificare eventuali disturbi respiratori notturni, tra cui le apnee ostruttive del sonno.</p>
       <ButtonLink href={requestUrl}>Richiedi l’esame</ButtonLink>
+      <p className="polygraphy-report-hint">Referto entro <strong>5 giorni lavorativi</strong> dalla riconsegna del dispositivo.</p>
     </Container></section>
 
     <section className="section"><Container className="polygraphy-editorial">
-      <div><h2>Che cos’è la poligrafia notturna?</h2><p>La poligrafia del sonno, o monitoraggio cardiorespiratorio notturno, registra la respirazione mentre dormi. Questo monitoraggio cardio-respiratorio per lo studio delle apnee raccoglie segnali che dipendono dalla configurazione del dispositivo e possono comprendere:</p><ul><li>Flusso respiratorio.</li><li>Movimenti toracici e addominali.</li><li>Saturazione periferica di ossigeno.</li><li>Frequenza cardiaca.</li><li>Posizione corporea e russamento.</li></ul></div>
+      <div><p className="eyebrow">L’esame</p><h2>Che cos’è la poligrafia notturna?</h2><p>La poligrafia del sonno, o monitoraggio cardiorespiratorio notturno, registra la respirazione mentre dormi. Questo monitoraggio cardio-respiratorio per lo studio delle apnee può registrare:</p><ul className="polygraphy-list"><li>Flusso respiratorio.</li><li>Movimenti toracici e addominali.</li><li>Saturazione periferica di ossigeno.</li><li>Frequenza cardiaca.</li><li>Posizione corporea e russamento.</li></ul></div>
       <aside className="polygraphy-note"><h3>Poligrafia e polisonnogramma: qual è la differenza?</h3><p>La polisonnografia comprende anche segnali neurofisiologici per riconoscere le fasi del sonno e i risvegli. Il polisonnogramma è la registrazione ottenuta con questo esame: non va confuso con il tracciato della sola poligrafia respiratoria. I due esami rispondono a esigenze diverse e la scelta dipende dalla valutazione clinica.</p></aside>
     </Container></section>
 
     <section className="section section--tint"><Container className="polygraphy-editorial">
-      <div><h2>Quando può essere utile?</h2><p>Una valutazione dei disturbi respiratori del sonno può essere indicata in presenza di:</p><ul><li>Russamento abituale, soprattutto con altri sintomi.</li><li>Pause respiratorie osservate durante il sonno.</li><li>Sonnolenza diurna eccessiva.</li><li>Risvegli con sensazione di soffocamento.</li><li>Sospetto clinico di apnee ostruttive del sonno.</li></ul></div>
-      <div><p>La poligrafia non è appropriata per ogni persona. L’indicazione nasce dalla valutazione dei sintomi, della storia clinica e delle eventuali malattie associate.</p><p>Nei quadri complessi o quando l’esito non chiarisce il sospetto clinico possono essere necessari accertamenti differenti, inclusa la polisonnografia.</p></div>
+      <div><p className="eyebrow">Le indicazioni</p><h2>Quando può essere utile?</h2><p>Una valutazione dei disturbi respiratori del sonno può essere indicata in presenza di:</p><ul className="polygraphy-list"><li>Russamento abituale, soprattutto con altri sintomi.</li><li>Pause respiratorie osservate durante il sonno.</li><li>Sonnolenza diurna eccessiva.</li><li>Risvegli con sensazione di soffocamento.</li><li>Sospetto clinico di apnee ostruttive del sonno.</li></ul></div>
+      <aside className="polygraphy-note"><h3>La scelta parte dalla valutazione clinica</h3><p>La poligrafia non è appropriata per ogni persona. L’indicazione nasce dalla valutazione dei sintomi, della storia clinica e delle eventuali malattie associate.</p><p>Nei quadri complessi o quando l’esito non chiarisce il sospetto clinico possono essere necessari accertamenti differenti, inclusa la polisonnografia.</p></aside>
     </Container></section>
 
     <section className="section"><Container>
@@ -45,12 +46,12 @@ export default function PolygraphyPage() {
       <Image src={equipment.image!} alt={`Dispositivo ${equipment.manufacturer} ${equipment.model} utilizzato per la poligrafia notturna`} width={640} height={480} sizes="(max-width: 800px) 92vw, 45vw" className="polygraphy-device" />
     </Container></section> : null}
 
-    <section className="section section--tint"><Container className="polygraphy-reading">
-      <h2>Cosa succede dopo l’esame?</h2>
+    <section className="section section--tint"><Container className="polygraphy-editorial">
+      <div><p className="eyebrow">Dalla registrazione al risultato</p><h2>Cosa succede dopo l’esame?</h2>
       <p>La registrazione è una parte del percorso diagnostico. Lo specialista ne verifica la qualità e interpreta i risultati insieme ai sintomi, alla storia clinica e alle eventuali comorbidità.</p>
-      <h3>Tempi di refertazione</h3>
-      <p>Il referto è disponibile entro un massimo di 5 giorni lavorativi dalla riconsegna del dispositivo.</p>
       <p>In base al quadro possono essere proposti ulteriori approfondimenti, valutazioni o trattamenti specifici. Questi passaggi vengono concordati: non sono automaticamente inclusi nella prestazione.</p>
+      </div>
+      <aside className="polygraphy-report" aria-labelledby="polygraphy-report-title"><p className="eyebrow">Tempi di refertazione</p><h3 id="polygraphy-report-title">Il referto entro <strong>5 giorni lavorativi</strong></h3><p>Dalla riconsegna del dispositivo: questo è il tempo massimo previsto per la disponibilità del referto.</p></aside>
     </Container></section>
 
     <section className="section"><Container className="polygraphy-reading">
