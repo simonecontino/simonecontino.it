@@ -26,8 +26,8 @@ export default function PolygraphyPage() {
     </Container></section>
 
     <section className="section"><Container className="polygraphy-editorial">
-      <div><h2>Che cos’è la poligrafia notturna?</h2><p>Il monitoraggio cardiorespiratorio notturno registra la respirazione mentre dormi. I segnali disponibili dipendono dalla configurazione del dispositivo e possono comprendere:</p><ul><li>Flusso respiratorio.</li><li>Movimenti toracici e addominali.</li><li>Saturazione periferica di ossigeno.</li><li>Frequenza cardiaca.</li><li>Posizione corporea e russamento.</li></ul></div>
-      <aside className="polygraphy-note"><h3>Non è una polisonnografia completa</h3><p>La polisonnografia comprende anche segnali neurofisiologici per riconoscere le fasi del sonno e i risvegli. I due esami rispondono a esigenze diverse: la scelta dipende dalla valutazione clinica.</p></aside>
+      <div><h2>Che cos’è la poligrafia notturna?</h2><p>La poligrafia del sonno, o monitoraggio cardiorespiratorio notturno, registra la respirazione mentre dormi. Questo monitoraggio cardio-respiratorio per lo studio delle apnee raccoglie segnali che dipendono dalla configurazione del dispositivo e possono comprendere:</p><ul><li>Flusso respiratorio.</li><li>Movimenti toracici e addominali.</li><li>Saturazione periferica di ossigeno.</li><li>Frequenza cardiaca.</li><li>Posizione corporea e russamento.</li></ul></div>
+      <aside className="polygraphy-note"><h3>Poligrafia e polisonnogramma: qual è la differenza?</h3><p>La polisonnografia comprende anche segnali neurofisiologici per riconoscere le fasi del sonno e i risvegli. Il polisonnogramma è la registrazione ottenuta con questo esame: non va confuso con il tracciato della sola poligrafia respiratoria. I due esami rispondono a esigenze diverse e la scelta dipende dalla valutazione clinica.</p></aside>
     </Container></section>
 
     <section className="section section--tint"><Container className="polygraphy-editorial">
@@ -48,6 +48,8 @@ export default function PolygraphyPage() {
     <section className="section section--tint"><Container className="polygraphy-reading">
       <h2>Cosa succede dopo l’esame?</h2>
       <p>La registrazione è una parte del percorso diagnostico. Lo specialista ne verifica la qualità e interpreta i risultati insieme ai sintomi, alla storia clinica e alle eventuali comorbidità.</p>
+      <h3>Tempi di refertazione</h3>
+      <p>Il referto è disponibile entro un massimo di 5 giorni lavorativi dalla riconsegna del dispositivo.</p>
       <p>In base al quadro possono essere proposti ulteriori approfondimenti, valutazioni o trattamenti specifici. Questi passaggi vengono concordati: non sono automaticamente inclusi nella prestazione.</p>
     </Container></section>
 

@@ -66,3 +66,11 @@ Prestazioni già confermate: prima visita pneumologica, controllo pneumologico, 
 - `[REVISIONE LEGALE COOKIE POLICY]`
 - `[SCEGLIERE FORNITORE FORM CONTATTI]`
 - `[DECIDERE SE ATTIVARE ANALYTICS CON CONSENSO]`
+
+## Materiale visivo per la pagina poligrafia notturna
+
+- Confermare produttore e modello effettivamente utilizzati prima di attivare la sezione strumentazione in `src/data/polygraphy.ts`.
+- Fornire fotografie autentiche del dispositivo e dei sensori, con autorizzazione alla pubblicazione.
+- Fornire un esempio di referto e tracciati esplicativi: preferire materiale dimostrativo del produttore autorizzato o esempi completamente anonimizzati, senza dati identificativi, metadati o codici riconducibili a pazienti.
+- Distinguere nelle didascalie il tracciato cardiorespiratorio dal polisonnogramma, che comprende segnali neurofisiologici. Non pubblicare immagini di strumentazioni differenti come se fossero quelle utilizzate.
+- Tempo di refertazione confermato dal titolare: entro un massimo di 5 giorni lavorativi dalla riconsegna del dispositivo.
